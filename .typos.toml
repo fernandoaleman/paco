@@ -1,0 +1,16 @@
+[files]
+extend-exclude = [
+  "*.lock",
+  "*.svg",
+  "*.png",
+  "*.jpg",
+  "*.jpeg",
+  "*.ttf",
+  "*.woff",
+  "*.woff2",
+  "themes/*/backgrounds/*",
+]
+
+[default.extend-words]
+# Add words here when typos reports false positives. Format: wrong = "right"
+# Use [default.extend-identifiers] for code identifiers we want to preserve as-is.
