@@ -1,0 +1,7 @@
+default: true
+
+MD013: false        # line length — too noisy for prose
+MD033: false        # inline HTML — sometimes needed (<details>, <sub>)
+MD041: false        # first line must be H1 — relax for files with frontmatter
+MD024:              # duplicate headings — allow if in different parent sections
+  siblings_only: true
