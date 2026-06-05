@@ -36,6 +36,19 @@ User strongly prefers Rust-built CLI tools (e.g., `fd` > `find`, `rg` >
   (shellcheck = Haskell, shfmt = Go, bats = bash, markdownlint = JS),
   use what works.
 
+## Reference user's existing configs
+
+Before recommending or drafting config for any tool we're discussing
+(terminal, editor, prompt, multiplexer, TUI, CLI), **check the user's
+`~/.config/<tool>/` first** for their existing setup. Adopt their
+settings by default; deviate only with environment-specific reason
+(e.g., Mac retina font-size doesn't translate to Hyprland DPI). Call
+out what you're inheriting vs tuning so they can override.
+
+Known configured tools (inventory 2026-06-05): alacritty, ghostty,
+nvim, starship.toml, tmux, tmux-ssh, sesh, lazygit, lazydocker, btop,
+htop, bat, mise, gh, op, chezmoi, git, zsh.
+
 ## XDG Base Directory strategy
 
 User wants paco to follow the XDG Base Directory Specification wherever
@@ -88,3 +101,16 @@ on macOS is the canonical pattern.
   (rc, conf.d/, functions/, completion/) lives under `$ZDOTDIR`. Cache
   `zcompdump` goes to `$XDG_CACHE_HOME/zsh/zcompdump`. Pacman-installed
   plugins are sourced from `/usr/share/zsh/plugins/<name>/<name>.zsh`.
+- Q10: ghostty as default terminal. Inherit settings from user's
+  `~/.config/ghostty/config`: `copy-on-select=clipboard`,
+  `shell-integration=detect`, `mouse-hide-while-typing=true`,
+  `background-opacity=0.9`, `window-padding-x/y=25/20`,
+  `keybind shift+enter=text:\x1b\r` (Claude Code multi-line input).
+  Tune for Hyprland: smaller `font-size` (~11–12 vs Mac's 16), adopt
+  `async-backend=epoll` from Omarchy's config (Hyprland slowness fix,
+  ghostty discussion #3224), add OSC-52 paste/copy keybinds. Skip
+  ghostty's split-pane keybinds — tmux owns multiplexing.
+- Multiplexing: **tmux confirmed** (sessions, split panes, windows).
+  User also uses `sesh` for session management. Detail decisions
+  deferred to Q21 area (TUIs/utilities). Refs: `~/.config/tmux/`,
+  `~/.config/tmux-ssh/`, `~/.config/sesh/` on user's Mac.
