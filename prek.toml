@@ -39,3 +39,8 @@ hooks = [{ id = "markdownlint", args = ["--config", ".markdownlint.yaml"] }]
 repo = "https://github.com/crate-ci/committed"
 rev = "v1.1.11"
 hooks = [{ id = "committed", stages = ["commit-msg"] }]
+
+[[repos]]
+repo = "https://github.com/JohnnyMorganz/StyLua"
+rev = "v2.5.2"
+hooks = [{ id = "stylua" }]

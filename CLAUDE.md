@@ -36,6 +36,22 @@ User strongly prefers Rust-built CLI tools (e.g., `fd` > `find`, `rg` >
   (shellcheck = Haskell, shfmt = Go, bats = bash, markdownlint = JS),
   use what works.
 
+## Distro-vs-personal philosophy
+
+paco ships a minimal, working base. For every customization decision,
+apply the distro-level-vs-personal lens:
+
+- **Distro-level (ship as default):** every user benefits regardless of
+  stack/workflow. Examples: file-picker hidden visibility, tmux-nvim
+  Ctrl+hjkl, transparency when terminal is opaque, news-alert
+  suppression.
+- **Personal preference (don't ship):** some users want, some don't.
+  Examples: `jk`→ESC, language-specific LSP pins, jinja autodetect.
+
+Lean Omarchy-minimal for the base. Users layer their own via standard
+override paths (e.g., `~/.config/nvim/lua/plugins/*.lua` merges with
+LazyVim defaults).
+
 ## Reference user's existing configs
 
 Before recommending or drafting config for any tool we're discussing
@@ -124,3 +140,26 @@ on macOS is the canonical pattern.
   User also uses `sesh` for session management. Detail decisions
   deferred to Q21 area (TUIs/utilities). Refs: `~/.config/tmux/`,
   `~/.config/tmux-ssh/`, `~/.config/sesh/` on user's Mac.
+- Q12: LazyVim as paco's nvim editor. Philosophy: ship a simple,
+  working base; users override via `~/.config/nvim/lua/plugins/`.
+  - Theme: Omarchy hot-reload pattern (theme.lua symlink,
+    all-themes.lua, paco-theme-hotreload.lua, per-theme neovim.lua).
+    Catppuccin's integrations block moves into themes/catppuccin/neovim.lua.
+  - Extras (7): editor.neo-tree, lang.markdown, lang.json, lang.yaml,
+    lang.toml, lang.git, coding.blink.
+  - Plugins shipped: blink keymap tweaks, snacks picker config (hidden
+    files + lazygit backdrop), vim-tmux-navigator.
+  - Distro overrides: disable-news-alert.lua. Animation stays on.
+  - Transparency: Omarchy's plugin/after/transparency.lua (~50 groups).
+  - Keymaps: `<`/`>` stay-in-visual only.
+  - No autocmds, no options overrides, no ftplugin/ftdetect overrides.
+  - Stylua: spaces, indent_width=2, column_width=120. prek hook added
+    (StyLua v2.5.2).
+- Q21 pre-answer: lazygit AND lazydocker ship by default. Specific
+  keymaps deferred to TUI/utilities section (Q21 area).
+
+## Pending decisions
+
+- Keymap for lazydocker (user's Mac uses `<leader>dd` via snacks
+  terminal). LazyVim already ships `<leader>gg` for lazygit. Decide
+  when we reach Q21 (TUIs/utilities).
