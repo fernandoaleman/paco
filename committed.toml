@@ -1,0 +1,28 @@
+style = "conventional"
+
+# Standard 8 + build + ci + revert
+allowed_types = [
+  "feat",
+  "fix",
+  "docs",
+  "style",
+  "refactor",
+  "perf",
+  "test",
+  "chore",
+  "build",
+  "ci",
+  "revert",
+]
+
+# Subject = first line. 72 is more useful than the 50-char default for descriptive messages.
+subject_length = 72
+line_length = 72
+subject_capitalized = true
+subject_not_punctuated = true
+imperative_subject = true
+no_fixup = true
+no_wip = true
+
+# Allow merge commits (we may merge release branches later)
+merge_commit = false
