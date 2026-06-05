@@ -36,6 +36,22 @@ User strongly prefers Rust-built CLI tools (e.g., `fd` > `find`, `rg` >
   (shellcheck = Haskell, shfmt = Go, bats = bash, markdownlint = JS),
   use what works.
 
+## XDG Base Directory strategy
+
+User wants paco to follow the XDG Base Directory Specification wherever
+possible to keep `$HOME` minimal. Reference: user's own `~/.config/zsh/`
+on macOS is the canonical pattern.
+
+- Config → `$XDG_CONFIG_HOME` (default `~/.config`)
+- Data → `$XDG_DATA_HOME` (default `~/.local/share`)
+- State → `$XDG_STATE_HOME` (default `~/.local/state`)
+- Cache → `$XDG_CACHE_HOME` (default `~/.cache`)
+- `$HOME` should only contain `.zshenv` (the minimal shim that sets the
+  XDG vars + `ZDOTDIR`) and tool dotfiles that don't yet support XDG.
+- When a tool doesn't support XDG: check
+  [xdg-ninja](https://github.com/b3nj5m1n/xdg-ninja) for workarounds
+  before accepting clutter.
+
 ## Conventions paco adopts from the start (deltas from Omarchy)
 
 - `prek.toml` (pre-commit hooks) — Omarchy ships none.
@@ -62,3 +78,13 @@ User strongly prefers Rust-built CLI tools (e.g., `fd` > `find`, `rg` >
 - Q7: bats-core for tests; `tests/*.bats` one file per top-level subcommand.
 - Q8: GitHub Actions CI on Arch container only; justfile drives lint/test
   for both CI and local dev (one source of truth).
+- Q9: zsh as default interactive shell. `bin/` scripts stay bash
+  (`#!/usr/bin/env bash`). Plugins: zsh-autosuggestions, zsh-completions,
+  zsh-syntax-highlighting (all Arch `extra`). Sourcing order at install
+  time: completions → autosuggestions → syntax-highlighting (last).
+- Q11 (pre-answered): Starship for prompt.
+- Layout convention: zsh follows XDG. `~/.zshenv` is a minimal shim that
+  sets `XDG_*` and `ZDOTDIR=$XDG_CONFIG_HOME/zsh`. Everything else
+  (rc, conf.d/, functions/, completion/) lives under `$ZDOTDIR`. Cache
+  `zcompdump` goes to `$XDG_CACHE_HOME/zsh/zcompdump`. Pacman-installed
+  plugins are sourced from `/usr/share/zsh/plugins/<name>/<name>.zsh`.
