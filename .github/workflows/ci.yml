@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+    steps:
+      - name: Install base deps
+        run: pacman -Syu --noconfirm git just python python-pip
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Install prek
+        run: pip install --break-system-packages prek
+      - name: Lint
+        run: just lint
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+    steps:
+      - name: Install base deps
+        run: pacman -Syu --noconfirm git just bats
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Test
+        run: just test
