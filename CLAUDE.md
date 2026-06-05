@@ -95,7 +95,17 @@ on macOS is the canonical pattern.
   (`#!/usr/bin/env bash`). Plugins: zsh-autosuggestions, zsh-completions,
   zsh-syntax-highlighting (all Arch `extra`). Sourcing order at install
   time: completions → autosuggestions → syntax-highlighting (last).
-- Q11 (pre-answered): Starship for prompt.
+- Q11 (finalized): Starship hybrid config = Omarchy's structure + user's
+  vim-mode-aware character. Modules enabled: directory (truncate to 2 +
+  repo root highlighted), git_branch (italic cyan), git_status (full
+  glyph set), character (with vimcmd_* symbols). `command_timeout=200ms`
+  (Arch SSDs are fast). Disabled: aws, battery, package, username,
+  hostname, docker_context, git_commit, git_state, git_metrics. Colors
+  hard-coded as `cyan` get overridden per-theme via paco's theme system
+  (Q15). Source configs: ~/.config/starship.toml (user, vim symbols),
+  omarchy/config/starship.toml (Omarchy, structure/glyphs).
+- zsh vi mode: `bindkey -v` ships as paco default. Matches user's
+  ~/.config/zsh/conf.d/20-keybindings.zsh.
 - Layout convention: zsh follows XDG. `~/.zshenv` is a minimal shim that
   sets `XDG_*` and `ZDOTDIR=$XDG_CONFIG_HOME/zsh`. Everything else
   (rc, conf.d/, functions/, completion/) lives under `$ZDOTDIR`. Cache
