@@ -168,6 +168,10 @@ on macOS is the canonical pattern.
   detail deferred to when we build `config/waybar/` (Q39 area). Paco
   menu button (replaces Omarchy's omarchy.ttf trick) deferred to Q33
   branding.
+- Q15: Mako as notification daemon. Wayland-native, layer-shell,
+  Omarchy-proven. Theme via INI template (`default/themed/mako.ini.tpl`)
+  with text/border/background color injection per theme. DND toggle
+  pattern inherited from Omarchy. Config detail deferred to Q39 area.
 
 ## Pending decisions
 
