@@ -157,9 +157,19 @@ on macOS is the canonical pattern.
     (StyLua v2.5.2).
 - Q21 pre-answer: lazygit AND lazydocker ship by default. Specific
   keymaps deferred to TUI/utilities section (Q21 area).
+- Q13: Vicinae as default launcher (Raycast-style, Raycast-compatible
+  extensions). Subsumes clipboard, emoji, snippets, calculator, and
+  shortcuts/quicklinks. Walker (Rust) is fallback if Vicinae fails
+  validation. See `project-launcher-vicinae-fallback` in auto-memory
+  for the validation gates. Q13a (separate clipboard manager) and the
+  emoji-picker question are now moot.
 
 ## Pending decisions
 
 - Keymap for lazydocker (user's Mac uses `<leader>dd` via snacks
   terminal). LazyVim already ships `<leader>gg` for lazygit. Decide
   when we reach Q21 (TUIs/utilities).
+- Vicinae validation gates (theming, layer-shell, stability, latency,
+  shortcuts/quicklinks) to be tested when we build
+  `install/packaging/launcher.sh` at Q39. If hard gates fail, swap to
+  Walker.
