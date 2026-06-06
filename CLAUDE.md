@@ -163,6 +163,11 @@ on macOS is the canonical pattern.
   validation. See `project-launcher-vicinae-fallback` in auto-memory
   for the validation gates. Q13a (separate clipboard manager) and the
   emoji-picker question are now moot.
+- Q14: Waybar as status bar. Pragmatic distro default — C++ but with
+  drop-in module library and CSS theme-pipeline fit. Position/modules
+  detail deferred to when we build `config/waybar/` (Q39 area). Paco
+  menu button (replaces Omarchy's omarchy.ttf trick) deferred to Q33
+  branding.
 
 ## Pending decisions
 
