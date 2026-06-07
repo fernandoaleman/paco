@@ -7,11 +7,11 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q43 (btrfs hard requirement; snapper defaults).
-  2026-06-07.
-- **Next question:** Q44 — Security (UFW defaults, sudoers tries, PAM
-  fingerprint, FIDO2 — copy which). See plan line 44.
-- **Total progress:** Q1–Q43 of Q1–Q50.
+- **Last completed:** Q44 (security: faillock, sudo tries, opt-in
+  helpers). 2026-06-07.
+- **Next question:** Q45 — First-boot experience (welcome notification,
+  wifi setup, firewall enable, hooks). See plan line 45.
+- **Total progress:** Q1–Q44 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -520,6 +520,16 @@ on macOS is the canonical pattern.
     (`default/snapper/root`): hourly cleanup, timeline enabled,
     reasonable snapshot retention counts.
   - Snapper for `/` only (NOT `/home`) — already noted in Q24.
+- Q44: Security defaults (reference distro's pattern):
+  - `Defaults passwd_tries=10` in sudoers (humane UX vs default 3)
+  - Faillock: `deny=10 unlock_time=120` (10 wrong tries → 2-min
+    lockout vs default 3 tries → 10-min lockout)
+  - SDDM autologin faillock fix: prevents lockout loops on autologin
+  - `paco setup-security-fingerprint` (opt-in) — fprintd-based
+    fingerprint login for laptops with fingerprint sensors
+  - `paco setup-security-fido2` (opt-in) — FIDO2 key auth for YubiKey
+    et al.
+  - UFW (Q27) default-deny incoming already locked in
 
 ## Pending decisions
 
