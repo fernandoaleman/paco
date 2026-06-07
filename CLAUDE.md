@@ -7,10 +7,12 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q29 (theme system architecture). 2026-06-07.
-- **Next question:** Q30 — Themes to ship (which themes get bundled in
-  default install, including a paco-branded default). See plan line 30.
-- **Total progress:** Q1–Q29 of Q1–Q50.
+- **Last completed:** Q30 (13 bundled themes; catppuccin-macchiato
+  default). 2026-06-07.
+- **Next question:** Q31 — Keybindings
+  (start from Omarchy's set as baseline, then prune/rename).
+  See plan line 31.
+- **Total progress:** Q1–Q30 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -361,6 +363,25 @@ on macOS is the canonical pattern.
     or `@import`/`source` directive pointing at
     `~/.config/paco/current/theme/<file>` so config files don't
     change at runtime — only the symlink target does.
+- Q30: Bundled themes (13). First-boot default = `catppuccin-macchiato`.
+  - **Catppuccin (3):** `catppuccin-macchiato` (NEW, default),
+    `catppuccin` (mocha), `catppuccin-latte`
+  - **Dark (8):** tokyo-night, gruvbox, nord, ristretto, ethereal,
+    osaka-jade, solitude, hackerman
+  - **Light (2):** flexoki-light, white
+  - Dropped from Omarchy's 21: everforest, kanagawa, last-horizon,
+    lumon, matte-black, miasma, retro-82, rose-pine, vantablack
+- Q30 implementation note for Q39 area:
+  - Author `catppuccin-macchiato` theme directory from scratch using
+    official Catppuccin palette (24 color fields, `neovim.lua`,
+    `bottom.toml`, `icons.theme`, backgrounds, previews)
+  - Copy 12 themes verbatim from Omarchy and paco-rebrand (rename
+    omarchy → paco references, update `neovim.lua` if it depends on
+    Omarchy-specific paths)
+- Q30 deferred: custom "paco" branded theme. `catppuccin-macchiato`
+  serves as first-boot default for v1; a future `paco-default` theme
+  with paco-brand colors can be added later when branding (Q33)
+  matures.
 
 ## Pending decisions
 
