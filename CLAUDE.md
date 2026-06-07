@@ -7,11 +7,10 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q40 (hardware vendor support: Framework, ROG,
-  Dell XPS, T2; skip Surface). 2026-06-07.
-- **Next question:** Q41 — Migration system (timestamp filenames, state
-  dir under `~/.local/state/paco/migrations/`). See plan line 41.
-- **Total progress:** Q1–Q40 of Q1–Q50.
+- **Last completed:** Q41 (migration system confirmed). 2026-06-07.
+- **Next question:** Q42 — Update mechanism (`paco update` pipeline
+  mirroring reference distro). See plan line 42.
+- **Total progress:** Q1–Q41 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -487,6 +486,16 @@ on macOS is the canonical pattern.
   - Implementation: `install/config/hardware/<vendor>/*.sh` per-vendor,
     plus `install/packaging/<vendor>.sh` for packages. Deferred to
     post-Q50 sprint.
+- Q41: Migration system (confirmed):
+  - Files: `migrations/<unix-timestamp>_<short-description>.sh`
+  - State: XDG-compliant `~/.local/state/paco/migrations/`, one
+    `<timestamp>.applied` marker per applied migration
+  - Runner: skips any migration whose marker exists; writes marker on
+    success
+  - Invoked by: `paco update` automatically, `paco migrate` manually
+  - Responsibilities: package add/remove, config rewrites, systemd
+    unit changes, file moves/renames — anything to migrate older paco
+    installs forward
 
 ## Pending decisions
 
