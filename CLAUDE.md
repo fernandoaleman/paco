@@ -29,6 +29,20 @@ _(This section and the "Last completed" / "Next question" tracker
 lines above can be removed when Phase 2 is fully complete — they're
 scaffolding for in-flight progress, not durable docs.)_
 
+## First-time setup on a new machine
+
+The bootstrap is chicken-and-egg (justfile references `just`):
+
+```bash
+brew install just      # macOS bootstrap (or pacman -S just on Arch)
+just install           # installs bats-core, pipx, prek
+just hooks             # wires prek into .git/hooks/pre-commit + commit-msg
+```
+
+After this, every `git commit` runs the full prek hook suite locally —
+markdownlint, shellcheck, shfmt, typos, trailing whitespace, conventional
+commits validation. Lint failures get caught before push, not in CI.
+
 ## Working style
 
 - One focused question at a time (or 2–4 closely-related). No batching.
