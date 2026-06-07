@@ -7,12 +7,12 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q30 (13 bundled themes; catppuccin-macchiato
-  default). 2026-06-07.
-- **Next question:** Q31 — Keybindings
-  (start from Omarchy's set as baseline, then prune/rename).
-  See plan line 31.
-- **Total progress:** Q1–Q30 of Q1–Q50.
+- **Last completed:** Q31 (keybindings baseline: Omarchy modular Lua).
+  2026-06-07.
+- **Next question:** Q32 — Hyprland config style
+  (Lua-based modular like Omarchy, or plain .conf).
+  See plan line 32.
+- **Total progress:** Q1–Q31 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -382,6 +382,15 @@ on macOS is the canonical pattern.
   serves as first-boot default for v1; a future `paco-default` theme
   with paco-brand colors can be added later when branding (Q33)
   matures.
+- Q31: Keybindings — adopt Omarchy's modular Lua binding files
+  (`default/hypr/bindings/*.lua`) as baseline. Detailed pruning and
+  paco-rebrand deferred to Q39 area when we author `config/hypr/`.
+  Known renames needed at that time:
+  - `omarchy-*` command references → `paco-*`
+  - Walker mode bindings → Vicinae equivalents (per Q13)
+  - HEY-specific `mailto:` handler binding → dropped (per Q18)
+  - lazydocker keybind in nvim already locked in at Q21
+    (`<leader>dd`)
 
 ## Pending decisions
 
