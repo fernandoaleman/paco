@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# paco:summary=Print paco version
+
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+candidates=(
+  "${script_dir}/../version"
+  "/usr/share/paco/version"
+)
+
+for path in "${candidates[@]}"; do
+  if [[ -f "${path}" ]]; then
+    cat "${path}"
+    exit 0
+  fi
+done
+
+echo "paco-version: could not find version file" >&2
+exit 1

@@ -7,12 +7,11 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q36 (CLI: full metadata-driven dispatcher).
+- **Last completed:** Q37 (paco version implemented; dispatcher live).
   2026-06-07.
-- **Next question:** Q37 — First subcommand to implement
-  (likely `paco version` and `paco update` to bootstrap the pattern).
-  See plan line 37.
-- **Total progress:** Q1–Q36 of Q1–Q50.
+- **Next question:** Q38 — Bootstrap entry (`boot.sh` curlable URL,
+  PACO_REPO + PACO_REF env vars). See plan line 38.
+- **Total progress:** Q1–Q37 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -448,6 +447,13 @@ on macOS is the canonical pattern.
     to user `$PATH` at login so scripts are also callable directly.
   - Dispatcher itself ships at `/usr/bin/paco`.
   - Implementation deferred to Q37 (first subcommand) and Q39 area.
+- Q37: First subcommand = `paco version` (implemented). Dispatcher
+  at `bin/paco` + subcommand at `bin/paco-version` + bats tests in
+  `tests/version.bats`. Validates Q36's metadata-driven dispatcher
+  architecture. v1 dispatcher is minimal (~70 lines): bare `paco` /
+  `paco --help` lists subcommands with summaries; `paco <cmd>` exec's
+  `paco-<cmd>` from search paths; unknown returns 127. Next major
+  subcommand: `paco update` (Q42).
 
 ## Pending decisions
 

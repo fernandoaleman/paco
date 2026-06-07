@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# paco — opinionated Arch Linux + Hyprland distribution
+#
+# Usage: paco <subcommand> [args...]
+#        paco --help    list available subcommands
+
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+search_paths=("${script_dir}" "/usr/share/paco/bin" "/usr/local/bin")
+
+get_metadata() {
+  local field="$1" script="$2"
+  local line
+  line="$(grep -m 1 "^# paco:${field}=" "${script}" 2> /dev/null || true)"
+  echo "${line#"# paco:${field}="}"
+}
+
+find_subcommand() {
+  local cmd="$1"
+  for dir in "${search_paths[@]}"; do
+    if [[ -x "${dir}/paco-${cmd}" ]]; then
+      echo "${dir}/paco-${cmd}"
+      return 0
+    fi
+  done
+  return 1
+}
+
+list_subcommands() {
+  declare -A summaries
+  local dir script name hidden summary
+  for dir in "${search_paths[@]}"; do
+    [[ -d "${dir}" ]] || continue
+    for script in "${dir}"/paco-*; do
+      [[ -x "${script}" ]] || continue
+      name="${script##*/paco-}"
+      hidden="$(get_metadata hidden "${script}")"
+      [[ "${hidden}" == "true" ]] && continue
+      [[ -n "${summaries[${name}]:-}" ]] && continue
+      summary="$(get_metadata summary "${script}")"
+      summaries["${name}"]="${summary}"
+    done
+  done
+
+  echo "paco — opinionated Arch Linux + Hyprland distribution"
+  echo
+  echo "Usage: paco <subcommand> [args...]"
+  echo
+  echo "Available subcommands:"
+  for name in $(printf '%s\n' "${!summaries[@]}" | sort); do
+    printf '  %-20s %s\n' "${name}" "${summaries[${name}]}"
+  done
+}
+
+main() {
+  if [[ $# -eq 0 || "$1" == "--help" || "$1" == "-h" || "$1" == "help" ]]; then
+    list_subcommands
+    return 0
+  fi
+
+  if [[ "$1" == "--version" || "$1" == "-V" ]]; then
+    exec "$0" version
+  fi
+
+  local cmd="$1"
+  shift
+
+  local script
+  script="$(find_subcommand "${cmd}" || true)"
+  if [[ -n "${script}" ]]; then
+    exec "${script}" "$@"
+  fi
+
+  echo "paco: unknown subcommand '${cmd}'" >&2
+  echo "Run 'paco --help' for available subcommands." >&2
+  exit 127
+}
+
+main "$@"
