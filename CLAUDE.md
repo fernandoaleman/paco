@@ -7,10 +7,10 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q23 (boot splash: Plymouth). 2026-06-07.
-- **Next question:** Q24 — Bootloader (Limine vs systemd-boot vs GRUB).
-  See plan line 24.
-- **Total progress:** Q1–Q23 of Q1–Q50.
+- **Last completed:** Q24 (bootloader: Limine + snapper). 2026-06-07.
+- **Next question:** Q25 — Audio stack (PipeWire + wireplumber,
+  easyeffects yes/no). See plan line 25.
+- **Total progress:** Q1–Q24 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -299,6 +299,16 @@ on macOS is the canonical pattern.
   colors.toml (not hardcoded like Omarchy's `#1a1b26`).
 - Plymouth requires: mkinitcpio HOOKS list includes `plymouth`,
   `plymouth-quit-wait.service` unmasked.
+- Q24: Limine bootloader (Omarchy pattern) with `limine-snapper-sync`
+  for boot-into-snapshot rollback. Both UEFI and BIOS supported.
+  Snapper integration assumes btrfs — formal stance on filesystem
+  decided in Q43. Config templates at `default/limine/{default.conf,
+  limine.conf}` (Omarchy pattern; paco-rebrand to match).
+- mkinitcpio HOOKS list (Omarchy-derived): `base udev plymouth keyboard
+  autodetect microcode modconf kms keymap consolefont block encrypt
+  filesystems fsck btrfs-overlayfs`
+- Snapper for `/` only (NOT `/home`) — user data shouldn't roll back.
+- `btrfs quota disable /` for performance.
 
 ## Pending decisions
 
