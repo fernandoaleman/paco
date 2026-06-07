@@ -7,11 +7,10 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q33 (branding scope: full brand depth, details
-  deferred). 2026-06-07.
-- **Next question:** Q34 — Custom font (paco.ttf for waybar glyph, or
-  use existing icon font). See plan line 34.
-- **Total progress:** Q1–Q33 of Q1–Q50.
+- **Last completed:** Q34 (custom paco.ttf brand font). 2026-06-07.
+- **Next question:** Q35 — Fonts to ship (JetBrainsMono NF, Liberation
+  Sans, Noto, others). See plan line 35.
+- **Total progress:** Q1–Q34 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -407,6 +406,12 @@ on macOS is the canonical pattern.
   SDDM `Main.qml` with paco identity, wallpapers per bundled theme.
   Logo design vibe deferred — will explore options when designing.
   All asset design deferred to Q39 area.
+- Q34: Custom `paco.ttf` font with brand glyph (single character in
+  Private Use Area). Generated from paco SVG logo via FontForge or
+  Python fonttools script. Ships as `default/fonts/paco.ttf`,
+  installed to `/usr/share/fonts/paco/paco.ttf`. Waybar reference:
+  `format = "<span font='paco'></span>"`. Generation deferred to Q39
+  area pending logo design (Q33 deferred).
 
 ## Pending decisions
 
