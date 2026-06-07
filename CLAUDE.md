@@ -197,17 +197,24 @@ on macOS is the canonical pattern.
   `--app=` mode drives it. Keep generalized Zoom URL-scheme handler.
   **Drop HEY-specific mailto handler** (Basecamp-internal). Default
   bundled web-apps via per-item approval rule (Q19+).
-- Q19: Default bundled web-apps (14, per-item approved): Google Photos,
-  Google Contacts, Google Messages, Google Maps, Google Calendar, Gmail,
-  YouTube, ChatGPT, GitHub, Discord, Zoom (with URL-scheme handler),
-  Claude, Slack, 1Password. Skipped Omarchy defaults: HEY, Basecamp,
-  Fizzy, WhatsApp, X, Figma. Icons bundled from Omarchy's set (9): Google
-  Photos, Google Contacts, Google Messages, Google Maps, YouTube, ChatGPT,
-  GitHub, Discord, Zoom. **Do not copy Omarchy icons for apps we aren't
-  using** (HEY/Basecamp/Fizzy/WhatsApp/X/Figma/Disk Usage/Docker/imv/
-  Retro Gaming/windows). Icons to source (5): Google Calendar, Gmail,
-  Claude, Slack, 1Password — try flaticon.com first (see auto-memory
-  `feedback-flaticon-for-icons`).
+- Q19 (revised): Default bundled web-apps (12, per-item approved):
+  Google Photos, Google Contacts, Google Messages, Google Maps, Google
+  Calendar, Gmail, YouTube, ChatGPT, GitHub, Discord, Zoom (with
+  URL-scheme handler), Claude. 1Password and Slack moved to native in
+  Q20 (Omarchy pattern: one mode per app). Skipped Omarchy defaults:
+  HEY, Basecamp, Fizzy, WhatsApp, X, Figma. Icons bundled from
+  Omarchy's set (9): Google Photos, Google Contacts, Google Messages,
+  Google Maps, YouTube, ChatGPT, GitHub, Discord, Zoom. **Do not copy
+  Omarchy icons for apps we aren't using** (HEY/Basecamp/Fizzy/WhatsApp/
+  X/Figma/Disk Usage/Docker/imv/Retro Gaming/windows). Icons to source
+  (3): Google Calendar, Gmail, Claude — try flaticon.com first (see
+  auto-memory `feedback-flaticon-for-icons`).
+- Q20: Default bundled native apps (5, per-item approved): 1Password
+  (`1password` + `1password-cli`), Claude Code (`claude-code`), Slack
+  (`slack-desktop`), Spotify (`spotify`), Obsidian (`obsidian`). Stable
+  branch (not Omarchy's `1password-beta`) — to confirm at install
+  script time (Q39). Skipped: Typora (paid), Cursor, VS Code (user
+  uses LazyVim; both would be optional `paco-install-<name>` later).
 
 ## Pending decisions
 
@@ -218,8 +225,7 @@ on macOS is the canonical pattern.
   shortcuts/quicklinks) to be tested when we build
   `install/packaging/launcher.sh` at Q39. If hard gates fail, swap to
   Walker.
-- Source 5 missing web-app icons (Google Calendar, Gmail, Claude, Slack,
-  1Password) when building `install/packaging/webapps.sh` at Q39.
-  Try flaticon.com first.
+- Source 3 missing web-app icons (Google Calendar, Gmail, Claude) when
+  building `install/packaging/webapps.sh` at Q39. Try flaticon.com first.
 - Create `applications/icons/ATTRIBUTION.md` with source + license for
   each bundled icon (Omarchy-derived + new sources).
