@@ -7,11 +7,12 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q37 (paco version implemented; dispatcher live).
+- **Last completed:** Q38 (bootstrap entry + manual install procedure).
   2026-06-07.
-- **Next question:** Q38 — Bootstrap entry (`boot.sh` curlable URL,
-  PACO_REPO + PACO_REF env vars). See plan line 38.
-- **Total progress:** Q1–Q37 of Q1–Q50.
+- **Next question:** Q39 — Install phase ordering
+  (helpers → preflight → packaging → config → login → post-install).
+  See plan line 39.
+- **Total progress:** Q1–Q38 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -445,6 +446,28 @@ on macOS is the canonical pattern.
   `paco --help` lists subcommands with summaries; `paco <cmd>` exec's
   `paco-<cmd>` from search paths; unknown returns 127. Next major
   subcommand: `paco update` (Q42).
+- Q38: Bootstrap entry — `boot.sh` at repo root, curlable via GitHub
+  raw URL for v1:
+  `https://raw.githubusercontent.com/fernandoaleman/paco/master/boot.sh`.
+  Env vars `PACO_REPO` (default `fernandoaleman/paco`) and `PACO_REF`
+  (default `master`) allow testing alt forks / branches.
+  - Manual install procedure (mirrors reference distro with deltas):
+    1. Arch ISO + balenaEtcher to USB
+    2. archinstall with btrfs + compression, LUKS encryption,
+       Limine bootloader, pipewire audio, **NetworkManager** (not iwd
+       "Copy ISO network config" — deviation from reference)
+    3. After reboot + login: `curl -fsSL <boot.sh URL> | bash`
+  - boot.sh responsibilities: clone PACO_REPO@PACO_REF to
+    `~/.local/share/paco`, exec install.sh.
+  - install.sh phase additions vs reference distro:
+    - **Prompt for git name/email** during install (most paco users
+      will be devs; convenient setup).
+    - **Pre-flight checks** in preflight phase: min disk (~20 GB),
+      min RAM (4 GB), UEFI present, btrfs root, internet reachable.
+      Fail-fast with clear messages.
+    - **End-of-install summary**: list what was installed, what's next
+      (paco-theme-set, paco-webapp-install, etc.), then prompt reboot.
+  - Implementation deferred to Q39 area.
 
 ## Pending decisions
 
@@ -457,6 +480,9 @@ on macOS is the canonical pattern.
   if changing, do the global rename while it's still cheap (~30 min
   across docs + memory). After Q39, rename cost grows to hours +
   migration script for existing installs.
+- Post-v1: ship an `archinstall` profile so users can run
+  `archinstall --profile paco` and skip the manual click-through.
+  See auto-memory `project-archinstall-profile-future`.
 - Vicinae validation gates (theming, layer-shell, stability, latency,
   shortcuts/quicklinks) to be tested when we build
   `install/packaging/launcher.sh` at Q39. If hard gates fail, swap to
