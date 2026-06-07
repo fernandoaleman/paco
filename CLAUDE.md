@@ -7,12 +7,12 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q38 (bootstrap entry + manual install procedure).
+- **Last completed:** Q39 (install phase ordering confirmed).
   2026-06-07.
-- **Next question:** Q39 — Install phase ordering
-  (helpers → preflight → packaging → config → login → post-install).
-  See plan line 39.
-- **Total progress:** Q1–Q38 of Q1–Q50.
+- **Next question:** Q40 — Hardware-specific scripts (Framework, ASUS
+  ROG, Dell, Surface, Apple T2 — bring forward which, drop which).
+  See plan line 40.
+- **Total progress:** Q1–Q39 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -468,6 +468,13 @@ on macOS is the canonical pattern.
     - **End-of-install summary**: list what was installed, what's next
       (paco-theme-set, paco-webapp-install, etc.), then prompt reboot.
   - Implementation deferred to Q39 area.
+- Q39: Install phase ordering confirmed (matches reference distro):
+  `helpers → preflight → packaging → config → login → post-install →
+  first-run`. Each phase = directory of numbered shell scripts run in
+  order. Phase orchestrator at `install/<phase>/all.sh`. Master
+  orchestrator at `install.sh`.
+  - Implementation deferred to "post-Q50 implementation sprint."
+    Decisions Q40–Q50 finalize design first.
 
 ## Pending decisions
 
