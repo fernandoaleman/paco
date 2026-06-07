@@ -7,10 +7,9 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q26 (power: power-profiles-daemon). 2026-06-07.
-- **Next question:** Q27 — Networking (NetworkManager vs iwd; firewall
-  UFW yes/no). See plan line 27.
-- **Total progress:** Q1–Q26 of Q1–Q50.
+- **Last completed:** Q27 (NetworkManager + UFW firewall). 2026-06-07.
+- **Next question:** Q28 — Bluetooth (bluez/blueman). See plan line 28.
+- **Total progress:** Q1–Q27 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -317,6 +316,15 @@ on macOS is the canonical pattern.
   3-mode picker (Power Saver / Balanced / Performance) integrated via
   waybar. tlp / auto-cpufreq available as opt-in via
   `paco-install-tlp` / `paco-install-auto-cpufreq`.
+- Q27: Networking = **NetworkManager** (deviation from Omarchy's iwd
+  choice). Heavier but GUI-friendly. Click-to-connect UX out of box,
+  nm-applet integrates with waybar. Handles wifi + ethernet + VPN +
+  proxy in one daemon. Package: `networkmanager` (with
+  `nm-connection-editor` GUI). systemd-networkd-wait-online disabled
+  to avoid boot timeout (Omarchy pattern carried over).
+- Q27 firewall: UFW enabled by default with default-deny incoming.
+  Standard desktop hardening. Package: `ufw`. Service enabled in
+  install scripts.
 
 ## Pending decisions
 
