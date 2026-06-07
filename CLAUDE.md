@@ -7,10 +7,9 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q21 (CLI/TUI tools). Commit `6109048`. 2026-06-06.
-- **Next question:** Q22 — Login manager (SDDM vs ly vs greetd-tuigreet
-  vs getty autologin). See plan line 22.
-- **Total progress:** Q1–Q21 of Q1–Q50.
+- **Last completed:** Q22 (login manager: SDDM). 2026-06-07.
+- **Next question:** Q23 — Boot splash (Plymouth yes/no). See plan line 23.
+- **Total progress:** Q1–Q22 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -276,6 +275,22 @@ on macOS is the canonical pattern.
     thefuck (personal), atuin, yq.
 - Q21 keymap: ship `<leader>dd` → lazydocker via snacks terminal in
   paco's nvim defaults. `<leader>gg` → lazygit is LazyVim default.
+- Q22: SDDM as login manager (Omarchy current pattern). Includes:
+  - Autologin enabled by default for single-user laptops
+    (`/etc/sddm.conf.d/autologin.conf` with `User=$USER`, `Session=paco`)
+  - Custom paco QML theme at `/usr/share/sddm/themes/paco/`
+    (replaces Omarchy's QML — deferred to Q33 branding for paco logo +
+    color palette injection)
+  - "Hyprland renders SDDM's login UI" pattern (`CompositorCommand=
+    start-hyprland --config /usr/share/sddm/hyprland.lua`)
+  - Passwordless `Default_keyring` + `pam_gnome_keyring.so` stripped
+    from `/etc/pam.d/sddm` (Omarchy's pattern — single-user/LUKS
+    assumption; revisit security model in Q44)
+  - paco session entry: `/usr/local/share/wayland-sessions/paco.desktop`
+    with `Exec=uwsm start -g -1 -e -D Hyprland hyprland.desktop`
+- Wayland-session decision: `uwsm` wrapper (Omarchy pattern) for proper
+  systemd `graphical-session.target` integration. Confirms the
+  uwsm dependency in paco's base packages.
 
 ## Pending decisions
 
