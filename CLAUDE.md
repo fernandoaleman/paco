@@ -7,12 +7,11 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q31 (keybindings baseline: Omarchy modular Lua).
-  2026-06-07.
-- **Next question:** Q32 — Hyprland config style
-  (Lua-based modular like Omarchy, or plain .conf).
-  See plan line 32.
-- **Total progress:** Q1–Q31 of Q1–Q50.
+- **Last completed:** Q32 (Hyprland config: Lua modular). 2026-06-07.
+- **Next question:** Q33 — Branding assets (paco name, ASCII logo, SVG
+  logo, PNG icon, Plymouth theme, SDDM theme, wallpapers, waybar icon
+  font). See plan line 33.
+- **Total progress:** Q1–Q32 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -391,6 +390,10 @@ on macOS is the canonical pattern.
   - HEY-specific `mailto:` handler binding → dropped (per Q18)
   - lazydocker keybind in nvim already locked in at Q21
     (`<leader>dd`)
+- Q32: Hyprland config style = Lua-based modular (Omarchy pattern).
+  Files: `default/hypr/bindings/*.lua`, `monitors.lua`, `input.lua`,
+  `hyprlock.lua`, etc. Compile/translate step to Hyprland's `.conf`
+  format. Theme template at `hyprland.lua.tpl` (per Q29).
 
 ## Pending decisions
 
