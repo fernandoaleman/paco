@@ -7,9 +7,11 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q27 (NetworkManager + UFW firewall). 2026-06-07.
-- **Next question:** Q28 — Bluetooth (bluez/blueman). See plan line 28.
-- **Total progress:** Q1–Q27 of Q1–Q50.
+- **Last completed:** Q28 (bluetooth: bluez + blueman). 2026-06-07.
+- **Next question:** Q29 — Theme system architecture
+  (Omarchy's colors.toml + .tpl approach + `paco-theme-set` command).
+  See plan line 29.
+- **Total progress:** Q1–Q28 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -325,6 +327,9 @@ on macOS is the canonical pattern.
 - Q27 firewall: UFW enabled by default with default-deny incoming.
   Standard desktop hardening. Package: `ufw`. Service enabled in
   install scripts.
+- Q28: Bluetooth = bluez + blueman (with GTK tray applet).
+  Click-to-pair via waybar tray. Packages: `bluez`, `bluez-utils`,
+  `blueman`. Service `bluetooth.service` enabled at install.
 
 ## Pending decisions
 
