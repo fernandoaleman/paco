@@ -7,10 +7,11 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q34 (custom paco.ttf brand font). 2026-06-07.
-- **Next question:** Q35 — Fonts to ship (JetBrainsMono NF, Liberation
-  Sans, Noto, others). See plan line 35.
-- **Total progress:** Q1–Q34 of Q1–Q50.
+- **Last completed:** Q35 (lean 4-font bundle). 2026-06-07.
+- **Next question:** Q36 — CLI architecture (single `paco` dispatcher
+  with metadata-driven subcommands vs flat PATH scripts; metadata
+  format). See plan line 36.
+- **Total progress:** Q1–Q35 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -412,6 +413,17 @@ on macOS is the canonical pattern.
   installed to `/usr/share/fonts/paco/paco.ttf`. Waybar reference:
   `format = "<span font='paco'></span>"`. Generation deferred to Q39
   area pending logo design (Q33 deferred).
+- Q35: Bundled fonts (4, lean): `ttf-jetbrains-mono-nerd` (primary
+  monospace — terminal/code, Nerd Font glyphs for waybar/yazi),
+  `noto-fonts` (universal sans/serif), `noto-fonts-emoji` (color
+  emoji), `ttf-liberation` (Liberation Sans/Serif — referenced by
+  fontconfig as default sans/serif). Skipped: `noto-fonts-cjk`,
+  `ttf-ia-writer`, and all optional alternative mono fonts (Cascadia,
+  Fira, Source Code Pro, Inter) — users install themselves if they
+  prefer those.
+- fontconfig (Omarchy-derived): sans-serif → Liberation Sans;
+  serif → Liberation Serif; monospace appends JetBrainsMono Nerd
+  Font; system-ui → Liberation Sans.
 
 ## Pending decisions
 
