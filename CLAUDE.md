@@ -7,11 +7,11 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q42 (update pipeline + yay AUR helper).
+- **Last completed:** Q43 (btrfs hard requirement; snapper defaults).
   2026-06-07.
-- **Next question:** Q43 — Snapshots (Limine + snapper, btrfs
-  assumption, or skip). See plan line 43.
-- **Total progress:** Q1–Q42 of Q1–Q50.
+- **Next question:** Q44 — Security (UFW defaults, sudoers tries, PAM
+  fingerprint, FIDO2 — copy which). See plan line 44.
+- **Total progress:** Q1–Q43 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -511,6 +511,15 @@ on macOS is the canonical pattern.
 - Q42 AUR helper: **yay** (reference distro's choice). Deviation from
   Rust-tool preference (paru is Rust); user opted for reference-distro
   consistency over Rust pedigree. Both are equivalently capable.
+- Q43: Snapshots — Limine + snapper integration (already locked in
+  Q22/Q24/Q38). Q43 finalizes:
+  - **btrfs is a hard requirement.** Preflight check fails fast on
+    non-btrfs root with clear error message pointing user to use
+    archinstall with btrfs + LUKS.
+  - snapper config = reference distro's defaults
+    (`default/snapper/root`): hourly cleanup, timeline enabled,
+    reasonable snapshot retention counts.
+  - Snapper for `/` only (NOT `/home`) — already noted in Q24.
 
 ## Pending decisions
 
