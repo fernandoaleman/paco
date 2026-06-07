@@ -51,6 +51,13 @@ User strongly prefers Rust-built CLI tools (e.g., `fd` > `find`, `rg` >
   (shellcheck = Haskell, shfmt = Go, bats = bash, markdownlint = JS),
   use what works.
 
+## Verify CI after every push
+
+After every `git push`, wait for GitHub Actions CI to complete and
+verify it passes before moving on to the next step. Catches failures
+immediately instead of letting them pile up. See auto-memory
+`feedback-verify-ci-after-push`.
+
 ## Bundled apps require per-item approval
 
 For Q19 (web apps), Q20 (commercial apps), Q21 (TUIs/utilities), and
@@ -112,7 +119,7 @@ on macOS is the canonical pattern.
 
 ## Current dev environment
 
-- Building paco *from* macOS while user doesn't yet have an Arch machine.
+- Building paco _from_ macOS while user doesn't yet have an Arch machine.
 - justfile supports both: `just install` auto-detects OS and dispatches
   to `install-mac` (Homebrew) or `install-arch` (pacman).
 - Lint and test recipes work identically on both OSes; only `install`
@@ -232,7 +239,7 @@ on macOS is the canonical pattern.
   uses LazyVim; both would be optional `paco-install-<name>` later).
 - Q21: Default bundled CLI/TUI tools (21, per-item approved):
   - Tier 1 (5): bat, **bottom/btm** (Rust, replacing btop — Rust pedigree
-    + theme integration via `default/themed/bottom.toml.tpl` +
+    with theme integration via `default/themed/bottom.toml.tpl` and
     `paco-restart-bottom` helper), lazydocker, lazygit, tmux.
   - Tier 2 (10): dust, eza, fd, fzf, gum, jq, ripgrep, tldr, zoxide,
     fastfetch.
