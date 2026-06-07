@@ -7,10 +7,10 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q25 (audio: PipeWire + wireplumber). 2026-06-07.
-- **Next question:** Q26 — Power profiles
-  (power-profiles-daemon vs tlp vs auto-cpufreq). See plan line 26.
-- **Total progress:** Q1–Q25 of Q1–Q50.
+- **Last completed:** Q26 (power: power-profiles-daemon). 2026-06-07.
+- **Next question:** Q27 — Networking (NetworkManager vs iwd; firewall
+  UFW yes/no). See plan line 27.
+- **Total progress:** Q1–Q26 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -313,6 +313,10 @@ on macOS is the canonical pattern.
   GUI EQ users install themselves via `paco-install-easyeffects` later).
   Packages: `pipewire`, `pipewire-alsa`, `pipewire-pulse`,
   `pipewire-jack`, `wireplumber` (Omarchy's set).
+- Q26: Power management = `power-profiles-daemon` (Omarchy default).
+  3-mode picker (Power Saver / Balanced / Performance) integrated via
+  waybar. tlp / auto-cpufreq available as opt-in via
+  `paco-install-tlp` / `paco-install-auto-cpufreq`.
 
 ## Pending decisions
 
