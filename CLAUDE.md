@@ -7,11 +7,10 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q28 (bluetooth: bluez + blueman). 2026-06-07.
-- **Next question:** Q29 — Theme system architecture
-  (Omarchy's colors.toml + .tpl approach + `paco-theme-set` command).
-  See plan line 29.
-- **Total progress:** Q1–Q28 of Q1–Q50.
+- **Last completed:** Q29 (theme system architecture). 2026-06-07.
+- **Next question:** Q30 — Themes to ship (which themes get bundled in
+  default install, including a paco-branded default). See plan line 30.
+- **Total progress:** Q1–Q29 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -330,6 +329,38 @@ on macOS is the canonical pattern.
 - Q28: Bluetooth = bluez + blueman (with GTK tray applet).
   Click-to-pair via waybar tray. Packages: `bluez`, `bluez-utils`,
   `blueman`. Service `bluetooth.service` enabled at install.
+- Q29: Theme system architecture (Omarchy pattern adapted to paco's
+  app set). Three layers:
+  - **Theme directory** at `themes/<name>/` with: `colors.toml`
+    (palette: color0-15, background, foreground, accent, cursor),
+    `backgrounds/`, `icons.theme`, `bottom.toml`, `neovim.lua`
+    (colorscheme spec + Catppuccin's integrations block per Q12),
+    `preview.png` / `preview-unlock.png` / `unlock.png`. Drop:
+    `vscode.json`, `btop.theme`.
+  - **Templates** at `default/themed/*.tpl` processed per theme into
+    `~/.config/paco/current/theme/<file>`:
+    - Bundled-app templates: `ghostty.conf.tpl`, `waybar.css.tpl`,
+      `mako.ini.tpl`, `hyprland.lua.tpl`, `hyprlock.conf.tpl`,
+      `obsidian.css.tpl`, `chrome.theme.tpl`, `bottom.toml.tpl`,
+      `vicinae.<ext>.tpl` (or `walker.css.tpl` on fallback)
+    - Optional-alternative templates (for `paco-install-<X>` to
+      inherit theme): `alacritty.toml.tpl`, `foot.ini.tpl`,
+      `kitty.conf.tpl`
+    - Dropped from Omarchy's set: `quickshell.json.tpl`,
+      `helix.toml.tpl`, `keyboard.rgb.tpl`
+    - GTK apps (Thunar, blueman, easyeffects, etc.) get themed via
+      `gsettings` in `paco-theme-set-gnome` — no per-app templates
+      needed.
+  - **`paco-theme-set <name>` command** updates
+    `~/.config/paco/current/theme` symlink, renders all templates with
+    **gum** substitution (Charm tool from Q21), fires per-app restart
+    helpers (`paco-restart-waybar`, `paco-restart-mako`,
+    `paco-restart-bottom`, etc.), runs `paco-theme-set-gnome`, and
+    fires nvim `:LazyReload` via `paco-theme-hotreload.lua` hook (Q12).
+  - **Per-app integration**: each user config does either a symlink
+    or `@import`/`source` directive pointing at
+    `~/.config/paco/current/theme/<file>` so config files don't
+    change at runtime — only the symlink target does.
 
 ## Pending decisions
 
