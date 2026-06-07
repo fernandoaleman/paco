@@ -7,11 +7,10 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q45 (first-boot scripts adapted). 2026-06-07.
-- **Next question:** Q46 — Release channels
-  (`main` + `rc` + `dev` like reference, or single-branch).
-  See plan line 46.
-- **Total progress:** Q1–Q45 of Q1–Q50.
+- **Last completed:** Q46 (single-branch master for MVP). 2026-06-07.
+- **Next question:** Q47 — Version file (format, location).
+  See plan line 47.
+- **Total progress:** Q1–Q46 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -545,6 +544,10 @@ on macOS is the canonical pattern.
     validation gates (Q13 fallback criteria).
   - Location: `install/first-run/*.sh` per Q39 phase ordering.
   - Implementation deferred to post-Q50 sprint.
+- Q46: Release channels — single-branch (`master` only) for MVP. Adopt
+  multi-branch (`master` + `rc` + `dev`) later when paco has external
+  testers willing to run pre-release builds. `paco update-branch`
+  command ships but only `master` is valid for v1.
 
 ## Pending decisions
 
