@@ -36,6 +36,13 @@ User strongly prefers Rust-built CLI tools (e.g., `fd` > `find`, `rg` >
   (shellcheck = Haskell, shfmt = Go, bats = bash, markdownlint = JS),
   use what works.
 
+## Bundled apps require per-item approval
+
+For Q19 (web apps), Q20 (commercial apps), Q21 (TUIs/utilities), and
+any other "what to bundle by default" decision: ask user per item, do
+NOT propose en-masse lists. See auto-memory
+`feedback-approve-bundled-apps`.
+
 ## Distro-vs-personal philosophy
 
 paco ships a minimal, working base. For every customization decision,
@@ -185,6 +192,11 @@ on macOS is the canonical pattern.
   <name>` for chrome/edge/firefox/zen later. Chromium (Omarchy default)
   rejected because Arch's chromium package strips Google API keys,
   breaking sync.
+- Q18: Web-app strategy = clone Omarchy's pattern as `paco-webapp-*`
+  commands (`-install`, `-remove`, `-remove-all`, `-launch`). Brave
+  `--app=` mode drives it. Keep generalized Zoom URL-scheme handler.
+  **Drop HEY-specific mailto handler** (Basecamp-internal). Default
+  bundled web-apps via per-item approval rule (Q19+).
 
 ## Pending decisions
 
