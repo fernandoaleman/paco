@@ -7,12 +7,11 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q39 (install phase ordering confirmed).
-  2026-06-07.
-- **Next question:** Q40 — Hardware-specific scripts (Framework, ASUS
-  ROG, Dell, Surface, Apple T2 — bring forward which, drop which).
-  See plan line 40.
-- **Total progress:** Q1–Q39 of Q1–Q50.
+- **Last completed:** Q40 (hardware vendor support: Framework, ROG,
+  Dell XPS, T2; skip Surface). 2026-06-07.
+- **Next question:** Q41 — Migration system (timestamp filenames, state
+  dir under `~/.local/state/paco/migrations/`). See plan line 41.
+- **Total progress:** Q1–Q40 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -475,6 +474,19 @@ on macOS is the canonical pattern.
   orchestrator at `install.sh`.
   - Implementation deferred to "post-Q50 implementation sprint."
     Decisions Q40–Q50 finalize design first.
+- Q40: Hardware-specific scripts:
+  - **Vendor support (4):** Framework, ASUS ROG, Dell XPS, Apple T2.
+    Skipped: Microsoft Surface (user not targeting Surface devices).
+  - **Generic fixes (all kept):** NVIDIA drivers + Vulkan, Bluetooth,
+    Broadcom wifi (bcm43xx), specific ethernet (yt6801), wireless
+    regdom, Synaptic/Tuxedo touchpad fixes, F-key behavior, ignore-
+    power-button, USB autosuspend, printer.
+  - Each script detects target hardware before applying — no impact on
+    machines without the hardware. Bundle cost is ~30 small scripts in
+    repo.
+  - Implementation: `install/config/hardware/<vendor>/*.sh` per-vendor,
+    plus `install/packaging/<vendor>.sh` for packages. Deferred to
+    post-Q50 sprint.
 
 ## Pending decisions
 
