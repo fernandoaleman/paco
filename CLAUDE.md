@@ -7,10 +7,10 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q24 (bootloader: Limine + snapper). 2026-06-07.
-- **Next question:** Q25 — Audio stack (PipeWire + wireplumber,
-  easyeffects yes/no). See plan line 25.
-- **Total progress:** Q1–Q24 of Q1–Q50.
+- **Last completed:** Q25 (audio: PipeWire + wireplumber). 2026-06-07.
+- **Next question:** Q26 — Power profiles
+  (power-profiles-daemon vs tlp vs auto-cpufreq). See plan line 26.
+- **Total progress:** Q1–Q25 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -309,6 +309,10 @@ on macOS is the canonical pattern.
   filesystems fsck btrfs-overlayfs`
 - Snapper for `/` only (NOT `/home`) — user data shouldn't roll back.
 - `btrfs quota disable /` for performance.
+- Q25: Audio = PipeWire + wireplumber. easyeffects skipped (personal —
+  GUI EQ users install themselves via `paco-install-easyeffects` later).
+  Packages: `pipewire`, `pipewire-alsa`, `pipewire-pulse`,
+  `pipewire-jack`, `wireplumber` (Omarchy's set).
 
 ## Pending decisions
 
