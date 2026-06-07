@@ -178,6 +178,13 @@ on macOS is the canonical pattern.
   (gtk-theme + color-scheme + icon-theme). yazi (Rust) chosen for TUI
   alongside lazygit/lazydocker — Rust pedigree + image preview support
   via ghostty. Hyprland keybind for thunar deferred to Q31 keybindings.
+- Q17: Brave as default browser. Satisfies user's priorities: PWA via
+  `--app=` mode (preserves Omarchy-style web-app strategy) + Brave Sync
+  v2 (cross-machine extensions/settings, no Google account). AUR
+  `brave-bin`. Other browsers installable via `paco-install-browser
+  <name>` for chrome/edge/firefox/zen later. Chromium (Omarchy default)
+  rejected because Arch's chromium package strips Google API keys,
+  breaking sync.
 
 ## Pending decisions
 
