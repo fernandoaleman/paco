@@ -7,11 +7,11 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q32 (Hyprland config: Lua modular). 2026-06-07.
-- **Next question:** Q33 — Branding assets (paco name, ASCII logo, SVG
-  logo, PNG icon, Plymouth theme, SDDM theme, wallpapers, waybar icon
-  font). See plan line 33.
-- **Total progress:** Q1–Q32 of Q1–Q50.
+- **Last completed:** Q33 (branding scope: full brand depth, details
+  deferred). 2026-06-07.
+- **Next question:** Q34 — Custom font (paco.ttf for waybar glyph, or
+  use existing icon font). See plan line 34.
+- **Total progress:** Q1–Q33 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -75,6 +75,13 @@ User strongly prefers Rust-built CLI tools (e.g., `fd` > `find`, `rg` >
 - Don't force Rust-only — when no mature Rust alternative exists
   (shellcheck = Haskell, shfmt = Go, bats = bash, markdownlint = JS),
   use what works.
+
+## paco branding hygiene
+
+User-facing paco content (README, install scripts, runtime help/errors,
+shipped command output) must not contain "Omarchy" as a brand name.
+CLAUDE.md retains Omarchy references as internal design-history
+context. See auto-memory `project-no-omarchy-in-user-facing`.
 
 ## Verify CI after every push
 
@@ -394,6 +401,12 @@ on macOS is the canonical pattern.
   Files: `default/hypr/bindings/*.lua`, `monitors.lua`, `input.lua`,
   `hyprlock.lua`, etc. Compile/translate step to Hyprland's `.conf`
   format. Theme template at `hyprland.lua.tpl` (per Q29).
+- Q33: Branding scope = mirror reference distro's full brand depth.
+  Custom `paco.ttf` font with paco menu glyph (waybar button), paco
+  logo (SVG + PNG), ASCII logo for shell, Plymouth boot theme assets,
+  SDDM `Main.qml` with paco identity, wallpapers per bundled theme.
+  Logo design vibe deferred — will explore options when designing.
+  All asset design deferred to Q39 area.
 
 ## Pending decisions
 
@@ -402,6 +415,10 @@ on macOS is the canonical pattern.
   - `default/git/config` with delta as pager (side-by-side diff)
   - `default/zsh/conf.d/NN-mise.zsh` shell activation
   - sesh tmux keybind in default tmux config
+- **Lock project name before Q39 begins.** "paco" is the working name;
+  if changing, do the global rename while it's still cheap (~30 min
+  across docs + memory). After Q39, rename cost grows to hours +
+  migration script for existing installs.
 - Vicinae validation gates (theming, layer-shell, stability, latency,
   shortcuts/quicklinks) to be tested when we build
   `install/packaging/launcher.sh` at Q39. If hard gates fail, swap to
