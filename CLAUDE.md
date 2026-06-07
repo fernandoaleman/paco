@@ -7,9 +7,10 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q22 (login manager: SDDM). 2026-06-07.
-- **Next question:** Q23 — Boot splash (Plymouth yes/no). See plan line 23.
-- **Total progress:** Q1–Q22 of Q1–Q50.
+- **Last completed:** Q23 (boot splash: Plymouth). 2026-06-07.
+- **Next question:** Q24 — Bootloader (Limine vs systemd-boot vs GRUB).
+  See plan line 24.
+- **Total progress:** Q1–Q23 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -291,6 +292,13 @@ on macOS is the canonical pattern.
 - Wayland-session decision: `uwsm` wrapper (Omarchy pattern) for proper
   systemd `graphical-session.target` integration. Confirms the
   uwsm dependency in paco's base packages.
+- Q23: Plymouth boot splash enabled (Omarchy pattern). Graphical boot
+  splash + graphical LUKS unlock prompt. paco theme assets (logo,
+  bullet, lock/lock-failed, entry/entry-failed, progress bar) deferred
+  to Q33 branding. Background color sourced from active paco theme's
+  colors.toml (not hardcoded like Omarchy's `#1a1b26`).
+- Plymouth requires: mkinitcpio HOOKS list includes `plymouth`,
+  `plymouth-quit-wait.service` unmasked.
 
 ## Pending decisions
 
