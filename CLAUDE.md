@@ -7,11 +7,12 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q35 (lean 4-font bundle). 2026-06-07.
-- **Next question:** Q36 — CLI architecture (single `paco` dispatcher
-  with metadata-driven subcommands vs flat PATH scripts; metadata
-  format). See plan line 36.
-- **Total progress:** Q1–Q35 of Q1–Q50.
+- **Last completed:** Q36 (CLI: full metadata-driven dispatcher).
+  2026-06-07.
+- **Next question:** Q37 — First subcommand to implement
+  (likely `paco version` and `paco update` to bootstrap the pattern).
+  See plan line 37.
+- **Total progress:** Q1–Q36 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -424,6 +425,20 @@ on macOS is the canonical pattern.
 - fontconfig (Omarchy-derived): sans-serif → Liberation Sans;
   serif → Liberation Serif; monospace appends JetBrainsMono Nerd
   Font; system-ui → Liberation Sans.
+- Q36: CLI architecture = **full metadata-driven dispatcher** (Omarchy
+  pattern). Single `paco` bash script (~1000 lines like Omarchy's
+  `bin/omarchy` dispatcher) reads metadata headers from each
+  subcommand script and produces polished help.
+  - Metadata format: `# paco:summary=<one-liner>`, `# paco:hidden=true`,
+    `# paco:group=<group>` (for category grouping).
+  - Generated help: `paco --help`, `paco <group> --help`, etc.
+    Colored, formatted, command groups, hidden commands hidden by
+    default.
+  - Subcommand layout: `bin/paco-<cmd>` in repo,
+    `/usr/share/paco/bin/paco-<cmd>` installed, with that path added
+    to user `$PATH` at login so scripts are also callable directly.
+  - Dispatcher itself ships at `/usr/bin/paco`.
+  - Implementation deferred to Q37 (first subcommand) and Q39 area.
 
 ## Pending decisions
 
