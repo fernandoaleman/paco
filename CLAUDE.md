@@ -90,15 +90,6 @@ verify it passes before moving on to the next step. Catches failures
 immediately instead of letting them pile up. See auto-memory
 `feedback-verify-ci-after-push`.
 
-## Run tests locally after every code commit
-
-After every commit that touches code (not docs-only — i.e., changes to
-`bin/`, `tests/`, `install/`, etc.), run `just test` locally before
-moving on to the next step. Tests are intentionally NOT in prek hooks
-(industry standard — pre-commit stays fast for static checks; tests
-belong in CI). This rule keeps them running locally during build for
-fast feedback. See auto-memory `feedback-test-after-commit`.
-
 ## Bundled apps require per-item approval
 
 For Q19 (web apps), Q20 (commercial apps), Q21 (TUIs/utilities), and
