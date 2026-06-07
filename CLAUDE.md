@@ -7,11 +7,11 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q44 (security: faillock, sudo tries, opt-in
-  helpers). 2026-06-07.
-- **Next question:** Q45 — First-boot experience (welcome notification,
-  wifi setup, firewall enable, hooks). See plan line 45.
-- **Total progress:** Q1–Q44 of Q1–Q50.
+- **Last completed:** Q45 (first-boot scripts adapted). 2026-06-07.
+- **Next question:** Q46 — Release channels
+  (`main` + `rc` + `dev` like reference, or single-branch).
+  See plan line 46.
+- **Total progress:** Q1–Q45 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -530,6 +530,21 @@ on macOS is the canonical pattern.
   - `paco setup-security-fido2` (opt-in) — FIDO2 key auth for YubiKey
     et al.
   - UFW (Q27) default-deny incoming already locked in
+- Q45: First-boot experience — adapt 11 first-run scripts from
+  reference distro, drop 2, add 1 conditional:
+  - **Adapted (11):** welcome (paco keybinds), wifi (NetworkManager
+    helper — not iwd), firewall (UFW enable), gnome-theme (initial
+    gsettings), gdk-scale (HiDPI), gtk-primary-paste (disable
+    middle-click paste), dns-resolver, battery-monitor, swayosd
+    (volume/brightness popups), recover-internal-monitor,
+    cleanup-reboot-sudoers (remove temp install-time sudo rules).
+  - **Dropped (2):** elephant (Walker daemon — we use Vicinae per Q13),
+    install-voxtype.hook (reference-distro-specific tool).
+  - **Added (conditional):** `vicinae.sh` if Vicinae has a daemon
+    setup similar to Walker's elephant — confirm during Vicinae
+    validation gates (Q13 fallback criteria).
+  - Location: `install/first-run/*.sh` per Q39 phase ordering.
+  - Implementation deferred to post-Q50 sprint.
 
 ## Pending decisions
 
