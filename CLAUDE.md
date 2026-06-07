@@ -172,6 +172,12 @@ on macOS is the canonical pattern.
   Omarchy-proven. Theme via INI template (`default/themed/mako.ini.tpl`)
   with text/border/background color injection per theme. DND toggle
   pattern inherited from Omarchy. Config detail deferred to Q39 area.
+- Q16: File manager — Thunar (GUI) + yazi (TUI). Thunar chosen over
+  Nautilus for lighter dep tree (~15 MB vs ~150 MB of GNOME deps);
+  both behave identically under paco's gsettings-driven GTK theming
+  (gtk-theme + color-scheme + icon-theme). yazi (Rust) chosen for TUI
+  alongside lazygit/lazydocker — Rust pedigree + image preview support
+  via ghostty. Hyprland keybind for thunar deferred to Q31 keybindings.
 
 ## Pending decisions
 
