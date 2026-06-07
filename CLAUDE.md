@@ -7,10 +7,11 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q41 (migration system confirmed). 2026-06-07.
-- **Next question:** Q42 — Update mechanism (`paco update` pipeline
-  mirroring reference distro). See plan line 42.
-- **Total progress:** Q1–Q41 of Q1–Q50.
+- **Last completed:** Q42 (update pipeline + yay AUR helper).
+  2026-06-07.
+- **Next question:** Q43 — Snapshots (Limine + snapper, btrfs
+  assumption, or skip). See plan line 43.
+- **Total progress:** Q1–Q42 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -496,6 +497,20 @@ on macOS is the canonical pattern.
   - Responsibilities: package add/remove, config rewrites, systemd
     unit changes, file moves/renames — anything to migrate older paco
     installs forward
+- Q42: Update mechanism — `paco update` mirrors reference distro's
+  full pipeline. Subcommands:
+  - `paco update-confirm` / `paco update -y` to skip prompt
+  - `paco snapshot create` (Q43 area)
+  - `paco update-git` (git pull paco repo)
+  - `paco update-perform` orchestrates: keyring → available-reset →
+    system-pkgs (`pacman -Syu`) → migrate (Q41) → aur-pkgs → orphans →
+    hook post-update → analyze-logs → restart
+  - PTY logging wrapper via `script -qefc` writes `/tmp/paco-update.log`
+  - Hyprland noidle window tag prevents screensaver during update
+  - Error trap with help-link message
+- Q42 AUR helper: **yay** (reference distro's choice). Deviation from
+  Rust-tool preference (paru is Rust); user opted for reference-distro
+  consistency over Rust pedigree. Both are equivalently capable.
 
 ## Pending decisions
 
