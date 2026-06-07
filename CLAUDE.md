@@ -215,12 +215,29 @@ on macOS is the canonical pattern.
   branch (not Omarchy's `1password-beta`) — to confirm at install
   script time (Q39). Skipped: Typora (paid), Cursor, VS Code (user
   uses LazyVim; both would be optional `paco-install-<name>` later).
+- Q21: Default bundled CLI/TUI tools (21, per-item approved):
+  - Tier 1 (5): bat, **bottom/btm** (Rust, replacing btop — Rust pedigree
+    + theme integration via `default/themed/bottom.toml.tpl` +
+    `paco-restart-bottom` helper), lazydocker, lazygit, tmux.
+  - Tier 2 (10): dust, eza, fd, fzf, gum, jq, ripgrep, tldr, zoxide,
+    fastfetch.
+  - Tier 3 (3): mise (Rust version manager — needs shell activation
+    line in `default/zsh/conf.d/`), sesh (Go tmux session manager —
+    needs tmux keybind to invoke), gh (GitHub CLI).
+  - Tier 4 (3): delta (Rust git diff prettifier — needs git pager
+    config in `default/git/config`), procs, hyperfine.
+  - Skipped: inxi, htop (redundant with bottom), chezmoi (personal),
+    thefuck (personal), atuin, yq.
+- Q21 keymap: ship `<leader>dd` → lazydocker via snacks terminal in
+  paco's nvim defaults. `<leader>gg` → lazygit is LazyVim default.
 
 ## Pending decisions
 
-- Keymap for lazydocker (user's Mac uses `<leader>dd` via snacks
-  terminal). LazyVim already ships `<leader>gg` for lazygit. Decide
-  when we reach Q21 (TUIs/utilities).
+- Q21 wiring deferred to Q39 area:
+  - `default/themed/bottom.toml.tpl` + `paco-restart-bottom` helper
+  - `default/git/config` with delta as pager (side-by-side diff)
+  - `default/zsh/conf.d/NN-mise.zsh` shell activation
+  - sesh tmux keybind in default tmux config
 - Vicinae validation gates (theming, layer-shell, stability, latency,
   shortcuts/quicklinks) to be tested when we build
   `install/packaging/launcher.sh` at Q39. If hard gates fail, swap to
