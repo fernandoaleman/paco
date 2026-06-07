@@ -7,12 +7,27 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
+- **Last completed:** Q21 (CLI/TUI tools). Commit `6109048`. 2026-06-06.
+- **Next question:** Q22 — Login manager (SDDM vs ly vs greetd-tuigreet
+  vs getty autologin). See plan line 22.
+- **Total progress:** Q1–Q21 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
   pages documenting how Omarchy is built, with file-path citations.
   Consult the matching `docs/NN-<topic>.md` before any design decision.
 - **Reference repo:** `/Users/faleman/code/omarchy/` — Omarchy's source.
+
+## How to resume
+
+Open this directory in Claude Code. Say "continue paco" or "next
+question." Claude will load this file, see "Next question: Q22,"
+consult `paco-research/docs/10-login-boot-display-manager.md`, then
+ask you the question.
+
+_(This section and the "Last completed" / "Next question" tracker
+lines above can be removed when Phase 2 is fully complete — they're
+scaffolding for in-flight progress, not durable docs.)_
 
 ## Working style
 
