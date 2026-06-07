@@ -31,12 +31,22 @@ scaffolding for in-flight progress, not durable docs.)_
 
 ## First-time setup on a new machine
 
-The bootstrap is chicken-and-egg (justfile references `just`):
+The bootstrap is chicken-and-egg (justfile references `just`).
+
+**macOS:**
 
 ```bash
-brew install just      # macOS bootstrap (or pacman -S just on Arch)
-just install           # installs bats-core, pipx, prek
-just hooks             # wires prek into .git/hooks/pre-commit + commit-msg
+brew install just
+just install   # installs bats-core, pipx, prek
+just hooks     # wires prek into .git/hooks/pre-commit + commit-msg
+```
+
+**Arch Linux:**
+
+```bash
+sudo pacman -S --needed just
+just install   # installs git python python-pipx bats; pipx install prek
+just hooks     # wires prek into .git/hooks/pre-commit + commit-msg
 ```
 
 After this, every `git commit` runs the full prek hook suite locally —
