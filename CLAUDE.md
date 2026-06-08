@@ -7,11 +7,10 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q48 (manual install guide written). 2026-06-07.
-- **Next question:** Q49 — ISO build
-  (archiso-based ISO under `iso/` with releng/airootfs/profiledef.sh).
-  See plan line 49.
-- **Total progress:** Q1–Q48 of Q1–Q50.
+- **Last completed:** Q49 (archiso ISO deferred post-MVP). 2026-06-07.
+- **Next question:** Q50 — Release & distribution
+  (GitHub Releases for ISOs, signing, checksums). See plan line 50.
+- **Total progress:** Q1–Q49 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -561,6 +560,11 @@ on macOS is the canonical pattern.
   required settings (btrfs + LUKS + Limine + pipewire +
   NetworkManager) → curl-bash boot.sh → first-boot → next steps.
   Follows the no-Omarchy-in-user-facing rule (Q33).
+- Q49: ISO build — `archiso`-based ISO under `iso/` with standard
+  `releng/`, `airootfs/`, `profiledef.sh` layout. Auto-runs paco's
+  bootstrap on first boot. **Implementation deferred until post-MVP**
+  — manual install (Q38, Q48) must be fully working and tested before
+  ISO work begins.
 
 ## Pending decisions
 
