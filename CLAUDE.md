@@ -7,11 +7,11 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q47 (SemVer, manual bumps for MVP). 2026-06-07.
-- **Next question:** Q48 — Manual install docs
-  (write `docs/install-from-arch.md` covering Arch → paco overlay
-  steps). See plan line 48.
-- **Total progress:** Q1–Q47 of Q1–Q50.
+- **Last completed:** Q48 (manual install guide written). 2026-06-07.
+- **Next question:** Q49 — ISO build
+  (archiso-based ISO under `iso/` with releng/airootfs/profiledef.sh).
+  See plan line 49.
+- **Total progress:** Q1–Q48 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -555,6 +555,12 @@ on macOS is the canonical pattern.
   File location: `version` at repo root (already exists per Q3),
   installed to `/usr/share/paco/version` (already in `paco-version`'s
   search path per Q37). Manual bumps for MVP; auto-bump deferred.
+- Q48: Manual install docs — `docs/install-from-arch.md` written.
+  7-step user-facing guide: download ISO → write USB → boot →
+  connect network (iwctl on the live ISO) → archinstall with our
+  required settings (btrfs + LUKS + Limine + pipewire +
+  NetworkManager) → curl-bash boot.sh → first-boot → next steps.
+  Follows the no-Omarchy-in-user-facing rule (Q33).
 
 ## Pending decisions
 
