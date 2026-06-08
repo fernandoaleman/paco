@@ -7,10 +7,12 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q49 (archiso ISO deferred post-MVP). 2026-06-07.
-- **Next question:** Q50 — Release & distribution
-  (GitHub Releases for ISOs, signing, checksums). See plan line 50.
-- **Total progress:** Q1–Q49 of Q1–Q50.
+- **Last completed:** Q50 (release & distribution). 2026-06-07.
+- **Status:** All 50 Phase 2 questions answered.
+- **Next:** post-Q50 implementation sprint — write install.sh,
+  boot.sh, all `install/<phase>/*.sh` scripts, dispatcher
+  subcommands, themes, etc.
+- **Total progress:** Q1–Q50 of Q1–Q50 (100%).
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -565,6 +567,17 @@ on macOS is the canonical pattern.
   bootstrap on first boot. **Implementation deferred until post-MVP**
   — manual install (Q38, Q48) must be fully working and tested before
   ISO work begins.
+- Q50: Release & distribution:
+  - **Source releases:** GitHub Releases on `v0.X.Y` tags (auto-
+    generates source tarball). SHA256 checksum file as release
+    artifact.
+  - **ISO releases (post-Q49):** attach ISO to GitHub release with
+    SHA256 + GPG signature for integrity verification. Deferred until
+    ISO build exists.
+  - **Custom pacman repo:** `pkgs.paco.org/stable/$arch` (mirroring
+    reference distro). Deferred until we have paco-specific binary
+    packages to ship (e.g., a future `paco-nvim` prebuilt LazyVim
+    package).
 
 ## Pending decisions
 
