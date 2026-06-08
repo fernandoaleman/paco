@@ -6,30 +6,34 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 
 ## Working state
 
-- **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q50 (release & distribution). 2026-06-07.
-- **Status:** All 50 Phase 2 questions answered.
-- **Next:** post-Q50 implementation sprint — write install.sh,
-  boot.sh, all `install/<phase>/*.sh` scripts, dispatcher
-  subcommands, themes, etc.
-- **Total progress:** Q1–Q50 of Q1–Q50 (100%).
+- **Phase:** 2 implementation sprint (all 50 design decisions complete
+  as of 2026-06-07; commit `5ad99e3`).
+- **Suggested starting point:** `install/helpers/` (utility functions
+  sourced by all later phases) → `install.sh` skeleton →
+  `install/preflight/` (environment checks per Q38). Foundation work
+  that unblocks the rest.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
-  the 50-question track and full approach.
+  the 50-question track and full approach (Q1–Q50 all answered;
+  this plan served its purpose).
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
-  pages documenting how Omarchy is built, with file-path citations.
-  Consult the matching `docs/NN-<topic>.md` before any design decision.
-- **Reference repo:** `/Users/faleman/code/omarchy/` — Omarchy's source.
+  pages documenting how the reference distro is built. Consult the
+  matching `docs/NN-<topic>.md` before any implementation step.
+- **Reference repo:** `/Users/faleman/code/omarchy/` — reference
+  distro's source.
 
 ## How to resume
 
-Open this directory in Claude Code. Say "continue paco" or "next
-question." Claude will load this file, see "Next question: Q22,"
-consult `paco-research/docs/10-login-boot-display-manager.md`, then
-ask you the question.
+Open this directory in Claude Code. Say "continue paco" or "start
+implementation." Claude will:
 
-_(This section and the "Last completed" / "Next question" tracker
-lines above can be removed when Phase 2 is fully complete — they're
-scaffolding for in-flight progress, not durable docs.)_
+1. Read this file
+2. See Phase 2 implementation sprint is next
+3. Check the "Pending decisions" section for deferred wiring items
+4. Propose starting with `install/helpers/` + `install.sh` skeleton
+
+_(The "Working state" tracker and this "How to resume" section can be
+removed when the implementation sprint is fully complete and paco
+v1 is shipped.)_
 
 ## First-time setup on a new machine
 
