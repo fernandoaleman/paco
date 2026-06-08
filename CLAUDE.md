@@ -7,10 +7,11 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 (build paco step-by-step). Phase 1 (research) is complete.
-- **Last completed:** Q46 (single-branch master for MVP). 2026-06-07.
-- **Next question:** Q47 — Version file (format, location).
-  See plan line 47.
-- **Total progress:** Q1–Q46 of Q1–Q50.
+- **Last completed:** Q47 (SemVer, manual bumps for MVP). 2026-06-07.
+- **Next question:** Q48 — Manual install docs
+  (write `docs/install-from-arch.md` covering Arch → paco overlay
+  steps). See plan line 48.
+- **Total progress:** Q1–Q47 of Q1–Q50.
 - **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
   the 50-question track and full approach.
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
@@ -548,6 +549,12 @@ on macOS is the canonical pattern.
   multi-branch (`master` + `rc` + `dev`) later when paco has external
   testers willing to run pre-release builds. `paco update-branch`
   command ships but only `master` is valid for v1.
+- Q47: Version format = **SemVer** (MAJOR.MINOR.PATCH). Currently
+  `0.0.1`. Bumps follow Conventional Commits mapping:
+  `feat:` → minor, `fix:` → patch, `BREAKING CHANGE:` → major.
+  File location: `version` at repo root (already exists per Q3),
+  installed to `/usr/share/paco/version` (already in `paco-version`'s
+  search path per Q37). Manual bumps for MVP; auto-bump deferred.
 
 ## Pending decisions
 
@@ -563,6 +570,9 @@ on macOS is the canonical pattern.
 - Post-v1: ship an `archinstall` profile so users can run
   `archinstall --profile paco` and skip the manual click-through.
   See auto-memory `project-archinstall-profile-future`.
+- Switch to automated SemVer bumping via GitHub Actions workflow
+  (e.g., release-please reading Conventional Commits) when manual
+  cadence gets tedious — typically around ~10 releases.
 - Vicinae validation gates (theming, layer-shell, stability, latency,
   shortcuts/quicklinks) to be tested when we build
   `install/packaging/launcher.sh` at Q39. If hard gates fail, swap to
