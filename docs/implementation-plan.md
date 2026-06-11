@@ -5,7 +5,7 @@
 paco has all 50 Phase 2 design decisions locked (see
 `/Users/faleman/code/paco/CLAUDE.md` decisions log Q1–Q50). The
 implementation sprint now begins. The user has a dedicated Beelink
-SET8 ready for an Arch Linux install where paco will be built and
+SER8 ready for an Arch Linux install where paco will be built and
 tested incrementally.
 
 **The user wants a slow, deliberate, "one small bite at a time"
