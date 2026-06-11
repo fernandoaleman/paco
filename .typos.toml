@@ -14,3 +14,4 @@ extend-exclude = [
 [default.extend-words]
 # Add words here when typos reports false positives. Format: wrong = "right"
 # Use [default.extend-identifiers] for code identifiers we want to preserve as-is.
+SER8 = "SER8"  # Beelink SER8 mini-PC product name
