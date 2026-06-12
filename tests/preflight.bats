@@ -6,10 +6,9 @@ setup() {
 }
 
 @test "preflight scripts exist" {
-  [ -r "${ROOT}/install/preflight/all.sh" ]
-  [ -r "${ROOT}/install/preflight/begin.sh" ]
-  [ -r "${ROOT}/install/preflight/show-env.sh" ]
-  [ -r "${ROOT}/install/preflight/guard.sh" ]
+  for f in all begin show-env guard hardware-mins git-author first-run-mode migrations-bootstrap; do
+    [ -r "${ROOT}/install/preflight/${f}.sh" ]
+  done
 }
 
 @test "all preflight scripts are syntactically valid" {
