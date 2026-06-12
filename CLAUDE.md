@@ -6,13 +6,15 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 
 ## Working state
 
-- **Phase:** 2 implementation sprint. Iterations 1–2 of 21 complete
-  (2026-06-11, latest commit `48d6067`). Helpers infrastructure
-  (errors, logging, presentation, paco-pkg-*) verified on Beelink SER8.
-- **Next iteration:** Iteration 3 — Preflight phase (Arch/UEFI/btrfs
-  guards + hardware mins per Q38 + git name/email prompt + first-run
-  mode marker + migrations bootstrap). See
-  `docs/implementation-plan.md` iter 3 for files + test procedure.
+- **Phase:** 2 implementation sprint. Iterations 1–4 of 21 complete
+  (2026-06-11, latest commit `a2ab5b3`). paco is now installed
+  system-wide at `/usr/bin/paco` on the Beelink, with 4 subcommands
+  (version, pkg-add, pkg-present, pkg-missing) auto-discovered via
+  metadata. Pacman tuned (Color + ParallelDownloads + ILoveCandy).
+- **Next iteration:** Iteration 5 — `paco update` minimal. Adds
+  `paco-update`, `paco-update-git`, `paco-migrate`. After this, the
+  dev loop transitions from curl-pipe-bash to `paco update`. See
+  `docs/implementation-plan.md` iter 5 for files + test procedure.
 - **Plan:** `/Users/faleman/code/paco/docs/implementation-plan.md`
   (also persisted at `~/.claude/plans/continue-paco-before-we-giggly-blanket.md`)
 - **Original 50-question plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md`

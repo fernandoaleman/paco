@@ -132,8 +132,8 @@ Once these are green, iteration 1 can begin.
   `paco --help` work from any shell.
 - **Files:** `install/post-install/{all,paco-install,pacman-config,
   finished}.sh`. Modify `install.sh` to source post-install.
-- **Test:** `which paco` → `/usr/bin/paco`; `paco --version` matches
-  `version` file.
+- **Test:** `command -v paco` → `/usr/bin/paco`; `paco --version`
+  matches `version` file.
 - **Idempotency:** `install -Dm755` for the binary; `ln -sfn` for
   symlinks.
 
@@ -183,7 +183,7 @@ Once these are green, iteration 1 can begin.
   `install/packaging/{tools-tier1,tools-tier2}.sh`,
   `default/zsh/conf.d/{30-aliases,40-zoxide}.zsh`.
 - **Test:** Log out + in → `$SHELL` is `/usr/bin/zsh`; all 15 tools
-  resolve via `which`.
+  resolve via `command -v`.
 - **Idempotency:** `chsh` only if current shell != zsh; pacman
   `--needed`.
 
@@ -345,9 +345,9 @@ the GUI.
   `applications/icons/*.png` (9 reference-derived + 3 sourced from
   flaticon per Q19), `applications/icons/ATTRIBUTION.md`,
   `install/config/zoom-url-handler.sh`.
-- **Test:** All native apps resolve via `which`; `paco webapp launch
-  gmail` opens in Chrome `--app=` mode; Zoom invite link opens
-  client.
+- **Test:** All native apps resolve via `command -v`; `paco webapp
+  launch gmail` opens in Chrome `--app=` mode; Zoom invite link
+  opens client.
 - **Idempotency:** `.desktop` files keyed by name; reinstall
   overwrites cleanly.
 
