@@ -15,10 +15,7 @@ source "${PACO_INSTALL}/helpers/all.sh"
 
 start_install_log
 paco_banner
-paco_section "Installing paco (iteration 3b — preflight + state markers)"
+paco_section "Installing paco (iteration 4 — dispatcher install)"
 
 source "${PACO_INSTALL}/preflight/all.sh"
-
-echo
-paco_section "Preflight passed. (No further install phases yet — packaging lands in iter 6+.)"
-echo "Log: ${PACO_INSTALL_LOG_FILE}"
+source "${PACO_INSTALL}/post-install/all.sh"
