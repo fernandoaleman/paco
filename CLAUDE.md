@@ -6,20 +6,24 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 
 ## Working state
 
-- **Phase:** 2 implementation sprint (all 50 design decisions complete
-  as of 2026-06-07; commit `5ad99e3`).
-- **Suggested starting point:** `install/helpers/` (utility functions
-  sourced by all later phases) → `install.sh` skeleton →
-  `install/preflight/` (environment checks per Q38). Foundation work
-  that unblocks the rest.
-- **Plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md` —
-  the 50-question track and full approach (Q1–Q50 all answered;
-  this plan served its purpose).
+- **Phase:** 2 implementation sprint. Iteration 1 of 21 complete
+  (2026-06-11, commit `5805f39`). curl-pipe-bash bootstrap verified
+  end-to-end on Beelink SER8.
+- **Next iteration:** Iteration 2 — Helpers phase (run_logged,
+  error trap, gum-styled output, paco-pkg-add wrappers, log to
+  `/var/log/paco-install.log`). See `docs/implementation-plan.md`
+  iter 2 for files + test procedure.
+- **Plan:** `/Users/faleman/code/paco/docs/implementation-plan.md`
+  (also persisted at `~/.claude/plans/continue-paco-before-we-giggly-blanket.md`)
+- **Original 50-question plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md`
+  (Q1–Q50 all answered; archived reference).
 - **Research repo:** `/Users/faleman/code/paco-research/` — 26 markdown
   pages documenting how the reference distro is built. Consult the
   matching `docs/NN-<topic>.md` before any implementation step.
 - **Reference repo:** `/Users/faleman/code/omarchy/` — reference
   distro's source.
+- **Test machine:** Beelink SER8 at `ssh beelink` (Mac Host alias
+  in `~/.ssh/config`). See auto-memory `project-beelink-ssh-setup`.
 
 ## How to resume
 
