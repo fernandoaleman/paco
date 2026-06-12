@@ -9,6 +9,13 @@ export FOREGROUND_OK="#a6e3a1"
 export FOREGROUND_WARN="#f9e2af"
 export FOREGROUND_ERR="#f38ba8"
 
+# Force gum to emit ANSI colors even when its stdout is piped (e.g., through
+# run_logged's `tee`). Without these, gum auto-detects non-TTY and outputs
+# plain text. Side effect: install.log will contain ANSI escape codes — view
+# with `cat` (renders) or `less -R`. Set NO_COLOR=1 to override.
+export FORCE_COLOR=1
+export CLICOLOR_FORCE=1
+
 paco_banner() {
   local logo_file="${PACO_PATH}/logo.txt"
   if [[ -r "${logo_file}" ]]; then
