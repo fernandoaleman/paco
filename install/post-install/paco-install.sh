@@ -4,13 +4,37 @@ set -euo pipefail
 
 paco_section "Installing paco command-line tools"
 
-# Dispatcher → /usr/bin/paco
+# Check if any file differs from its target. If nothing changed, skip
+# entirely (no sudo prompt, fast exit).
+needs_install=false
+
+if [[ ! -f /usr/bin/paco ]] || ! cmp -s "${PACO_PATH}/bin/paco" /usr/bin/paco; then
+  needs_install=true
+fi
+
+if [[ ! -f /usr/share/paco/version ]] || ! cmp -s "${PACO_PATH}/version" /usr/share/paco/version; then
+  needs_install=true
+fi
+
+if [[ "${needs_install}" == "false" ]]; then
+  for sub in "${PACO_PATH}/bin/"paco-*; do
+    [[ -f "${sub}" ]] || continue
+    name="$(basename "${sub}")"
+    if [[ ! -f "/usr/share/paco/bin/${name}" ]] || ! cmp -s "${sub}" "/usr/share/paco/bin/${name}"; then
+      needs_install=true
+      break
+    fi
+  done
+fi
+
+if [[ "${needs_install}" == "false" ]]; then
+  echo "paco system files already up to date."
+  exit 0
+fi
+
+# Something changed; install everything.
 sudo install -Dm755 "${PACO_PATH}/bin/paco" /usr/bin/paco
-
-# Version file → /usr/share/paco/version
 sudo install -Dm644 "${PACO_PATH}/version" /usr/share/paco/version
-
-# Subcommands → /usr/share/paco/bin/
 sudo install -d /usr/share/paco/bin
 for sub in "${PACO_PATH}/bin/"paco-*; do
   [[ -f "${sub}" ]] || continue

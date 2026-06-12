@@ -16,6 +16,11 @@ export FOREGROUND_ERR="#f38ba8"
 export FORCE_COLOR=1
 export CLICOLOR_FORCE=1
 
+# Tell lipgloss (gum's styling engine) the terminal supports 24-bit color.
+# Without this, gum falls back to 256-color in non-TTY contexts (even with
+# FORCE_COLOR), producing slightly different shades than direct-TTY output.
+export COLORTERM=truecolor
+
 paco_banner() {
   local logo_file="${PACO_PATH}/logo.txt"
   if [[ -r "${logo_file}" ]]; then
