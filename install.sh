@@ -1,10 +1,21 @@
 #!/usr/bin/env bash
-# paco install — master orchestrator (will grow as install phases land).
+# shellcheck disable=SC1091,SC2154
+# paco install — master orchestrator (grows as install phases land).
+# - SC1091: shellcheck-py can't resolve sourced paths that use variables
+# - SC2154: PACO_INSTALL_LOG_FILE is set by helpers/logging.sh once sourced
 
 set -euo pipefail
 
-echo "════════════════════════════════════════"
-echo "  paco install — skeleton (iteration 1)"
-echo "════════════════════════════════════════"
-echo "PACO_PATH: ${PACO_PATH:-unset}"
+PACO_PATH="${PACO_PATH:-${HOME}/.local/share/paco}"
+PACO_INSTALL="${PACO_PATH}/install"
+export PACO_PATH PACO_INSTALL
+
+# shellcheck source=install/helpers/all.sh
+source "${PACO_INSTALL}/helpers/all.sh"
+
+start_install_log
+paco_banner
+paco_section "Installing paco (iteration 2 — helpers wired, no phases yet)"
+
 echo "(no install phases wired yet)"
+echo "Log: ${PACO_INSTALL_LOG_FILE}"

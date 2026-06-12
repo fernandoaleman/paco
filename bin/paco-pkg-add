@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# paco:summary=Install one or more pacman packages (idempotent via --needed)
+
+set -euo pipefail
+
+if [[ $# -eq 0 ]]; then
+  echo "Usage: paco-pkg-add <pkg> [pkg...]" >&2
+  exit 2
+fi
+
+sudo pacman -S --needed --noconfirm "$@"

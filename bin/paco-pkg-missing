@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# paco:summary=Check if a pacman package is NOT installed (exit 0 if missing)
+
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: paco-pkg-missing <pkg>" >&2
+  exit 2
+fi
+
+! pacman -Qi "$1" > /dev/null 2>&1
