@@ -15,7 +15,10 @@ source "${PACO_INSTALL}/helpers/all.sh"
 
 start_install_log
 paco_banner
-paco_section "Installing paco (iteration 2 — helpers wired, no phases yet)"
+paco_section "Installing paco (iteration 3a — preflight guards)"
 
-echo "(no install phases wired yet)"
+source "${PACO_INSTALL}/preflight/all.sh"
+
+echo
+paco_section "Preflight passed. (No further install phases yet — packaging lands in iter 6+.)"
 echo "Log: ${PACO_INSTALL_LOG_FILE}"
