@@ -15,7 +15,7 @@ source "${PACO_INSTALL}/helpers/all.sh"
 
 start_install_log
 paco_banner
-paco_section "Installing paco (iteration 3a — preflight guards)"
+paco_section "Installing paco (iteration 3b — preflight + state markers)"
 
 source "${PACO_INSTALL}/preflight/all.sh"
 
