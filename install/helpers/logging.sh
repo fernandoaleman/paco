@@ -15,7 +15,7 @@ start_install_log() {
     echo "PACO_PATH: ${PACO_PATH}"
     echo "PACO_REF:  ${PACO_REF:-master}"
     echo "User:      ${USER} ($(id -u))"
-    echo "Host:      $(hostname)"
+    echo "Host:      ${HOSTNAME:-$(uname -n)}"
     echo "========================"
   } >> "${PACO_INSTALL_LOG_FILE}"
 }
