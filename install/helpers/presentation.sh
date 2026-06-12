@@ -20,5 +20,6 @@ paco_banner() {
 }
 
 paco_section() {
+  echo
   gum style --foreground "${FOREGROUND_OK}" --bold "==> $1"
 }
