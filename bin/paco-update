@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# paco:summary=Update paco (pull source, run migrations, re-run install)
+
+set -euo pipefail
+
+PACO_PATH="${PACO_PATH:-${HOME}/.local/share/paco}"
+export PACO_PATH
+
+# Pull latest source.
+paco update-git
+
+# Run any pending migrations BEFORE re-running install (migrations may
+# adjust state that install.sh expects).
+paco migrate
+
+# Re-run the full installer (idempotent).
+exec bash "${PACO_PATH}/install.sh"

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# paco:summary=Pull the latest paco source (does not re-run install)
+
+set -euo pipefail
+
+PACO_PATH="${PACO_PATH:-${HOME}/.local/share/paco}"
+PACO_REF="${PACO_REF:-master}"
+
+if [[ ! -d "${PACO_PATH}/.git" ]]; then
+  echo "paco: ${PACO_PATH} is not a git checkout." >&2
+  echo "Run the boot.sh curl-bash to initialize." >&2
+  exit 1
+fi
+
+echo "==> Fetching origin..."
+git -C "${PACO_PATH}" fetch origin
+echo "==> Checking out ${PACO_REF}..."
+git -C "${PACO_PATH}" checkout "${PACO_REF}"
+echo "==> Resetting to origin/${PACO_REF}..."
+git -C "${PACO_PATH}" reset --hard "origin/${PACO_REF}"

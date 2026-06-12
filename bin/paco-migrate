@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# paco:summary=Run any pending paco migrations
+
+set -euo pipefail
+
+PACO_PATH="${PACO_PATH:-${HOME}/.local/share/paco}"
+PACO_STATE_DIR="${XDG_STATE_HOME:-${HOME}/.local/state}/paco"
+PACO_MIGRATIONS="${PACO_PATH}/migrations"
+PACO_MIGRATIONS_STATE="${PACO_STATE_DIR}/migrations"
+
+mkdir -p "${PACO_MIGRATIONS_STATE}"
+
+# No migrations directory yet → nothing to do.
+[[ -d "${PACO_MIGRATIONS}" ]] || exit 0
+
+count_run=0
+count_skipped=0
+
+# Sort by name (timestamp-prefixed names sort chronologically).
+while IFS= read -r migration; do
+  [[ -f "${migration}" ]] || continue
+  name="$(basename "${migration}")"
+  marker="${PACO_MIGRATIONS_STATE}/${name}.applied"
+
+  if [[ -f "${marker}" ]]; then
+    ((count_skipped++))
+    continue
+  fi
+
+  echo "==> Running migration: ${name}"
+  if bash "${migration}"; then
+    touch "${marker}"
+    echo "    ✓ ${name}"
+    ((count_run++))
+  else
+    echo "    ✗ ${name} failed; aborting" >&2
+    exit 1
+  fi
+done < <(find "${PACO_MIGRATIONS}" -maxdepth 1 -name '*.sh' -print | sort)
+
+echo "Migrations: ${count_run} run, ${count_skipped} already applied."
