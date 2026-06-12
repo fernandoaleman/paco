@@ -14,9 +14,16 @@ setup() {
   [ -x "${ROOT}/install.sh" ]
 }
 
-@test "install.sh prints skeleton banner and exits 0" {
-  run env PACO_PATH=/tmp/paco-test bash "${ROOT}/install.sh"
+@test "boot.sh is syntactically valid" {
+  run bash -n "${ROOT}/boot.sh"
   [ "${status}" -eq 0 ]
-  [[ "${output}" == *"paco install — skeleton (iteration 1)"* ]]
-  [[ "${output}" == *"PACO_PATH: /tmp/paco-test"* ]]
 }
+
+@test "install.sh is syntactically valid" {
+  run bash -n "${ROOT}/install.sh"
+  [ "${status}" -eq 0 ]
+}
+
+# Full install.sh runtime test belongs on a real Arch host (it shells out
+# to sudo pacman to bootstrap gum). See docs/implementation-plan.md
+# iter 2 "Beelink test procedure" for the live test.
