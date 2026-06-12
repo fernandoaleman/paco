@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # paco:summary=Pull the latest paco source (does not re-run install)
+# paco:hidden=true
 
 set -euo pipefail
 
