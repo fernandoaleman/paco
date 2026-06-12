@@ -6,13 +6,13 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 
 ## Working state
 
-- **Phase:** 2 implementation sprint. Iteration 1 of 21 complete
-  (2026-06-11, commit `5805f39`). curl-pipe-bash bootstrap verified
-  end-to-end on Beelink SER8.
-- **Next iteration:** Iteration 2 — Helpers phase (run_logged,
-  error trap, gum-styled output, paco-pkg-add wrappers, log to
-  `/var/log/paco-install.log`). See `docs/implementation-plan.md`
-  iter 2 for files + test procedure.
+- **Phase:** 2 implementation sprint. Iterations 1–2 of 21 complete
+  (2026-06-11, latest commit `48d6067`). Helpers infrastructure
+  (errors, logging, presentation, paco-pkg-*) verified on Beelink SER8.
+- **Next iteration:** Iteration 3 — Preflight phase (Arch/UEFI/btrfs
+  guards + hardware mins per Q38 + git name/email prompt + first-run
+  mode marker + migrations bootstrap). See
+  `docs/implementation-plan.md` iter 3 for files + test procedure.
 - **Plan:** `/Users/faleman/code/paco/docs/implementation-plan.md`
   (also persisted at `~/.claude/plans/continue-paco-before-we-giggly-blanket.md`)
 - **Original 50-question plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md`
