@@ -1,10 +1,10 @@
--- Window rules. Defaults are intentionally minimal; user-facing
--- ~/.config/hypr/looknfeel.lua and bindings.lua can override.
+-- Window rules. Properties are set directly as keys (no "rule" field);
+-- `match` filters which windows the rule applies to.
+-- Reference: https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 
--- Open Wayland clients on the focused workspace by default
-hl.window_rule({ rule = "suppressevent maximize", match = "class:.*" })
-
--- Float common dialog/portal windows
-hl.window_rule({ rule = "float", match = "title:Open File" })
-hl.window_rule({ rule = "float", match = "title:Save File" })
-hl.window_rule({ rule = "float", match = "title:Choose Files" })
+-- Suppress apps trying to programmatically maximize themselves —
+-- conflicts with Hyprland's tiling.
+hl.window_rule({
+  match = { class = ".*" },
+  suppress_event = "maximize",
+})
