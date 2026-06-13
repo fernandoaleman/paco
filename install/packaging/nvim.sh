@@ -15,9 +15,11 @@ paco_section "Installing neovim + LazyVim runtime deps"
 #   luarocks/lua51: silences lazy.nvim's hererocks check + future-proofs
 #                   user plugins that need luarocks (image.nvim, magick.nvim,
 #                   HTTP-based plugins, etc.)
+#   imagemagick:   provides `magick` (v7) and `convert` (v6 compat) —
+#                   used by image rendering / markdown preview
 # Skipped: rust/cargo — too heavy (~300 MB) for the base; users can
 # `mise use -g rust@latest` if needed.
-TOOLS=(neovim nodejs npm unzip tree-sitter wget python-pip python-regex luarocks lua51)
+TOOLS=(neovim nodejs npm unzip tree-sitter wget python-pip python-regex luarocks lua51 imagemagick)
 
 missing=()
 for t in "${TOOLS[@]}"; do
