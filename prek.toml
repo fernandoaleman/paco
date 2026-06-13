@@ -16,7 +16,8 @@ hooks = [
 [[repos]]
 repo = "https://github.com/shellcheck-py/shellcheck-py"
 rev = "v0.11.0.1"
-hooks = [{ id = "shellcheck" }]
+# Exclude .zsh files: shellcheck doesn't fully understand zsh syntax.
+hooks = [{ id = "shellcheck", exclude = "\\.zsh$|\\.zshrc$" }]
 
 [[repos]]
 repo = "https://github.com/scop/pre-commit-shfmt"

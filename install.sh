@@ -21,8 +21,9 @@ source "${PACO_INSTALL}/helpers/all.sh"
 
 start_install_log
 paco_banner
-paco_section "Installing paco (iteration 6 — yay AUR helper)"
+paco_section "Installing paco (iteration 7 — zsh + XDG layout)"
 
 source "${PACO_INSTALL}/preflight/all.sh"
 source "${PACO_INSTALL}/packaging/all.sh"
+source "${PACO_INSTALL}/config/all.sh"
 source "${PACO_INSTALL}/post-install/all.sh"
