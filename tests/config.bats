@@ -19,6 +19,8 @@ setup() {
   [ -r "${ROOT}/install/config/mise.sh" ]
   [ -r "${ROOT}/install/config/yay-defaults.sh" ]
   [ -r "${ROOT}/install/config/pacman-makepkg.sh" ]
+  [ -r "${ROOT}/install/config/lazydocker.sh" ]
+  [ -r "${ROOT}/install/config/podman-socket.sh" ]
 }
 
 @test "default nvim files exist" {

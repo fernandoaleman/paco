@@ -1,0 +1,11 @@
+# paco lazydocker config — wired for the podman backend.
+#
+# lazydocker talks to the Docker API. Podman emulates that API via its
+# user socket (enabled by install/config/podman-socket.sh) and lazydocker
+# finds it via DOCKER_HOST exported in default/zsh/conf.d/70-podman.zsh.
+#
+# This file just tells lazydocker which compose binary to invoke for
+# compose-related actions (the API socket part is automatic).
+
+commandTemplates:
+  dockerCompose: podman-compose
