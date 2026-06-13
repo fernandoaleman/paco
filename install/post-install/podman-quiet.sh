@@ -13,24 +13,26 @@ else
   echo "Created /etc/containers/nodocker."
 fi
 
+# Cleanup: an earlier paco version put the compose override under
+# ~/.config/containers/containers.conf.d/ — podman doesn't scan that
+# location, so the file was inert. Remove it if it's still there.
+old_user_path="${XDG_CONFIG_HOME:-${HOME}/.config}/containers/containers.conf.d/99-paco-quiet.conf"
+if [[ -L "${old_user_path}" || -f "${old_user_path}" ]]; then
+  rm -f "${old_user_path}"
+  echo "Removed stale user-level override at ${old_user_path}"
+fi
+
 # Quiet 2: podman compose's "Executing external compose provider" notice.
-# Per-user containers.conf.d override (no /etc/ touching for this one).
-user_dir="${XDG_CONFIG_HOME:-${HOME}/.config}/containers/containers.conf.d"
-target="${user_dir}/99-paco-quiet.conf"
+# Has to live in /etc/containers/containers.conf.d/ — podman doesn't
+# scan a user-XDG .d/ override directory (only ~/.config/containers/
+# containers.conf as a single file).
+target="/etc/containers/containers.conf.d/99-paco-quiet.conf"
 source_file="${PACO_PATH}/default/containers/containers.conf.d/99-paco-quiet.conf"
 
-mkdir -p "${user_dir}"
-
-if [[ -L "${target}" ]] && [[ "$(readlink "${target}")" == "${source_file}" ]]; then
-  echo "containers.conf.d override already symlinked."
+if [[ -f "${target}" ]] && cmp -s "${source_file}" "${target}"; then
+  echo "${target} already in place."
   exit 0
 fi
 
-if [[ -e "${target}" ]] && [[ ! -L "${target}" ]]; then
-  backup="${target}.backup.$(date +%Y%m%d-%H%M%S)"
-  echo "Backing up existing ${target} → ${backup}"
-  mv "${target}" "${backup}"
-fi
-
-ln -sfn "${source_file}" "${target}"
-echo "Symlinked ${target} → ${source_file}"
+sudo install -Dm644 "${source_file}" "${target}"
+echo "Installed ${target}"
