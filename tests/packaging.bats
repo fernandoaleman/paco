@@ -8,6 +8,9 @@ setup() {
 @test "packaging scripts exist" {
   [ -r "${ROOT}/install/packaging/all.sh" ]
   [ -r "${ROOT}/install/packaging/yay.sh" ]
+  [ -r "${ROOT}/install/packaging/zsh.sh" ]
+  [ -r "${ROOT}/install/packaging/tools-tier1.sh" ]
+  [ -r "${ROOT}/install/packaging/tools-tier2.sh" ]
 }
 
 @test "all packaging scripts are syntactically valid" {

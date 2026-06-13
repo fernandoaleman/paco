@@ -21,7 +21,7 @@ source "${PACO_INSTALL}/helpers/all.sh"
 
 start_install_log
 paco_banner
-paco_section "Installing paco (iteration 7 — zsh + XDG layout)"
+paco_section "Installing paco (iteration 8 — default shell + CLI tools)"
 
 source "${PACO_INSTALL}/preflight/all.sh"
 source "${PACO_INSTALL}/packaging/all.sh"

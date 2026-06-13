@@ -8,6 +8,7 @@ setup() {
 @test "config scripts exist" {
   [ -r "${ROOT}/install/config/all.sh" ]
   [ -r "${ROOT}/install/config/zsh-layout.sh" ]
+  [ -r "${ROOT}/install/config/default-shell.sh" ]
 }
 
 @test "all config scripts are syntactically valid" {
@@ -21,7 +22,9 @@ setup() {
   [ -r "${ROOT}/default/zsh/.zshrc" ]
   [ -r "${ROOT}/default/zsh/conf.d/10-options.zsh" ]
   [ -r "${ROOT}/default/zsh/conf.d/20-keybindings.zsh" ]
-  [ -r "${ROOT}/default/zsh/conf.d/30-plugins.zsh" ]
+  [ -r "${ROOT}/default/zsh/conf.d/30-aliases.zsh" ]
+  [ -r "${ROOT}/default/zsh/conf.d/40-zoxide.zsh" ]
+  [ -r "${ROOT}/default/zsh/conf.d/99-plugins.zsh" ]
 }
 
 @test "zsh packaging script is syntactically valid" {

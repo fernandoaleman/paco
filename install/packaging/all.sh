@@ -6,3 +6,5 @@ PACO_PACKAGING="${PACO_INSTALL}/packaging"
 
 run_logged "${PACO_PACKAGING}/yay.sh"
 run_logged "${PACO_PACKAGING}/zsh.sh"
+run_logged "${PACO_PACKAGING}/tools-tier1.sh"
+run_logged "${PACO_PACKAGING}/tools-tier2.sh"
