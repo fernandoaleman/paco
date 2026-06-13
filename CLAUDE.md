@@ -6,25 +6,22 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 
 ## Working state
 
-- **Phase:** 2 implementation sprint. Iterations 1–12 + 13a + 13b
-  complete (2026-06-13, latest commit `0526603`).
-  - Latest live system: zsh as login shell, starship prompt with
-    repo-aware path display, delta as git pager, ghostty installed,
-    tmux config in place with sesh popup + vim-tmux-navigator
-    bindings, 15 tier-1/2 tools, 3 tier-3, 3 tier-4, bats, plus
-    fonts (incl. JetBrainsMono Nerd Font).
-  - Symlinks established: `~/.zshenv`, `~/.config/{zsh,starship.toml,
-    git/config,fontconfig/fonts.conf,ghostty/config,tmux/tmux.conf}`.
+- **Phase:** 2 implementation sprint. Iterations 1–14 complete
+  (2026-06-13, latest commit `d91bcaf`).
+  - Latest live system: full dev environment (zsh + starship +
+    delta + ghostty + tmux + nvim/LazyVim + podman) PLUS a working
+    Hyprland Wayland desktop launched from TTY.
+  - Symlinks: `~/.zshenv`, `~/.config/{zsh,starship.toml,
+    git/config,fontconfig/fonts.conf,ghostty/config,tmux/tmux.conf,
+    nvim,mise/config.toml,lazydocker/config.yml,hypr}`.
   - All phases fully idempotent; bats tests run locally on Beelink.
-  - 13b nested-tmux finding: when SSH'd from Mac-tmux into
-    Beelink-tmux, outer tmux intercepts `Ctrl+hjkl` before it
-    reaches the inner tmux. Bindings work fine when paco is the
-    only tmux in the chain (verified on bare-metal Beelink). Not
-    a paco bug — real users won't have an outer tmux. No fix needed.
-- **Next iteration:** Iteration 13c — nvim base (LazyVim + 7 Q12
-  extras + paco-distro plugin for `<leader>dd` lazydocker +
-  stay-in-visual `<` `>`). See `docs/implementation-plan.md` iter 13
-  for the full file list.
+  - Hyprland config: Q32 strict (Lua), Omarchy-derived bindings,
+    paco-rebranded. vim-style hjkl focus / Super+Shift+hjkl swap.
+    Super+Backslash for split-toggle.
+- **Next iteration:** Iteration 15 — SDDM autologin. **Riskiest
+  step in the milestone.** Reboot triggers SDDM → autologin →
+  Hyprland. Wrong config can lock out GUI; SSH rescue path validated.
+  See `docs/implementation-plan.md` iter 15.
 - **Plan:** `/Users/faleman/code/paco/docs/implementation-plan.md`
   (also persisted at `~/.claude/plans/continue-paco-before-we-giggly-blanket.md`)
 - **Original 50-question plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md`
