@@ -14,7 +14,8 @@ jobs:
       image: archlinux:latest
     steps:
       - name: Install base deps
-        run: pacman -Syu --noconfirm git just python python-pip
+        # gcc provides `cc` linker, needed by prek to compile stylua from Rust source.
+        run: pacman -Syu --noconfirm git just python python-pip gcc
       - name: Checkout
         uses: actions/checkout@v6
       - name: Configure git safe directory
