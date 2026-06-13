@@ -9,6 +9,7 @@ setup() {
   [ -r "${ROOT}/install/config/all.sh" ]
   [ -r "${ROOT}/install/config/zsh-layout.sh" ]
   [ -r "${ROOT}/install/config/default-shell.sh" ]
+  [ -r "${ROOT}/install/config/fontconfig.sh" ]
 }
 
 @test "all config scripts are syntactically valid" {

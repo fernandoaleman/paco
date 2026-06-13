@@ -6,3 +6,4 @@ PACO_CONFIG="${PACO_INSTALL}/config"
 
 run_logged "${PACO_CONFIG}/zsh-layout.sh"
 run_logged "${PACO_CONFIG}/default-shell.sh"
+run_logged "${PACO_CONFIG}/fontconfig.sh"
