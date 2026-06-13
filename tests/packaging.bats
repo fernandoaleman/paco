@@ -16,6 +16,7 @@ setup() {
   [ -r "${ROOT}/install/packaging/starship.sh" ]
   [ -r "${ROOT}/install/packaging/tools-tier4.sh" ]
   [ -r "${ROOT}/install/packaging/dev-tools.sh" ]
+  [ -r "${ROOT}/install/packaging/ghostty.sh" ]
 }
 
 @test "all packaging scripts are syntactically valid" {
