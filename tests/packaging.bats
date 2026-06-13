@@ -18,6 +18,7 @@ setup() {
   [ -r "${ROOT}/install/packaging/dev-tools.sh" ]
   [ -r "${ROOT}/install/packaging/ghostty.sh" ]
   [ -r "${ROOT}/install/packaging/tools-tier3.sh" ]
+  [ -r "${ROOT}/install/packaging/nvim.sh" ]
 }
 
 @test "all packaging scripts are syntactically valid" {

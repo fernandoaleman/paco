@@ -21,7 +21,7 @@ source "${PACO_INSTALL}/helpers/all.sh"
 
 start_install_log
 paco_banner
-paco_section "Installing paco (iteration 13b — tmux config)"
+paco_section "Installing paco (iteration 13c — nvim + LazyVim)"
 
 source "${PACO_INSTALL}/preflight/all.sh"
 source "${PACO_INSTALL}/packaging/all.sh"

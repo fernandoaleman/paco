@@ -15,6 +15,13 @@ setup() {
   [ -r "${ROOT}/install/config/git-paco-defaults.sh" ]
   [ -r "${ROOT}/install/config/ghostty.sh" ]
   [ -r "${ROOT}/install/config/tmux.sh" ]
+  [ -r "${ROOT}/install/config/nvim.sh" ]
+}
+
+@test "default nvim files exist" {
+  [ -r "${ROOT}/default/nvim/init.lua" ]
+  [ -r "${ROOT}/default/nvim/lua/config/lazy.lua" ]
+  [ -r "${ROOT}/default/nvim/lua/plugins/paco-distro.lua" ]
 }
 
 @test "all config scripts are syntactically valid" {
