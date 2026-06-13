@@ -1,5 +1,6 @@
 #!/usr/bin/env bats
 # shellcheck shell=bash disable=SC2154
+bats_require_minimum_version 1.5.0
 
 setup() {
   ROOT="$(cd -- "$(dirname -- "${BATS_TEST_FILENAME}")/.." && pwd)"
@@ -24,8 +25,7 @@ setup() {
 }
 
 @test "dispatcher rejects unknown subcommand with exit 127" {
-  run paco doesnotexist
-  [ "${status}" -eq 127 ]
+  run -127 paco doesnotexist
 }
 
 @test "dispatcher lists user-facing subcommands in help" {

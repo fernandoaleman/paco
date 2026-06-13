@@ -1,5 +1,6 @@
 #!/usr/bin/env bats
 # shellcheck shell=bash disable=SC2154
+bats_require_minimum_version 1.5.0
 
 setup() {
   ROOT="$(cd -- "$(dirname -- "${BATS_TEST_FILENAME}")/.." && pwd)"
@@ -19,9 +20,8 @@ setup() {
 }
 
 @test "paco-update-git fails outside a git checkout" {
-  run env PACO_PATH="${BATS_TEST_TMPDIR}/notagitrepo" \
+  run -1 env PACO_PATH="${BATS_TEST_TMPDIR}/notagitrepo" \
     "${ROOT}/bin/paco-update-git"
-  [ "${status}" -eq 1 ]
   [[ "${output}" == *"is not a git checkout"* ]]
 }
 

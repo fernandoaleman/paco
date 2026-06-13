@@ -1,5 +1,6 @@
 #!/usr/bin/env bats
 # shellcheck shell=bash disable=SC2154
+bats_require_minimum_version 1.5.0
 
 setup() {
   ROOT="$(cd -- "$(dirname -- "${BATS_TEST_FILENAME}")/.." && pwd)"
@@ -30,6 +31,5 @@ setup() {
 }
 
 @test "paco-pkg-aur-add requires args" {
-  run "${ROOT}/bin/paco-pkg-aur-add"
-  [ "${status}" -eq 2 ]
+  run -2 "${ROOT}/bin/paco-pkg-aur-add"
 }

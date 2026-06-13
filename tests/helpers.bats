@@ -1,6 +1,7 @@
 #!/usr/bin/env bats
 # shellcheck shell=bash disable=SC2154
 # BATS_TEST_FILENAME is provided by bats at runtime.
+bats_require_minimum_version 1.5.0
 
 setup() {
   ROOT="$(cd -- "$(dirname -- "${BATS_TEST_FILENAME}")/.." && pwd)"
@@ -21,13 +22,11 @@ setup() {
 }
 
 @test "paco-pkg-add requires args" {
-  run "${ROOT}/bin/paco-pkg-add"
-  [ "${status}" -eq 2 ]
+  run -2 "${ROOT}/bin/paco-pkg-add"
 }
 
 @test "paco-pkg-present requires one arg" {
-  run "${ROOT}/bin/paco-pkg-present"
-  [ "${status}" -eq 2 ]
+  run -2 "${ROOT}/bin/paco-pkg-present"
 }
 
 @test "logo.txt exists" {

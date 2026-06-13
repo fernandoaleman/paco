@@ -1,6 +1,7 @@
 #!/usr/bin/env bats
 # shellcheck shell=bash disable=SC2154
 # BATS_TEST_FILENAME is provided by bats at runtime.
+bats_require_minimum_version 1.5.0
 
 setup() {
   ROOT="$(cd -- "$(dirname -- "${BATS_TEST_FILENAME}")/.." && pwd)"

@@ -1,6 +1,7 @@
 #!/usr/bin/env bats
 # shellcheck shell=bash disable=SC2154
 # BATS_TEST_FILENAME is provided by bats at runtime.
+bats_require_minimum_version 1.5.0
 
 setup() {
   ROOT="$(cd -- "$(dirname -- "${BATS_TEST_FILENAME}")/.." && pwd)"
@@ -28,8 +29,7 @@ setup() {
 }
 
 @test "paco unknown subcommand returns 127" {
-  run paco doesnotexist
-  [ "${status}" -eq 127 ]
+  run -127 paco doesnotexist
 }
 
 @test "paco --version delegates to paco version" {
