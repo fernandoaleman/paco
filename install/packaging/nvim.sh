@@ -17,9 +17,11 @@ paco_section "Installing neovim + LazyVim runtime deps"
 #                   HTTP-based plugins, etc.)
 #   imagemagick:   provides `magick` (v7) and `convert` (v6 compat) —
 #                   used by image rendering / markdown preview
+#   libyaml/libffi: ruby-build needs these to compile Ruby's psych and
+#                   fiddle extensions (mise compiles Ruby from source).
 # Skipped: rust/cargo — too heavy (~300 MB) for the base; users can
 # `mise use -g rust@latest` if needed.
-TOOLS=(neovim nodejs npm unzip tree-sitter wget python-pip python-regex luarocks lua51 imagemagick)
+TOOLS=(neovim nodejs npm unzip tree-sitter wget python-pip python-regex luarocks lua51 imagemagick libyaml libffi)
 
 missing=()
 for t in "${TOOLS[@]}"; do
