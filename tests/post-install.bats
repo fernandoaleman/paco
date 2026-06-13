@@ -7,7 +7,7 @@ setup() {
 }
 
 @test "post-install scripts exist" {
-  for f in all paco-install paco-profile pacman-config docker-compose-shim finished; do
+  for f in all paco-install paco-profile pacman-config docker-compose-shim podman-quiet finished; do
     [ -r "${ROOT}/install/post-install/${f}.sh" ]
   done
 }
