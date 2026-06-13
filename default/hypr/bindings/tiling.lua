@@ -5,7 +5,6 @@
 o.bind("SUPER + W", "Close window", hl.dsp.window.close())
 -- TODO iter ?: SUPER + CTRL + ALT + DELETE → close all (needs paco-hyprland-window-close-all)
 
-o.bind("SUPER + J", "Toggle window split", hl.dsp.layout("togglesplit"))
 o.bind("SUPER + P", "Pseudo window", hl.dsp.window.pseudo())
 o.bind("SUPER + T", "Toggle window floating/tiling", hl.dsp.window.float({ action = "toggle" }))
 o.bind("SUPER + F", "Full screen", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
@@ -13,8 +12,15 @@ o.bind("SUPER + CTRL + F", "Tiled full screen", hl.dsp.window.fullscreen_state({
 o.bind("SUPER + ALT + F", "Full width", hl.dsp.window.fullscreen({ mode = "maximized" }))
 
 -- TODO iter ?: SUPER + O → pop window out (paco-hyprland-window-pop)
--- TODO iter ?: SUPER + L → toggle workspace layout (paco-hyprland-workspace-layout-toggle)
+-- Toggle the dwindle split direction for the next window spawned off the
+-- focused one (was Super+J in omarchy; moved here to free J for focus-down).
+o.bind("SUPER + BACKSLASH", "Toggle window split direction", hl.dsp.layout("togglesplit"))
 
+-- Focus: vim-style hjkl + arrow keys (both work)
+o.bind("SUPER + H", "Focus on left window", hl.dsp.focus({ direction = "l" }))
+o.bind("SUPER + J", "Focus on below window", hl.dsp.focus({ direction = "d" }))
+o.bind("SUPER + K", "Focus on above window", hl.dsp.focus({ direction = "u" }))
+o.bind("SUPER + L", "Focus on right window", hl.dsp.focus({ direction = "r" }))
 o.bind("SUPER + LEFT", "Focus on left window", hl.dsp.focus({ direction = "l" }))
 o.bind("SUPER + RIGHT", "Focus on right window", hl.dsp.focus({ direction = "r" }))
 o.bind("SUPER + UP", "Focus on above window", hl.dsp.focus({ direction = "u" }))
@@ -53,7 +59,11 @@ o.bind("SUPER + SHIFT + ALT + RIGHT", "Move workspace to right monitor", hl.dsp.
 o.bind("SUPER + SHIFT + ALT + UP", "Move workspace to up monitor", hl.dsp.workspace.move({ monitor = "u" }))
 o.bind("SUPER + SHIFT + ALT + DOWN", "Move workspace to down monitor", hl.dsp.workspace.move({ monitor = "d" }))
 
--- Swap window in direction
+-- Swap window in direction: vim-style hjkl + arrow keys (both work)
+o.bind("SUPER + SHIFT + H", "Swap window to the left", hl.dsp.window.swap({ direction = "l" }))
+o.bind("SUPER + SHIFT + J", "Swap window down", hl.dsp.window.swap({ direction = "d" }))
+o.bind("SUPER + SHIFT + K", "Swap window up", hl.dsp.window.swap({ direction = "u" }))
+o.bind("SUPER + SHIFT + L", "Swap window to the right", hl.dsp.window.swap({ direction = "r" }))
 o.bind("SUPER + SHIFT + LEFT", "Swap window to the left", hl.dsp.window.swap({ direction = "l" }))
 o.bind("SUPER + SHIFT + RIGHT", "Swap window to the right", hl.dsp.window.swap({ direction = "r" }))
 o.bind("SUPER + SHIFT + UP", "Swap window up", hl.dsp.window.swap({ direction = "u" }))
