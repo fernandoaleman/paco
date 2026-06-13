@@ -21,8 +21,7 @@ paco_section "Installing neovim + LazyVim runtime deps"
 #                   used by image rendering / markdown preview
 #   libyaml/libffi: ruby-build needs these to compile Ruby's psych and
 #                   fiddle extensions (mise compiles Ruby from source).
-# Skipped: rust/cargo — too heavy (~300 MB) for the base; users can
-# `mise use -g rust@latest` if needed.
+# Note: rust/cargo is shipped via mise (default/mise/config.toml), not pacman.
 TOOLS=(neovim nodejs npm unzip tree-sitter-cli wget python-pip python-regex luarocks lua51 imagemagick libyaml libffi)
 
 missing=()
