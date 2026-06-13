@@ -6,20 +6,22 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 
 ## Working state
 
-- **Phase:** 2 implementation sprint. Iterations 1–5 of 21 complete
-  (2026-06-11, latest commit `c6633c7`). **Dev loop has transitioned**:
-  no more curl-bash; routine updates use `paco update`.
+- **Phase:** 2 implementation sprint. Iterations 1–6 of 21 complete
+  (2026-06-12, latest commit `a4d68e8`).
   - paco installed system-wide at `/usr/bin/paco`
-  - 5 user-facing subcommands: `update`, `version`, `pkg-add`,
-    `pkg-present`, `pkg-missing`. `update-git` and `migrate` are
-    hidden internal pieces of `update`.
-  - Preflight + post-install fully idempotent (no sudo prompts when
-    nothing changed)
-  - Color consistency via raw ANSI codes in `paco_section`
-- **Next iteration:** Iteration 6 — yay (AUR helper). Adds
-  `paco-pkg-aur-add` so paco can install AUR packages
-  (e.g., ttf-jetbrains-mono-nerd in iter 9). See
-  `docs/implementation-plan.md` iter 6 for files + test procedure.
+  - 6 user-facing subcommands: `update`, `version`, `pkg-add`,
+    `pkg-aur-add`, `pkg-present`, `pkg-missing`. Hidden internals:
+    `update-git`, `migrate`, `pkg-aur-accessible`.
+  - `/usr/share/paco/bin` on PATH via `/etc/profile.d/paco.sh` (new
+    shells); install.sh prepends `${PACO_PATH}/bin` for current session
+  - yay (AUR helper) installs from AUR on first run; `paco pkg-aur-add
+    <pkg>` works
+  - All phases fully idempotent (zero sudo prompts when nothing changed)
+- **Next iteration:** Iteration 7 — zsh + 3 plugins + XDG layout
+  (zsh-autosuggestions, zsh-completions, zsh-syntax-highlighting;
+  `~/.zshenv` shim + `$ZDOTDIR=$XDG_CONFIG_HOME/zsh`). Default shell
+  stays bash for now — chsh happens in iter 8. See
+  `docs/implementation-plan.md` iter 7 for files + test procedure.
 - **Plan:** `/Users/faleman/code/paco/docs/implementation-plan.md`
   (also persisted at `~/.claude/plans/continue-paco-before-we-giggly-blanket.md`)
 - **Original 50-question plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md`
