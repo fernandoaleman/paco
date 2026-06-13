@@ -21,6 +21,7 @@ setup() {
   [ -r "${ROOT}/install/config/pacman-makepkg.sh" ]
   [ -r "${ROOT}/install/config/lazydocker.sh" ]
   [ -r "${ROOT}/install/config/podman-socket.sh" ]
+  [ -r "${ROOT}/install/config/podman-environment.sh" ]
 }
 
 @test "default nvim files exist" {
