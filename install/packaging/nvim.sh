@@ -8,10 +8,16 @@ paco_section "Installing neovim + LazyVim runtime deps"
 # extras paco ships (lang.json, lang.yaml, lang.markdown, lang.toml) need:
 #   nodejs/npm:    jsonls, yamlls, prettier, marksman fallback
 #   unzip:         common requirement for many Mason packages
+#   tree-sitter:   CLI used by nvim-treesitter to compile parsers
+#   wget:          some Mason install scripts use it instead of curl
+#   python-pip:    Mason fetches Python LSPs (pyright, ruff, etc.) via pip
+#   python-regex:  faster regex module some Python LSPs/formatters require
 #   luarocks/lua51: silences lazy.nvim's hererocks check + future-proofs
 #                   user plugins that need luarocks (image.nvim, magick.nvim,
 #                   HTTP-based plugins, etc.)
-TOOLS=(neovim nodejs npm unzip luarocks lua51)
+# Skipped: rust/cargo — too heavy (~300 MB) for the base; users can
+# `mise use -g rust@latest` if needed.
+TOOLS=(neovim nodejs npm unzip tree-sitter wget python-pip python-regex luarocks lua51)
 
 missing=()
 for t in "${TOOLS[@]}"; do
