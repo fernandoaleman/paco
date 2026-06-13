@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# paco:summary=Check if the AUR is reachable
+# paco:hidden=true
+
+set -euo pipefail
+
+curl -fsSL --max-time 5 https://aur.archlinux.org/ -o /dev/null

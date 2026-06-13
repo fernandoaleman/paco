@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# paco:summary=Install one or more AUR packages via yay (idempotent via --needed)
+
+set -euo pipefail
+
+if [[ $# -eq 0 ]]; then
+  echo "Usage: paco-pkg-aur-add <pkg> [pkg...]" >&2
+  exit 2
+fi
+
+yay -S --needed --noconfirm "$@"

@@ -15,7 +15,8 @@ source "${PACO_INSTALL}/helpers/all.sh"
 
 start_install_log
 paco_banner
-paco_section "Installing paco (iteration 4 — dispatcher install)"
+paco_section "Installing paco (iteration 6 — yay AUR helper)"
 
 source "${PACO_INSTALL}/preflight/all.sh"
+source "${PACO_INSTALL}/packaging/all.sh"
 source "${PACO_INSTALL}/post-install/all.sh"
