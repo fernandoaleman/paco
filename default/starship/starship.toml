@@ -1,0 +1,76 @@
+# paco starship config — Omarchy-derived structure + vim-mode-aware character.
+# Q11: directory truncates to 2 + highlights repo root; git_branch italic cyan;
+# git_status full glyph set; character with vimcmd_* symbols.
+# Hard-coded colors here will be overridden per-theme via the theme system (Q15/Q17).
+
+command_timeout = 200
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$character"""
+
+# Disabled modules per Q11
+[aws]
+disabled = true
+
+[battery]
+disabled = true
+
+[package]
+disabled = true
+
+[username]
+disabled = true
+
+[hostname]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[git_commit]
+disabled = true
+
+[git_state]
+disabled = true
+
+[git_metrics]
+disabled = true
+
+[directory]
+truncation_length = 2
+truncation_symbol = "…/"
+truncate_to_repo = true
+repo_root_style = "bold cyan"
+style = "cyan"
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+symbol = " "
+style = "italic cyan"
+format = "on [$symbol$branch]($style) "
+
+[git_status]
+style = "yellow"
+format = '([\[$all_status$ahead_behind\]]($style) )'
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+up_to_date = ""
+untracked = "?${count}"
+stashed = "$"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold yellow)"
+vimcmd_replace_one_symbol = "[❮](bold purple)"
+vimcmd_replace_symbol = "[❮](bold purple)"
+vimcmd_visual_symbol = "[❮](bold cyan)"

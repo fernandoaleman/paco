@@ -10,6 +10,8 @@ setup() {
   [ -r "${ROOT}/install/config/zsh-layout.sh" ]
   [ -r "${ROOT}/install/config/default-shell.sh" ]
   [ -r "${ROOT}/install/config/fontconfig.sh" ]
+  [ -r "${ROOT}/install/config/starship.sh" ]
+  [ -r "${ROOT}/install/config/git-paco-defaults.sh" ]
 }
 
 @test "all config scripts are syntactically valid" {

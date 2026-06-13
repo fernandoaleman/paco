@@ -12,6 +12,8 @@ setup() {
   [ -r "${ROOT}/install/packaging/tools-tier1.sh" ]
   [ -r "${ROOT}/install/packaging/tools-tier2.sh" ]
   [ -r "${ROOT}/install/packaging/fonts.sh" ]
+  [ -r "${ROOT}/install/packaging/starship.sh" ]
+  [ -r "${ROOT}/install/packaging/tools-tier4.sh" ]
 }
 
 @test "all packaging scripts are syntactically valid" {

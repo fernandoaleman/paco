@@ -1,0 +1,20 @@
+# paco git defaults. Loaded by git via XDG path (~/.config/git/config).
+# Your ~/.gitconfig overrides any of these on conflict.
+
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	light = false
+	side-by-side = true
+	line-numbers = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[diff]
+	colorMoved = default

@@ -21,7 +21,7 @@ source "${PACO_INSTALL}/helpers/all.sh"
 
 start_install_log
 paco_banner
-paco_section "Installing paco (iteration 9 — fonts + fontconfig)"
+paco_section "Installing paco (iteration 10 — starship + delta + tier-4 tools)"
 
 source "${PACO_INSTALL}/preflight/all.sh"
 source "${PACO_INSTALL}/packaging/all.sh"
