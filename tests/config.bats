@@ -16,6 +16,7 @@ setup() {
   [ -r "${ROOT}/install/config/ghostty.sh" ]
   [ -r "${ROOT}/install/config/tmux.sh" ]
   [ -r "${ROOT}/install/config/nvim.sh" ]
+  [ -r "${ROOT}/install/config/mise.sh" ]
 }
 
 @test "default nvim files exist" {

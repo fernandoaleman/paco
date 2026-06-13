@@ -22,13 +22,26 @@ return {
     },
   },
 
-  -- Ensure the `regex` treesitter parser is installed; LazyVim extras use it
-  -- for embedded regex highlighting inside JS/markdown/json string literals.
+  -- Ensure treesitter parsers paco's bundled features (render-markdown,
+  -- snacks.picker, bash highlighting) and common web-dev languages need.
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
-      table.insert(opts.ensure_installed, "regex")
+      local extras = {
+        "regex",
+        "bash",
+        "css",
+        "html",
+        "javascript",
+        "scss",
+        "svelte",
+        "tsx",
+        "vue",
+      }
+      for _, lang in ipairs(extras) do
+        table.insert(opts.ensure_installed, lang)
+      end
     end,
   },
 }

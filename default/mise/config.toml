@@ -1,0 +1,12 @@
+# paco-shipped mise config. Declares language versions paco wants available
+# globally. Does NOT auto-install at paco-update time (Python compile is
+# 5+ min) — install on demand.
+#
+# To install everything declared here:
+#   mise install
+# Or for the nvim provider bridge in one shot (Python + Ruby + pynvim + gem):
+#   paco setup-nvim-providers
+
+[tools]
+python = "latest"
+ruby = "latest"
