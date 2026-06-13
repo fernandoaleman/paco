@@ -6,9 +6,12 @@ paco_section "Installing neovim + LazyVim runtime deps"
 
 # LazyVim's Mason auto-installer fetches LSPs/formatters at runtime. The
 # extras paco ships (lang.json, lang.yaml, lang.markdown, lang.toml) need:
-#   nodejs/npm: jsonls, yamlls, prettier, marksman fallback
-#   unzip:      common requirement for many Mason packages
-TOOLS=(neovim nodejs npm unzip)
+#   nodejs/npm:    jsonls, yamlls, prettier, marksman fallback
+#   unzip:         common requirement for many Mason packages
+#   luarocks/lua51: silences lazy.nvim's hererocks check + future-proofs
+#                   user plugins that need luarocks (image.nvim, magick.nvim,
+#                   HTTP-based plugins, etc.)
+TOOLS=(neovim nodejs npm unzip luarocks lua51)
 
 missing=()
 for t in "${TOOLS[@]}"; do
