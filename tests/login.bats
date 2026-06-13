@@ -9,6 +9,8 @@ setup() {
 @test "login scripts exist" {
   [ -r "${ROOT}/install/login/all.sh" ]
   [ -r "${ROOT}/install/login/wayland-session.sh" ]
+  [ -r "${ROOT}/install/login/sddm.sh" ]
+  [ -r "${ROOT}/install/login/faillock-sddm.sh" ]
 }
 
 @test "all login scripts are syntactically valid" {

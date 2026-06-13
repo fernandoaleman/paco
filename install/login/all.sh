@@ -5,3 +5,5 @@
 PACO_LOGIN="${PACO_INSTALL}/login"
 
 run_logged "${PACO_LOGIN}/wayland-session.sh"
+run_logged "${PACO_LOGIN}/sddm.sh"
+run_logged "${PACO_LOGIN}/faillock-sddm.sh"

@@ -1,6 +1,7 @@
 [Desktop Entry]
-Name=paco
-Comment=Opinionated Arch + Hyprland (paco)
-Exec=Hyprland --config %h/.config/hypr/hyprland.lua
+Name=paco (Hyprland uwsm)
+Comment=Opinionated Arch + Hyprland (paco), session managed by uwsm
+Exec=uwsm start -g -1 -e -D Hyprland hyprland.desktop
+TryExec=uwsm
 Type=Application
 DesktopNames=Hyprland
