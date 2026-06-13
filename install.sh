@@ -10,6 +10,12 @@ PACO_PATH="${PACO_PATH:-${HOME}/.local/share/paco}"
 PACO_INSTALL="${PACO_PATH}/install"
 export PACO_PATH PACO_INSTALL
 
+# Make paco-* subcommands available for this install session by prepending
+# the clone's bin/ to PATH. After install completes, /etc/profile.d/paco.sh
+# (installed by post-install/paco-profile.sh) puts /usr/share/paco/bin on
+# PATH for future shells.
+export PATH="${PACO_PATH}/bin:${PATH}"
+
 # shellcheck source=install/helpers/all.sh
 source "${PACO_INSTALL}/helpers/all.sh"
 

@@ -5,5 +5,6 @@
 PACO_POST="${PACO_INSTALL}/post-install"
 
 run_logged "${PACO_POST}/paco-install.sh"
+run_logged "${PACO_POST}/paco-profile.sh"
 run_logged "${PACO_POST}/pacman-config.sh"
 run_logged "${PACO_POST}/finished.sh"
