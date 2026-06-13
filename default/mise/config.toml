@@ -11,3 +11,4 @@
 python = "latest"
 ruby = "latest"
 rust = "latest"
+node = "latest"

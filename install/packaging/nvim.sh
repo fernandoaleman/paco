@@ -6,7 +6,6 @@ paco_section "Installing neovim + LazyVim runtime deps"
 
 # LazyVim's Mason auto-installer fetches LSPs/formatters at runtime. The
 # extras paco ships (lang.json, lang.yaml, lang.markdown, lang.toml) need:
-#   nodejs/npm:    jsonls, yamlls, prettier, marksman fallback
 #   unzip:         common requirement for many Mason packages
 #   tree-sitter-cli: CLI used by nvim-treesitter to compile parsers
 #                    (Arch ships the library as `tree-sitter` separately;
@@ -21,8 +20,11 @@ paco_section "Installing neovim + LazyVim runtime deps"
 #                   used by image rendering / markdown preview
 #   libyaml/libffi: ruby-build needs these to compile Ruby's psych and
 #                   fiddle extensions (mise compiles Ruby from source).
-# Note: rust/cargo is shipped via mise (default/mise/config.toml), not pacman.
-TOOLS=(neovim nodejs npm unzip tree-sitter-cli wget python-pip python-regex luarocks lua51 imagemagick libyaml libffi)
+# Shipped via mise (default/mise/config.toml) instead of pacman:
+#   node/npm: managed by mise so user can switch versions per project;
+#             also where Mason picks up its npm host
+#   python/ruby/rust: all managed by mise per user preference
+TOOLS=(neovim unzip tree-sitter-cli wget python-pip python-regex luarocks lua51 imagemagick libyaml libffi)
 
 missing=()
 for t in "${TOOLS[@]}"; do

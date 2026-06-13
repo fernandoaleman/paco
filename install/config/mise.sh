@@ -29,11 +29,15 @@ echo "Running mise install (first run compiles Python + Ruby — may take 5–15
 mise install
 
 # 3. Install nvim provider bridges into the mise-managed runtimes.
-# pip --upgrade and gem --conservative are no-ops when already current.
+# pip --upgrade, gem --conservative, and npm install -g are no-ops when
+# already current.
 echo "Installing pynvim into mise's python..."
 mise exec python -- python -m pip install --upgrade pynvim
 
 echo "Installing neovim gem into mise's ruby..."
 mise exec ruby -- gem install --conservative neovim
+
+echo "Installing neovim npm package into mise's node..."
+mise exec node -- npm install -g --silent neovim
 
 echo "mise + nvim providers ready."
