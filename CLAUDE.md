@@ -6,22 +6,27 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 
 ## Working state
 
-- **Phase:** 2 implementation sprint. Iterations 1–14 complete
-  (2026-06-13, latest commit `d91bcaf`).
-  - Latest live system: full dev environment (zsh + starship +
-    delta + ghostty + tmux + nvim/LazyVim + podman) PLUS a working
-    Hyprland Wayland desktop launched from TTY.
+- **Phase:** 2 implementation sprint. Iterations 1–15 complete
+  (2026-06-13, latest commit `f1d9ea6`).
+  - Latest live system: paco boots directly into Hyprland via SDDM
+    autologin. Full dev environment present (zsh, starship, delta,
+    ghostty, tmux, nvim/LazyVim, podman). Wayland session via uwsm;
+    SSH rescue path validated working through reboots.
   - Symlinks: `~/.zshenv`, `~/.config/{zsh,starship.toml,
     git/config,fontconfig/fonts.conf,ghostty/config,tmux/tmux.conf,
     nvim,mise/config.toml,lazydocker/config.yml,hypr}`.
+  - SDDM config: `/etc/sddm.conf.d/{10-wayland,autologin}.conf`,
+    `/usr/share/sddm/hyprland.lua`, pam_gnome_keyring stripped from
+    auth+password phases, faillock relaxed for sddm-autologin.
   - All phases fully idempotent; bats tests run locally on Beelink.
   - Hyprland config: Q32 strict (Lua), Omarchy-derived bindings,
     paco-rebranded. vim-style hjkl focus / Super+Shift+hjkl swap.
     Super+Backslash for split-toggle.
-- **Next iteration:** Iteration 15 — SDDM autologin. **Riskiest
-  step in the milestone.** Reboot triggers SDDM → autologin →
-  Hyprland. Wrong config can lock out GUI; SSH rescue path validated.
-  See `docs/implementation-plan.md` iter 15.
+- **Next iteration:** Iteration 16 — Waybar + Mako + Vicinae.
+  Empty desktop becomes a usable one: status bar at top, notifications
+  on screen, Super+Space launches Vicinae. Q13 validation gates
+  apply (swap to Walker if Vicinae fails theming/layer-shell/
+  stability tests). See `docs/implementation-plan.md` iter 16.
 - **Plan:** `/Users/faleman/code/paco/docs/implementation-plan.md`
   (also persisted at `~/.claude/plans/continue-paco-before-we-giggly-blanket.md`)
 - **Original 50-question plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md`
