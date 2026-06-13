@@ -6,22 +6,29 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 
 ## Working state
 
-- **Phase:** 2 implementation sprint. Iterations 1–6 of 21 complete
-  (2026-06-12, latest commit `a4d68e8`).
-  - paco installed system-wide at `/usr/bin/paco`
-  - 6 user-facing subcommands: `update`, `version`, `pkg-add`,
-    `pkg-aur-add`, `pkg-present`, `pkg-missing`. Hidden internals:
-    `update-git`, `migrate`, `pkg-aur-accessible`.
-  - `/usr/share/paco/bin` on PATH via `/etc/profile.d/paco.sh` (new
-    shells); install.sh prepends `${PACO_PATH}/bin` for current session
-  - yay (AUR helper) installs from AUR on first run; `paco pkg-aur-add
-    <pkg>` works
-  - All phases fully idempotent (zero sudo prompts when nothing changed)
-- **Next iteration:** Iteration 7 — zsh + 3 plugins + XDG layout
-  (zsh-autosuggestions, zsh-completions, zsh-syntax-highlighting;
-  `~/.zshenv` shim + `$ZDOTDIR=$XDG_CONFIG_HOME/zsh`). Default shell
-  stays bash for now — chsh happens in iter 8. See
-  `docs/implementation-plan.md` iter 7 for files + test procedure.
+- **Phase:** 2 implementation sprint. Iterations 1–12 + 13a complete,
+  13b in progress (2026-06-12, latest commit `52a0d08`).
+  - Latest live system: zsh as login shell, starship prompt with
+    repo-aware path display, delta as git pager, ghostty installed,
+    tmux config in place, 15 tier-1/2 tools, 3 tier-3, 3 tier-4,
+    bats, plus fonts (incl. JetBrainsMono Nerd Font).
+  - Symlinks established: `~/.zshenv`, `~/.config/{zsh,starship.toml,
+    git/config,fontconfig/fonts.conf,ghostty/config,tmux/tmux.conf}`.
+  - All phases fully idempotent; bats tests run locally on Beelink.
+- **In progress:** Iteration 13b tmux config — sesh popup works
+  with `sleep 2` auto-dismiss for empty list. **Open debugging
+  item:** vim-tmux-navigator `Ctrl+hjkl` (no prefix) doesn't move
+  between panes on the Beelink. Bindings ARE loaded (verified via
+  `tmux list-keys -T root | grep -E 'C-[hjkl]'`). Strong hypothesis:
+  Mac terminal (likely Ghostty on Mac) intercepts these keys before
+  SSH. **Resume tomorrow by testing locally on the Beelink directly
+  first** — if Ctrl+hjkl works on bare metal but not over SSH,
+  terminal intercept is confirmed. See auto-memory
+  `project-tmux-navigator-debug` for full debug procedure.
+- **Next iteration after 13b closes:** Iteration 13c — nvim base
+  (LazyVim + 7 Q12 extras + paco-distro plugin for `<leader>dd`
+  lazydocker + stay-in-visual `<` `>`). See
+  `docs/implementation-plan.md` iter 13 for the full file list.
 - **Plan:** `/Users/faleman/code/paco/docs/implementation-plan.md`
   (also persisted at `~/.claude/plans/continue-paco-before-we-giggly-blanket.md`)
 - **Original 50-question plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md`
