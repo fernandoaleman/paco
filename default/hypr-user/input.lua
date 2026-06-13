@@ -1,0 +1,12 @@
+-- Your personal input overrides go here. paco's defaults are in
+-- default/hypr/input.lua — call hl.config() again here to override
+-- any subset of those values without losing the others.
+--
+-- Example:
+-- hl.config({
+--   input = {
+--     kb_layout = "us,de",         -- multiple layouts
+--     kb_options = "grp:alts_toggle",  -- switch layouts with both Alts
+--     touchpad = { natural_scroll = true },
+--   },
+-- })

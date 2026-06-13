@@ -22,6 +22,7 @@ setup() {
   [ -r "${ROOT}/install/config/lazydocker.sh" ]
   [ -r "${ROOT}/install/config/podman-socket.sh" ]
   [ -r "${ROOT}/install/config/podman-environment.sh" ]
+  [ -r "${ROOT}/install/config/hyprland.sh" ]
 }
 
 @test "default nvim files exist" {

@@ -20,6 +20,7 @@ setup() {
   [ -r "${ROOT}/install/packaging/tools-tier3.sh" ]
   [ -r "${ROOT}/install/packaging/nvim.sh" ]
   [ -r "${ROOT}/install/packaging/podman.sh" ]
+  [ -r "${ROOT}/install/packaging/hyprland.sh" ]
 }
 
 @test "all packaging scripts are syntactically valid" {

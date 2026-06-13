@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=paco
+Comment=Opinionated Arch + Hyprland (paco)
+Exec=Hyprland --config %h/.config/hypr/hyprland.lua
+Type=Application
+DesktopNames=Hyprland

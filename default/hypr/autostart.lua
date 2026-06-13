@@ -1,0 +1,7 @@
+-- paco autostart defaults. Iter 14 is intentionally empty —
+-- future iterations will populate this as their components land:
+--   waybar       (iter 16)
+--   mako         (iter 16)
+--   hypridle     (iter 17 area)
+--   nm-applet    (iter 19)
+--   blueman-applet (iter 19)

@@ -1,0 +1,9 @@
+-- Your personal look-and-feel overrides. paco's defaults are in
+-- default/hypr/looknfeel.lua — override any subset by calling hl.config()
+-- again here.
+--
+-- Example:
+-- hl.config({
+--   general = { gaps_in = 10, gaps_out = 20 },
+--   decoration = { rounding = 8 },
+-- })

@@ -1,0 +1,6 @@
+-- Your personal autostart commands go here.
+--
+-- Examples:
+-- o.exec_on_start("nm-applet")
+-- o.exec_on_start("blueman-applet")
+-- o.exec_on_start("my-custom-thing")

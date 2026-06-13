@@ -1,0 +1,6 @@
+-- Your personal keybindings go here. paco's defaults are loaded by
+-- default.hypr.paco. Add your own with o.bind(...).
+--
+-- Example:
+-- o.bind("SUPER + B", "My browser", "firefox")
+-- o.bind("SUPER + E", "Files", "thunar")
