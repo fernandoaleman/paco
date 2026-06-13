@@ -17,6 +17,8 @@ setup() {
   [ -r "${ROOT}/install/config/tmux.sh" ]
   [ -r "${ROOT}/install/config/nvim.sh" ]
   [ -r "${ROOT}/install/config/mise.sh" ]
+  [ -r "${ROOT}/install/config/yay-defaults.sh" ]
+  [ -r "${ROOT}/install/config/pacman-makepkg.sh" ]
 }
 
 @test "default nvim files exist" {
