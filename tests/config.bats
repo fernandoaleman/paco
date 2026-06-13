@@ -14,6 +14,7 @@ setup() {
   [ -r "${ROOT}/install/config/starship.sh" ]
   [ -r "${ROOT}/install/config/git-paco-defaults.sh" ]
   [ -r "${ROOT}/install/config/ghostty.sh" ]
+  [ -r "${ROOT}/install/config/tmux.sh" ]
 }
 
 @test "all config scripts are syntactically valid" {
