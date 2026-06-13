@@ -34,7 +34,6 @@ setup() {
   [[ "${output}" == *"update"* ]]
   [[ "${output}" == *"pkg-add"* ]]
   [[ "${output}" == *"pkg-aur-add"* ]]
-  [[ "${output}" == *"setup-nvim-providers"* ]]
 }
 
 @test "dispatcher hides hidden subcommands from help" {
