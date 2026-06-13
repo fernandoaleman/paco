@@ -6,29 +6,25 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 
 ## Working state
 
-- **Phase:** 2 implementation sprint. Iterations 1–12 + 13a complete,
-  13b in progress (2026-06-12, latest commit `52a0d08`).
+- **Phase:** 2 implementation sprint. Iterations 1–12 + 13a + 13b
+  complete (2026-06-13, latest commit `0526603`).
   - Latest live system: zsh as login shell, starship prompt with
     repo-aware path display, delta as git pager, ghostty installed,
-    tmux config in place, 15 tier-1/2 tools, 3 tier-3, 3 tier-4,
-    bats, plus fonts (incl. JetBrainsMono Nerd Font).
+    tmux config in place with sesh popup + vim-tmux-navigator
+    bindings, 15 tier-1/2 tools, 3 tier-3, 3 tier-4, bats, plus
+    fonts (incl. JetBrainsMono Nerd Font).
   - Symlinks established: `~/.zshenv`, `~/.config/{zsh,starship.toml,
     git/config,fontconfig/fonts.conf,ghostty/config,tmux/tmux.conf}`.
   - All phases fully idempotent; bats tests run locally on Beelink.
-- **In progress:** Iteration 13b tmux config — sesh popup works
-  with `sleep 2` auto-dismiss for empty list. **Open debugging
-  item:** vim-tmux-navigator `Ctrl+hjkl` (no prefix) doesn't move
-  between panes on the Beelink. Bindings ARE loaded (verified via
-  `tmux list-keys -T root | grep -E 'C-[hjkl]'`). Strong hypothesis:
-  Mac terminal (likely Ghostty on Mac) intercepts these keys before
-  SSH. **Resume tomorrow by testing locally on the Beelink directly
-  first** — if Ctrl+hjkl works on bare metal but not over SSH,
-  terminal intercept is confirmed. See auto-memory
-  `project-tmux-navigator-debug` for full debug procedure.
-- **Next iteration after 13b closes:** Iteration 13c — nvim base
-  (LazyVim + 7 Q12 extras + paco-distro plugin for `<leader>dd`
-  lazydocker + stay-in-visual `<` `>`). See
-  `docs/implementation-plan.md` iter 13 for the full file list.
+  - 13b nested-tmux finding: when SSH'd from Mac-tmux into
+    Beelink-tmux, outer tmux intercepts `Ctrl+hjkl` before it
+    reaches the inner tmux. Bindings work fine when paco is the
+    only tmux in the chain (verified on bare-metal Beelink). Not
+    a paco bug — real users won't have an outer tmux. No fix needed.
+- **Next iteration:** Iteration 13c — nvim base (LazyVim + 7 Q12
+  extras + paco-distro plugin for `<leader>dd` lazydocker +
+  stay-in-visual `<` `>`). See `docs/implementation-plan.md` iter 13
+  for the full file list.
 - **Plan:** `/Users/faleman/code/paco/docs/implementation-plan.md`
   (also persisted at `~/.claude/plans/continue-paco-before-we-giggly-blanket.md`)
 - **Original 50-question plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md`
