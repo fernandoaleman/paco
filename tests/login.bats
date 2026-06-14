@@ -11,6 +11,14 @@ setup() {
   [ -r "${ROOT}/install/login/wayland-session.sh" ]
   [ -r "${ROOT}/install/login/sddm.sh" ]
   [ -r "${ROOT}/install/login/faillock-sddm.sh" ]
+  [ -r "${ROOT}/install/login/plymouth.sh" ]
+  [ -r "${ROOT}/install/login/limine-snapper.sh" ]
+}
+
+@test "boot stack default configs exist" {
+  [ -r "${ROOT}/default/limine/limine.conf" ]
+  [ -r "${ROOT}/default/limine/default.conf" ]
+  [ -r "${ROOT}/default/snapper/root" ]
 }
 
 @test "all login scripts are syntactically valid" {

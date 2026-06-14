@@ -1,0 +1,11 @@
+# paco snapper config — root only.
+# Snapshots are pre/post update only (no timeline), capped at 5.
+# /home is NEVER snapshotted (per Q43 — rolling back user data loses work).
+
+SUBVOLUME="/"
+FSTYPE="btrfs"
+
+NUMBER_LIMIT="5"
+NUMBER_LIMIT_IMPORTANT="5"
+
+TIMELINE_CREATE="no"
