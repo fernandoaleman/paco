@@ -6,27 +6,32 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 
 ## Working state
 
-- **Phase:** 2 implementation sprint. Iterations 1–15 complete
-  (2026-06-13, latest commit `f1d9ea6`).
-  - Latest live system: paco boots directly into Hyprland via SDDM
-    autologin. Full dev environment present (zsh, starship, delta,
+- **Phase:** 2 implementation sprint. Iterations 1–16 complete
+  (2026-06-13, latest commit `98983fe`).
+  - Latest live system: usable Hyprland desktop. SDDM autologin
+    boots → Hyprland → Waybar at top, mako notifications, Vicinae
+    on Super+Space. Full dev environment (zsh, starship, delta,
     ghostty, tmux, nvim/LazyVim, podman). Wayland session via uwsm;
     SSH rescue path validated working through reboots.
   - Symlinks: `~/.zshenv`, `~/.config/{zsh,starship.toml,
     git/config,fontconfig/fonts.conf,ghostty/config,tmux/tmux.conf,
-    nvim,mise/config.toml,lazydocker/config.yml,hypr}`.
+    nvim,mise/config.toml,lazydocker/config.yml,hypr,waybar,mako}`.
   - SDDM config: `/etc/sddm.conf.d/{10-wayland,autologin}.conf`,
     `/usr/share/sddm/hyprland.lua`, pam_gnome_keyring stripped from
     auth+password phases, faillock relaxed for sddm-autologin.
+  - Vicinae validation: native quicklinks/snippets/emojis/clipboard
+    all working; notes via extension store (post-install user step).
+    Daemon runs as vicinae.service, `vicinae toggle` opens window.
   - All phases fully idempotent; bats tests run locally on Beelink.
   - Hyprland config: Q32 strict (Lua), Omarchy-derived bindings,
     paco-rebranded. vim-style hjkl focus / Super+Shift+hjkl swap.
     Super+Backslash for split-toggle.
-- **Next iteration:** Iteration 16 — Waybar + Mako + Vicinae.
-  Empty desktop becomes a usable one: status bar at top, notifications
-  on screen, Super+Space launches Vicinae. Q13 validation gates
-  apply (swap to Walker if Vicinae fails theming/layer-shell/
-  stability tests). See `docs/implementation-plan.md` iter 16.
+- **Next iteration:** Iteration 17 — Theme system live. 13 themes
+  (catppuccin-macchiato authored + 12 omarchy-derived rebranded).
+  Color templates for ghostty, waybar, mako, hyprland, hyprlock,
+  vicinae. `paco theme set <name>` command + per-app restart hooks.
+  Replace iter-16 hardcoded catppuccin-macchiato colors with theme
+  system @import directives. Big iter — likely split into a/b/c.
 - **Plan:** `/Users/faleman/code/paco/docs/implementation-plan.md`
   (also persisted at `~/.claude/plans/continue-paco-before-we-giggly-blanket.md`)
 - **Original 50-question plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md`
