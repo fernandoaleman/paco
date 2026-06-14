@@ -6,12 +6,14 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 
 ## Working state
 
-- **Phase:** 2 implementation sprint. Iterations 1-17 complete
-  (2026-06-13, latest commit `0a2856b`). All 13 Q30 themes shipped.
-  - Latest live system: usable Hyprland desktop with theme system
-    live. SDDM autologin boots → Hyprland with paco's catppuccin-
-    macchiato theme applied across waybar, mako, ghostty, hyprland
-    borders. Vicinae launcher on Super+Space. Full dev environment.
+- **Phase:** 2 implementation sprint. Iterations 1-18 complete
+  (2026-06-14, latest commit `2eddff1`). **Milestone E fully closed.**
+  All 13 Q30 themes + theme-driven install-output colors. Boot stack
+  live: Plymouth (bgrt), Limine (paco-branded), snapper root snapshots.
+  - Latest live system: full paco. Cold boot → Plymouth splash →
+    SDDM autologin → Hyprland with catppuccin-macchiato theme applied
+    across waybar/mako/ghostty/hyprland borders. Vicinae on Super+Space.
+    Full dev environment. limine-snapper-sync watching for snapshots.
   - Symlinks: `~/.zshenv`, `~/.config/{zsh,starship.toml,
     git/config,fontconfig/fonts.conf,ghostty/config,tmux/tmux.conf,
     nvim,mise/config.toml,lazydocker/config.yml,hypr,waybar,mako}`.
@@ -28,11 +30,24 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
   - Hyprland config: Q32 strict (Lua), Omarchy-derived bindings,
     paco-rebranded. vim-style hjkl focus / Super+Shift+hjkl swap.
     Super+Backslash for split-toggle. Border colors theme-managed.
-- **Next iteration:** Iteration 18 — Plymouth, Limine, snapper.
-  **Second-riskiest step** in the whole plan — touches mkinitcpio
-  and bootloader; rescue USB recommended before starting. After
-  this, milestone E closes and only F (iters 19-21) remains before
-  v0.1.0.
+- **Next iteration:** Iteration 19 — system services (NetworkManager
+  applet, bluetooth, audio, power profiles, UFW). Small-to-medium
+  iter; mostly enabling services + waybar applet integrations. No
+  boot-stack risk. After this: iter 20 (bundled apps — big, per-item
+  approval), iter 21 (first-run + tag v0.1.0).
+
+  **iter 18 LVM gotcha (resolved, commit dc866d9):** archinstall's
+  "Best-effort default partitioning + btrfs" creates LVM-on-disk
+  (sometimes LUKS-on-LV when encryption enabled). paco's HOOKS list
+  needed `lvm2` between `encrypt` and `filesystems`. See TODO memory
+  `project-archinstall-docs-todo` for exhaustive archinstall docs.
+
+  **iter 18 idempotency fixes (commits 90dd5c6, 2eddff1):** sudo
+  prompts on subsequent paco updates from unconditional `sudo mkdir`,
+  /etc/default/limine + /boot/limine.conf reported "Wrote" every run
+  due to brittle cmp checks. Switched to paco-branding marker greps.
+  inotify-tools added so limine-snapper-sync.service stays running
+  instead of falling back to snapper plugin mode.
 - **Plan:** `/Users/faleman/code/paco/docs/implementation-plan.md`
   (also persisted at `~/.claude/plans/continue-paco-before-we-giggly-blanket.md`)
 - **Original 50-question plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md`
