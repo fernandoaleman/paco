@@ -18,6 +18,10 @@ paco_section "Installing system services (network, bluetooth, audio, power, fire
 #     playerctl                                    — media key control
 #   Power (Q26):
 #     power-profiles-daemon
+#     python-gobject       — optdep of powerprofilesctl CLI (it's a
+#                            Python script importing `gi`); without it
+#                            `powerprofilesctl get` throws
+#                            ModuleNotFoundError
 #   Firewall (Q27 + Q44):
 #     ufw
 PACMAN_TOOLS=(
@@ -35,6 +39,7 @@ PACMAN_TOOLS=(
   pavucontrol
   playerctl
   power-profiles-daemon
+  python-gobject
   ufw
 )
 

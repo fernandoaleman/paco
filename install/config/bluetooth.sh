@@ -4,26 +4,25 @@ set -euo pipefail
 
 paco_section "Configuring Bluetooth"
 
-# Enable bluetooth.service (NOT --now). User toggles power on/off via
-# waybar bluetooth module / blueman-applet; we don't want the radio
-# blasting at boot.
-if systemctl is-enabled bluetooth.service > /dev/null 2>&1; then
-  echo "bluetooth.service already enabled."
+# Enable + start bluetooth.service. The daemon needs to be running so
+# blueman-applet (Hyprland autostart) can talk to it, and so paired
+# bluetooth keyboards/mice reconnect automatically after autologin.
+#
+# We deliberately keep bluez's default `AutoEnable=true` (i.e. don't
+# sed /etc/bluetooth/main.conf) so the controller powers on at every
+# boot. Users with a BT keyboard/mouse otherwise need a wired keyboard
+# to toggle the radio on each session — the LUKS prompt already forces
+# wired-KB use once (initramfs has no bluetooth stack), and forcing it
+# a second time post-login would be needlessly hostile to BT-KB users.
+#
+# Privacy-conscious users who want BT off at boot can flip the value
+# back to false via blueman or by editing /etc/bluetooth/main.conf.
+if systemctl is-enabled bluetooth.service > /dev/null 2>&1 &&
+  systemctl is-active bluetooth.service > /dev/null 2>&1; then
+  echo "bluetooth.service already enabled + active."
 else
-  sudo systemctl enable bluetooth.service
-  echo "Enabled bluetooth.service."
-fi
-
-# Persist last power state across reboots (default AutoEnable=true would
-# always power-on at boot, overriding the user's last choice).
-bt_main_conf="/etc/bluetooth/main.conf"
-if [[ -f "${bt_main_conf}" ]]; then
-  if grep -qE '^AutoEnable=false$' "${bt_main_conf}"; then
-    echo "${bt_main_conf} already has AutoEnable=false."
-  else
-    sudo sed -i 's/^#\?AutoEnable=.*/AutoEnable=false/' "${bt_main_conf}"
-    echo "Set AutoEnable=false in ${bt_main_conf}."
-  fi
+  sudo systemctl enable --now bluetooth.service
+  echo "Enabled + started bluetooth.service."
 fi
 
 # Ship paco's wireplumber drop-in for A2DP auto-connect on bluetooth audio.
