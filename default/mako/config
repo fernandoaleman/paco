@@ -1,0 +1,22 @@
+# paco mako config — notification daemon for Wayland.
+# Iter 16 ships a minimal base; per-app handlers can land in later iters.
+
+anchor=top-right
+group-by=app-name,summary,body
+default-timeout=5000
+width=420
+outer-margin=20
+padding=10,15
+border-size=2
+max-icon-size=32
+font=sans-serif 14px
+
+[mode=do-not-disturb]
+invisible=true
+
+[mode=do-not-disturb app-name=notify-send]
+invisible=false
+
+[urgency=critical]
+default-timeout=0
+layer=overlay

@@ -23,6 +23,9 @@ setup() {
   [ -r "${ROOT}/install/config/podman-socket.sh" ]
   [ -r "${ROOT}/install/config/podman-environment.sh" ]
   [ -r "${ROOT}/install/config/hyprland.sh" ]
+  [ -r "${ROOT}/install/config/waybar.sh" ]
+  [ -r "${ROOT}/install/config/mako.sh" ]
+  [ -r "${ROOT}/install/config/vicinae.sh" ]
 }
 
 @test "default nvim files exist" {

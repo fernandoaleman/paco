@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# paco:summary=Kill and relaunch waybar (picks up config + style changes)
+
+set -euo pipefail
+
+pkill -x waybar || true
+setsid waybar > /dev/null 2>&1 &
+disown 2> /dev/null || true
+echo "Waybar restarted."

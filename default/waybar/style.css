@@ -1,0 +1,66 @@
+/* paco Waybar style.
+ *
+ * Iter 16 ships hardcoded catppuccin-macchiato colors. iter 17 (theme
+ * system) will refactor this to @import a theme-managed waybar.css so
+ * `paco theme set <name>` can repaint the bar.
+ */
+
+* {
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: 'JetBrainsMono Nerd Font';
+  font-size: 12px;
+}
+
+window#waybar {
+  background-color: #24273a;
+  color: #cad3f5;
+  border-bottom: 2px solid #363a4f;
+}
+
+.modules-left,
+.modules-right,
+.modules-center {
+  margin: 0 8px;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  background: transparent;
+  color: #a5adcb;
+}
+
+#workspaces button.active {
+  color: #8aadf4;
+}
+
+#workspaces button.urgent {
+  color: #ed8796;
+}
+
+#clock,
+#pulseaudio,
+#network,
+#bluetooth,
+#cpu,
+#battery {
+  padding: 0 10px;
+}
+
+#battery.warning {
+  color: #f5a97f;
+}
+
+#battery.critical {
+  color: #ed8796;
+}
+
+tooltip {
+  background-color: #1e2030;
+  border: 1px solid #494d64;
+}
+
+tooltip label {
+  color: #cad3f5;
+}
