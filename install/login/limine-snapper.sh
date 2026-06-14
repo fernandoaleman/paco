@@ -59,32 +59,36 @@ if [[ -z "${cmdline}" ]]; then
   echo "WARN: Could not extract cmdline from ${limine_config}. Boot may break." >&2
 fi
 
-# 4. Write /etc/default/limine from paco's template with the cmdline substituted.
-#    This MUST happen before installing limine-mkinitcpio-hook (its post-tx hook
-#    runs limine-install which reads /etc/default/limine).
+# 4. Write /etc/default/limine from paco's template with the cmdline
+#    substituted. ONLY on the first run — subsequent paco updates would
+#    re-extract a cmdline that's been polluted by our own appended args
+#    (`quiet splash loglevel=0 ...`), causing drift. paco-marker grep
+#    skips after first install.
 default_target="/etc/default/limine"
-default_tmp="$(mktemp)"
-trap 'rm -f "${hooks_tmp}" "${default_tmp}"' EXIT
 
-sed "s|@@CMDLINE@@|${cmdline}|g" "${PACO_PATH}/default/limine/default.conf" \
-  > "${default_tmp}"
-
-if [[ -f "${default_target}" ]] && cmp -s "${default_tmp}" "${default_target}"; then
-  echo "${default_target} already in place."
+if grep -q '^TARGET_OS_NAME="paco"' "${default_target}" 2> /dev/null; then
+  echo "${default_target} already paco-branded. Skipping."
 else
+  default_tmp="$(mktemp)"
+  trap 'rm -f "${hooks_tmp}" "${default_tmp}"' EXIT
+
+  sed "s|@@CMDLINE@@|${cmdline}|g" "${PACO_PATH}/default/limine/default.conf" \
+    > "${default_tmp}"
+
   sudo install -Dm644 "${default_tmp}" "${default_target}"
   echo "Wrote ${default_target}"
-fi
 
-# Append any drop-in cmdline configs from /etc/limine-entry-tool.d/*.conf
-# (hardware fix scripts in later iters can add files here).
-shopt -s nullglob
-for dropin in /etc/limine-entry-tool.d/*.conf; do
-  # cat as user (dropins are typically world-readable), pipe to sudo tee -a.
-  # Avoids SC2024 "sudo doesn't affect redirects" while preserving intent.
-  cat "${dropin}" | sudo tee -a "${default_target}" > /dev/null
-done
-shopt -u nullglob
+  # Append any drop-in cmdline configs from /etc/limine-entry-tool.d/*.conf
+  # (hardware fix scripts in later iters can add files here). Only on
+  # initial write — they get baked into /etc/default/limine, which we
+  # then trust on subsequent runs.
+  shopt -s nullglob
+  for dropin in /etc/limine-entry-tool.d/*.conf; do
+    # cat as user (dropins are typically world-readable), pipe to sudo tee -a.
+    cat "${dropin}" | sudo tee -a "${default_target}" > /dev/null
+  done
+  shopt -u nullglob
+fi
 
 # 5. Remove the old in-ESP config if it's not /boot/limine.conf (avoid
 #    conflicting configs on the same ESP).
@@ -98,8 +102,7 @@ fi
 paco_limine_conf="${PACO_PATH}/default/limine/limine.conf"
 boot_limine_conf="/boot/limine.conf"
 
-if [[ -f "${boot_limine_conf}" ]] &&
-  head -20 "${boot_limine_conf}" | cmp -s "${paco_limine_conf}" - 2> /dev/null; then
+if grep -q 'paco Bootloader' "${boot_limine_conf}" 2> /dev/null; then
   echo "${boot_limine_conf} (header) already paco-branded."
 else
   sudo cp "${paco_limine_conf}" "${boot_limine_conf}"

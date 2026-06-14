@@ -26,7 +26,7 @@ fi
 
 # 3. /etc/sddm.conf.d/10-wayland.conf — tells SDDM to render itself
 #    under Wayland via Hyprland.
-sudo mkdir -p /etc/sddm.conf.d
+[[ -d /etc/sddm.conf.d ]] || sudo mkdir -p /etc/sddm.conf.d
 
 wayland_target="/etc/sddm.conf.d/10-wayland.conf"
 wayland_tmp="$(mktemp)"
