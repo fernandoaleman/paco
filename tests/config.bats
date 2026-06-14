@@ -31,6 +31,8 @@ setup() {
   [ -r "${ROOT}/install/config/power.sh" ]
   [ -r "${ROOT}/install/config/firewall.sh" ]
   [ -r "${ROOT}/install/config/default-browser.sh" ]
+  [ -r "${ROOT}/install/config/environment-d.sh" ]
+  [ -r "${ROOT}/default/environment.d/paco.conf" ]
   [ -r "${ROOT}/install/config/theme-default.sh" ]
 }
 

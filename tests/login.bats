@@ -13,6 +13,7 @@ setup() {
   [ -r "${ROOT}/install/login/faillock-sddm.sh" ]
   [ -r "${ROOT}/install/login/plymouth.sh" ]
   [ -r "${ROOT}/install/login/limine-snapper.sh" ]
+  [ -r "${ROOT}/install/login/default-keyring.sh" ]
 }
 
 @test "boot stack default configs exist" {
