@@ -11,8 +11,17 @@ if ! command -v vicinae > /dev/null 2>&1; then
   exit 0
 fi
 
-# Vicinae's expected config location and startup mechanism may vary by
-# packaging version. For now, just verify the binary works; user config
-# at ~/.config/vicinae/ (if any) gets created on first launch.
 echo "Vicinae binary found: $(command -v vicinae)"
-echo "(Super+Space launches it via Hyprland's bindings/launcher.lua.)"
+
+# Vicinae runs as a systemd user service (the daemon backs the launcher).
+# The CLI `vicinae` talks to that service. Without the service running,
+# Super+Space exec's the CLI but nothing visible happens.
+if systemctl --user is-active vicinae.service > /dev/null 2>&1; then
+  echo "vicinae.service already active."
+elif systemctl --user enable --now vicinae.service 2> /dev/null; then
+  echo "Enabled and started vicinae.service."
+else
+  echo "WARN: Could not enable vicinae.service — no user session bus yet?"
+  echo "      Run this manually after your next login:"
+  echo "        systemctl --user enable --now vicinae.service"
+fi
