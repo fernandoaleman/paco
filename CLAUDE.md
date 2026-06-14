@@ -6,14 +6,19 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 
 ## Working state
 
-- **Phase:** 2 implementation sprint. Iterations 1-18 complete
-  (2026-06-14, latest commit `2eddff1`). **Milestone E fully closed.**
+- **Phase:** 2 implementation sprint. Iterations 1-19 complete
+  (2026-06-14, latest commit `b107930`). **Milestone E fully closed;
+  Milestone F started (iter 19/4).**
   All 13 Q30 themes + theme-driven install-output colors. Boot stack
   live: Plymouth (bgrt), Limine (paco-branded), snapper root snapshots.
+  System services live: NetworkManager + nm-applet, bluez + blueman,
+  full pipewire, power-profiles-daemon, UFW default-deny+SSH.
   - Latest live system: full paco. Cold boot → Plymouth splash →
     SDDM autologin → Hyprland with catppuccin-macchiato theme applied
     across waybar/mako/ghostty/hyprland borders. Vicinae on Super+Space.
     Full dev environment. limine-snapper-sync watching for snapshots.
+    Network/BT/audio/power/firewall all active; waybar tray hosts
+    nm-applet + blueman-applet.
   - Symlinks: `~/.zshenv`, `~/.config/{zsh,starship.toml,
     git/config,fontconfig/fonts.conf,ghostty/config,tmux/tmux.conf,
     nvim,mise/config.toml,lazydocker/config.yml,hypr,waybar,mako}`.
@@ -30,11 +35,41 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
   - Hyprland config: Q32 strict (Lua), Omarchy-derived bindings,
     paco-rebranded. vim-style hjkl focus / Super+Shift+hjkl swap.
     Super+Backslash for split-toggle. Border colors theme-managed.
-- **Next iteration:** Iteration 19 — system services (NetworkManager
-  applet, bluetooth, audio, power profiles, UFW). Small-to-medium
-  iter; mostly enabling services + waybar applet integrations. No
-  boot-stack risk. After this: iter 20 (bundled apps — big, per-item
-  approval), iter 21 (first-run + tag v0.1.0).
+- **Next iteration:** Iteration 20 — bundled apps. Big iter, per-item
+  approval per `feedback-approve-bundled-apps`. Scope: 5 native apps
+  (Chrome, 1Password, Slack, Spotify, Obsidian per Q20), 12 web-apps
+  via `paco-webapp-*` (Q19), Thunar + yazi (Q16). Source 3 missing
+  web-app icons (Google Calendar, Gmail, Claude — flaticon first).
+  After this: iter 21 (first-run + tag v0.1.0).
+
+  **iter 19 gotchas (all resolved, commits 4d4713b, b7de496, b107930):**
+    1. UFW default-deny locked out the SSH rescue path the
+       implementation plan depends on. Added `ufw allow ssh` gated on
+       openssh being installed.
+    2. omarchy's `AutoEnable=false` for bluetooth (which we mirrored)
+       forces BT KB users to bring a wired KB every boot to toggle
+       the radio on. Dropped the sed; trust bluez default
+       (AutoEnable=true) so paired BT devices reconnect post-LUKS.
+    3. `powerprofilesctl` shebang `#!/usr/bin/env python3` resolves
+       to mise's Python (Q21 activates mise globally), which doesn't
+       see the system `gi` bindings. Pinned to `#!/usr/bin/python3`
+       via sed.
+    4. `set -o pipefail` + `systemctl is-enabled <masked-unit> | grep`
+       trap: systemctl prints "masked" but exits 1 for masked units;
+       pipefail inherited the nonzero exit, so the `if` always
+       short-circuited to the else and re-ran sudo on every paco
+       update. Captured into variable + `[[ ]]` comparison instead.
+    5. `ufw status` always needs sudo (root-only rule files), so the
+       SSH-allow idempotency check prompted on every paco update.
+       Added PACO_STATE_DIR/firewall.applied marker; fast-path
+       short-circuits on (ufw.conf ENABLED=yes + service active +
+       marker present), all sudo-free.
+
+  **Future opt-in (post-v0.1.0, memory `project-bluetooth-luks-future`):**
+  `paco setup-bluetooth-luks` via mkinitcpio-bluetooth lets BT KB
+  users work at the LUKS prompt. Slotted alongside Q44 deferred
+  security helpers (fingerprint, FIDO2). Wired-KB-at-LUKS limitation
+  is documented in `docs/install-from-arch.md` until then.
 
   **iter 18 LVM gotcha (resolved, commit dc866d9):** archinstall's
   "Best-effort default partitioning + btrfs" creates LVM-on-disk
