@@ -22,7 +22,7 @@ paco-webapp-install "YouTube" https://youtube.com/ YouTube.png
 paco-webapp-install "GitHub" https://github.com/ GitHub.png
 paco-webapp-install "Discord" https://discord.com/channels/@me Discord.png
 paco-webapp-install "Zoom" https://app.zoom.us/wc/home Zoom.png \
-  "paco-webapp-handler-zoom %u" \
+  "/usr/share/paco/bin/paco-webapp-handler-zoom %u" \
   "x-scheme-handler/zoommtg;x-scheme-handler/zoomus"
 
 echo "Default web apps installed (Super+Space → app name)."

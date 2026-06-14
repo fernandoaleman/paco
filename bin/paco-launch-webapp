@@ -21,19 +21,28 @@ esac
 
 # Resolve the browser's executable from its .desktop file. Check user
 # overrides first, then nix profile (rare but supported by omarchy),
-# then system. `head -1` deals with the (rare) case of duplicate
-# Exec= lines.
-exec_bin="$(
-  sed -n 's/^Exec=\([^ ]*\).*/\1/p' \
-    "${HOME}/.local/share/applications/${browser}" \
-    "${HOME}/.nix-profile/share/applications/${browser}" \
-    "/usr/share/applications/${browser}" 2> /dev/null |
-    head -1
-)"
+# then system. Build a list of files that actually exist before
+# handing to sed — sed exits 2 when any of its file args is missing,
+# and `set -o pipefail` upstream would propagate that even on a
+# successful match, killing the whole script.
+candidates=()
+for path in \
+  "${HOME}/.local/share/applications/${browser}" \
+  "${HOME}/.nix-profile/share/applications/${browser}" \
+  "/usr/share/applications/${browser}"; do
+  [[ -f ${path} ]] && candidates+=("${path}")
+done
+
+if [[ ${#candidates[@]} -eq 0 ]]; then
+  echo "paco-launch-webapp: ${browser} not installed in any expected location." >&2
+  exit 1
+fi
+
+# `head -1` handles (rare) duplicate Exec= lines from action entries.
+exec_bin="$(sed -n 's/^Exec=\([^ ]*\).*/\1/p' "${candidates[@]}" | head -1)"
 
 if [[ -z ${exec_bin} ]]; then
-  echo "paco-launch-webapp: could not resolve a chromium-derived browser." >&2
-  echo "                    (xdg default: ${browser})" >&2
+  echo "paco-launch-webapp: could not parse Exec= from ${candidates[*]}." >&2
   exit 1
 fi
 

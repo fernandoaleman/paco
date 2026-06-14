@@ -67,7 +67,13 @@ else
   ICON_PATH="${ICON_DIR}/${ICON_REF}"
 fi
 
-EXEC_COMMAND="${CUSTOM_EXEC:-paco-launch-webapp ${APP_URL}}"
+# Use an absolute path so the .desktop file works regardless of the
+# launcher's PATH (Vicinae, Hyprland exec, GNOME Shell, etc. all read
+# .desktop Exec= via their own exec context, which may not include
+# /usr/share/paco/bin even when environment.d does propagate). The
+# default callers stick to paco-launch-webapp; URL handlers (Zoom)
+# pass their own absolute path in CUSTOM_EXEC.
+EXEC_COMMAND="${CUSTOM_EXEC:-/usr/share/paco/bin/paco-launch-webapp ${APP_URL}}"
 
 DESKTOP_FILE="${DESKTOP_DIR}/${APP_NAME}.desktop"
 
