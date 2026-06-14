@@ -3,17 +3,23 @@
 # Visual: banner, color palette, gum env defaults.
 # PACO_PATH is set by install.sh before this is sourced.
 
-export GUM_INPUT_PROMPT_FOREGROUND="#89b4fa"
-export GUM_CHOOSE_CURSOR_FOREGROUND="#89b4fa"
-export FOREGROUND_OK="#a6e3a1"
-export FOREGROUND_WARN="#f9e2af"
-export FOREGROUND_ERR="#f38ba8"
+# Colors match paco's default theme (catppuccin-macchiato).
+# These render during `paco update` BEFORE the theme system has a chance
+# to set up anything, so they're hardcoded to the default-theme palette.
+# Future: source from $PACO_PATH/themes/catppuccin-macchiato/colors.toml
+# at install time so changing the default theme automatically updates these.
+
+export GUM_INPUT_PROMPT_FOREGROUND="#8aadf4"
+export GUM_CHOOSE_CURSOR_FOREGROUND="#8aadf4"
+export FOREGROUND_OK="#a6da95"
+export FOREGROUND_WARN="#eed49f"
+export FOREGROUND_ERR="#ed8796"
 
 # RGB equivalents (used by paco_section's direct printf, which renders
 # identically whether stdout is a TTY or piped through run_logged's tee).
-export PACO_RGB_OK="166;227;161"   # #a6e3a1
-export PACO_RGB_WARN="249;226;175" # #f9e2af
-export PACO_RGB_ERR="243;139;168"  # #f38ba8
+export PACO_RGB_OK="166;218;149"   # #a6da95
+export PACO_RGB_WARN="238;212;159" # #eed49f
+export PACO_RGB_ERR="237;135;150"  # #ed8796
 
 # Force gum to emit ANSI colors even when its stdout is piped (e.g., through
 # run_logged's `tee`). Without these, gum auto-detects non-TTY and outputs
