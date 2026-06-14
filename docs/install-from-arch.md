@@ -124,3 +124,22 @@ environment variables before running boot.sh:
 ```bash
 PACO_REPO=yourfork/paco PACO_REF=mybranch curl -fsSL <boot.sh URL> | bash
 ```
+
+## Known limitations
+
+### Wired keyboard required at the LUKS passphrase prompt
+
+The LUKS passphrase prompt runs from the initramfs, before the kernel
+loads the Bluetooth subsystem and before `/var/lib/bluetooth/` (where
+device pairings live) is accessible. **A wired USB keyboard is required
+to enter your LUKS passphrase on every cold boot.**
+
+After unlock, the rest of the session works normally with Bluetooth
+peripherals: SDDM autologin lands you in Hyprland, `bluetooth.service`
+is running, and paired devices reconnect automatically.
+
+A post-v0.1.0 opt-in helper (`paco setup-bluetooth-luks`) will let
+users who want to live without a wired keyboard at the LUKS prompt
+bake their paired devices into initramfs — at the cost of a per-machine
+setup ritual and a slightly larger boot attack surface. Until then,
+keep a USB keyboard handy for unlocks.
