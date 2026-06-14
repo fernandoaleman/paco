@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
-# paco:summary=Kill and relaunch mako (picks up config changes)
+# paco:summary=Reload mako config (via makoctl, keeps notifications in flight)
 
 set -euo pipefail
 
-pkill -x mako || true
-setsid mako > /dev/null 2>&1 &
-disown 2> /dev/null || true
-echo "Mako restarted."
+if pgrep -x mako > /dev/null; then
+  makoctl reload
+else
+  # Not running — start it
+  setsid mako > /dev/null 2>&1 &
+  disown 2> /dev/null || true
+fi
