@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# paco:summary=Open Zoom meeting URLs (zoommtg:// / zoomus://) in the Zoom web client
+# paco:args=[url]
+
+set -euo pipefail
+
+url="${1:-}"
+web_url="https://app.zoom.us/wc/home"
+
+if [[ ${url} =~ ^zoom(mtg|us):// ]]; then
+  confno="$(echo "${url}" | sed -n 's/.*[?&]confno=\([^&]*\).*/\1/p')"
+
+  if [[ -n ${confno} ]]; then
+    pwd_value="$(echo "${url}" | sed -n 's/.*[?&]pwd=\([^&]*\).*/\1/p')"
+
+    if [[ -n ${pwd_value} ]]; then
+      web_url="https://app.zoom.us/wc/join/${confno}?pwd=${pwd_value}"
+    else
+      web_url="https://app.zoom.us/wc/join/${confno}"
+    fi
+  fi
+fi
+
+exec paco-launch-webapp "${web_url}"

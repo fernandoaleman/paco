@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# paco:summary=Launch a URL as a web app in the default chromium-derived browser
+# paco:args=<url> [extra-flags...]
+
+set -euo pipefail
+
+if [[ -z ${1:-} ]]; then
+  echo "Usage: paco-launch-webapp <url> [extra-flags...]" >&2
+  exit 2
+fi
+
+browser="$(xdg-settings get default-web-browser 2> /dev/null || true)"
+
+# Only chromium-derived browsers support --app= mode. Fall back to
+# google-chrome (paco default per Q17) if the system default isn't
+# one of them.
+case ${browser} in
+  google-chrome* | chromium* | brave* | microsoft-edge* | opera* | vivaldi* | helium*) ;;
+  *) browser="google-chrome.desktop" ;;
+esac
+
+# Resolve the browser's executable from its .desktop file. Check user
+# overrides first, then nix profile (rare but supported by omarchy),
+# then system. `head -1` deals with the (rare) case of duplicate
+# Exec= lines.
+exec_bin="$(
+  sed -n 's/^Exec=\([^ ]*\).*/\1/p' \
+    "${HOME}/.local/share/applications/${browser}" \
+    "${HOME}/.nix-profile/share/applications/${browser}" \
+    "/usr/share/applications/${browser}" 2> /dev/null |
+    head -1
+)"
+
+if [[ -z ${exec_bin} ]]; then
+  echo "paco-launch-webapp: could not resolve a chromium-derived browser." >&2
+  echo "                    (xdg default: ${browser})" >&2
+  exit 1
+fi
+
+# setsid + uwsm-app: detach from caller's session + wrap in a transient
+# systemd scope so the window is tied to graphical-session.target (per
+# Q22 wayland-session decision).
+exec setsid uwsm-app -- "${exec_bin}" --app="$1" "${@:2}"

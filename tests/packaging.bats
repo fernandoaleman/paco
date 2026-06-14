@@ -26,6 +26,9 @@ setup() {
   [ -r "${ROOT}/install/packaging/launcher.sh" ]
   [ -r "${ROOT}/install/packaging/boot-stack.sh" ]
   [ -r "${ROOT}/install/packaging/system-services.sh" ]
+  [ -r "${ROOT}/install/packaging/chrome.sh" ]
+  [ -r "${ROOT}/install/packaging/icons.sh" ]
+  [ -r "${ROOT}/install/packaging/webapps.sh" ]
 }
 
 @test "all packaging scripts are syntactically valid" {

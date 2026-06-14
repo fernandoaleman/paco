@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# paco:summary=Restart the Vicinae launcher so it re-scans .desktop entries
+
+set -euo pipefail
+
+if ! systemctl --user is-enabled vicinae.service > /dev/null 2>&1; then
+  echo "paco-restart-vicinae: vicinae.service is not enabled. Skipping." >&2
+  exit 0
+fi
+
+systemctl --user restart vicinae.service
+echo "Vicinae restarted."

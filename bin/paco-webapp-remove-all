@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# paco:summary=Remove every web app installed via paco-webapp-install
+
+set -euo pipefail
+
+APP_DIR="${1:-${HOME}/.local/share/applications}"
+ICON_DIR="${HOME}/.local/share/applications/icons"
+
+echo "Scanning ${APP_DIR} for paco web apps..."
+
+webapp_files=()
+while IFS= read -r -d '' file; do
+  if grep -qE '^Exec=(paco-launch-webapp|paco-webapp-handler)' "${file}" 2> /dev/null; then
+    webapp_files+=("${file}")
+  fi
+done < <(find "${APP_DIR}" -maxdepth 1 -name '*.desktop' -print0 2> /dev/null)
+
+if ((${#webapp_files[@]} == 0)); then
+  echo "No web apps found."
+  exit 0
+fi
+
+for file in "${webapp_files[@]}"; do
+  app_name="$(basename "${file}" .desktop)"
+  echo "Removing ${app_name}"
+  rm -f "${file}"
+  rm -f "${ICON_DIR}/${app_name}.png"
+done
+
+if command -v update-desktop-database > /dev/null 2>&1; then
+  update-desktop-database "${APP_DIR}" > /dev/null 2>&1 || true
+fi
+
+if command -v paco-restart-vicinae > /dev/null 2>&1; then
+  paco-restart-vicinae
+fi
+
+echo "All paco web apps removed."
