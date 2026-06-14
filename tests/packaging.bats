@@ -25,6 +25,7 @@ setup() {
   [ -r "${ROOT}/install/packaging/waybar-mako.sh" ]
   [ -r "${ROOT}/install/packaging/launcher.sh" ]
   [ -r "${ROOT}/install/packaging/boot-stack.sh" ]
+  [ -r "${ROOT}/install/packaging/system-services.sh" ]
 }
 
 @test "all packaging scripts are syntactically valid" {

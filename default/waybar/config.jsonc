@@ -6,7 +6,7 @@
   "height": 26,
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "bluetooth", "cpu", "battery"],
+  "modules-right": ["tray", "pulseaudio", "network", "bluetooth", "cpu", "battery"],
 
   "hyprland/workspaces": {
     "on-click": "activate",
@@ -38,6 +38,11 @@
     "format": "{:%A %H:%M}",
     "format-alt": "{:%d %B %Y}",
     "tooltip": false
+  },
+
+  "tray": {
+    "icon-size": 18,
+    "spacing": 8
   },
 
   "pulseaudio": {

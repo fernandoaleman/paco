@@ -26,6 +26,10 @@ setup() {
   [ -r "${ROOT}/install/config/waybar.sh" ]
   [ -r "${ROOT}/install/config/mako.sh" ]
   [ -r "${ROOT}/install/config/vicinae.sh" ]
+  [ -r "${ROOT}/install/config/networking.sh" ]
+  [ -r "${ROOT}/install/config/bluetooth.sh" ]
+  [ -r "${ROOT}/install/config/power.sh" ]
+  [ -r "${ROOT}/install/config/firewall.sh" ]
   [ -r "${ROOT}/install/config/theme-default.sh" ]
 }
 
