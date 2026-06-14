@@ -36,9 +36,10 @@ mv "${NEXT_DIR}" "${CURRENT_DIR}"
 # Record the active theme name
 echo "${THEME_NAME}" > "${HOME}/.config/paco/current/theme-name"
 
-# Restart affected apps (best-effort — silent if not running)
+# Restart/reload affected apps (best-effort — silent if not running)
 command -v paco-restart-waybar > /dev/null && paco-restart-waybar > /dev/null 2>&1 || true
 command -v paco-restart-mako > /dev/null && paco-restart-mako > /dev/null 2>&1 || true
+command -v paco-restart-terminal > /dev/null && paco-restart-terminal > /dev/null 2>&1 || true
 command -v hyprctl > /dev/null && hyprctl reload > /dev/null 2>&1 || true
 
 echo "Theme set: ${THEME_NAME}"

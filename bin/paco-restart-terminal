@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# paco:summary=Reload supported terminal emulators after config changes
+
+set -euo pipefail
+
+# Ghostty has built-in SIGUSR2 config-reload (so existing windows pick
+# up new colors / fonts / etc. without being closed and reopened).
+if pgrep -x ghostty > /dev/null; then
+  killall -SIGUSR2 ghostty
+fi
+
+# Alacritty watches its config file for changes; touching it triggers reload.
+if [[ -f ~/.config/alacritty/alacritty.toml ]]; then
+  touch ~/.config/alacritty/alacritty.toml
+fi
+
+# Kitty also reloads on SIGUSR1 if running.
+if pgrep -x kitty > /dev/null; then
+  killall -SIGUSR1 kitty
+fi
