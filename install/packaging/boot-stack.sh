@@ -4,21 +4,37 @@ set -euo pipefail
 
 paco_section "Installing boot stack (Plymouth + Limine + snapper)"
 
-# plymouth:                graphical boot splash
-# snapper:                 btrfs snapshot manager (root-only per Q43)
-# limine-snapper-sync:     auto-create snapshots + populate Limine boot menu
-# limine-mkinitcpio-hook:  rebuild UKI + update Limine entries on kernel/initrd changes
-TOOLS=(plymouth snapper limine-snapper-sync limine-mkinitcpio-hook)
+# Pacman:
+#   plymouth: graphical boot splash
+#   snapper:  btrfs snapshot manager (root-only per Q43)
+PACMAN_TOOLS=(plymouth snapper)
 
-missing=()
-for t in "${TOOLS[@]}"; do
-  paco-pkg-present "${t}" || missing+=("${t}")
+# AUR:
+#   limine-snapper-sync:    auto-create snapshots + populate Limine boot menu
+#   limine-mkinitcpio-hook: rebuild UKI + update Limine entries on kernel changes
+AUR_TOOLS=(limine-snapper-sync limine-mkinitcpio-hook)
+
+pacman_missing=()
+for t in "${PACMAN_TOOLS[@]}"; do
+  paco-pkg-present "${t}" || pacman_missing+=("${t}")
 done
 
-if [[ ${#missing[@]} -eq 0 ]]; then
+aur_missing=()
+for t in "${AUR_TOOLS[@]}"; do
+  paco-pkg-present "${t}" || aur_missing+=("${t}")
+done
+
+if [[ ${#pacman_missing[@]} -eq 0 ]] && [[ ${#aur_missing[@]} -eq 0 ]]; then
   echo "Boot stack already installed. Skipping."
   exit 0
 fi
 
-paco-pkg-add "${missing[@]}"
-echo "Boot stack installed: ${TOOLS[*]}"
+if [[ ${#pacman_missing[@]} -gt 0 ]]; then
+  paco-pkg-add "${pacman_missing[@]}"
+fi
+
+if [[ ${#aur_missing[@]} -gt 0 ]]; then
+  paco-pkg-aur-add "${aur_missing[@]}"
+fi
+
+echo "Boot stack present: ${PACMAN_TOOLS[*]} ${AUR_TOOLS[*]}"
