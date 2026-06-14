@@ -7,7 +7,7 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 ## Working state
 
 - **Phase:** 2 implementation sprint. Iterations 1-17 complete
-  (2026-06-13, latest commit `e542d62`).
+  (2026-06-13, latest commit `0a2856b`). All 13 Q30 themes shipped.
   - Latest live system: usable Hyprland desktop with theme system
     live. SDDM autologin boots → Hyprland with paco's catppuccin-
     macchiato theme applied across waybar, mako, ghostty, hyprland
@@ -28,12 +28,11 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
   - Hyprland config: Q32 strict (Lua), Omarchy-derived bindings,
     paco-rebranded. vim-style hjkl focus / Super+Shift+hjkl swap.
     Super+Backslash for split-toggle. Border colors theme-managed.
-- **Next iteration:** Iteration 17b (polish) OR Iteration 18 (next
-  milestone E step). Iter 17b = ship the other 12 Q30 themes — pure
-  copy+rebrand from omarchy, low-risk mechanical work, can land
-  anytime. Iter 18 = Plymouth + Limine + snapper. **Second-riskiest
-  step** — touches mkinitcpio + bootloader; rescue USB recommended
-  before starting.
+- **Next iteration:** Iteration 18 — Plymouth, Limine, snapper.
+  **Second-riskiest step** in the whole plan — touches mkinitcpio
+  and bootloader; rescue USB recommended before starting. After
+  this, milestone E closes and only F (iters 19-21) remains before
+  v0.1.0.
 - **Plan:** `/Users/faleman/code/paco/docs/implementation-plan.md`
   (also persisted at `~/.claude/plans/continue-paco-before-we-giggly-blanket.md`)
 - **Original 50-question plan:** `/Users/faleman/.claude/plans/i-want-you-to-pure-deer.md`
