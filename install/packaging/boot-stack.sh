@@ -5,9 +5,11 @@ set -euo pipefail
 paco_section "Installing boot stack (Plymouth + Limine + snapper)"
 
 # Pacman:
-#   plymouth: graphical boot splash
-#   snapper:  btrfs snapshot manager (root-only per Q43)
-PACMAN_TOOLS=(plymouth snapper)
+#   plymouth:      graphical boot splash
+#   snapper:       btrfs snapshot manager (root-only per Q43)
+#   inotify-tools: provides inotifywait, which limine-snapper-sync.service
+#                  uses for continuous watching of snapshot dir
+PACMAN_TOOLS=(plymouth snapper inotify-tools)
 
 # AUR:
 #   limine-snapper-sync:    auto-create snapshots + populate Limine boot menu
