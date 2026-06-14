@@ -4,8 +4,8 @@
 hl.config({
   general = {
     col = {
-      active_border = { colors = { "rgba({{ accent_strip }}ee)", "rgba({{ mauve_strip }}ee)" }, angle = 45 },
-      inactive_border = "rgba({{ surface1_strip }}aa)",
+      active_border = { colors = { "rgba({{ accent_strip }}ee)", "rgba({{ color5_strip }}ee)" }, angle = 45 },
+      inactive_border = "rgba({{ color8_strip }}aa)",
     },
   },
 })
