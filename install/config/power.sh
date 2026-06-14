@@ -26,3 +26,18 @@ else
   sudo systemctl start power-profiles-daemon.service
   echo "Started power-profiles-daemon.service."
 fi
+
+# Arch ships /usr/bin/powerprofilesctl with `#!/usr/bin/env python3`.
+# paco activates mise in the shell (Q21), so `env python3` resolves to
+# mise's Python, which doesn't see the system `gi` bindings installed
+# by python-gobject — and the CLI throws ModuleNotFoundError on `gi`.
+# Force the shebang to the absolute system Python.
+ppctl_bin="/usr/bin/powerprofilesctl"
+if [[ -f "${ppctl_bin}" ]]; then
+  if head -1 "${ppctl_bin}" | grep -q '^#!/usr/bin/python3$'; then
+    echo "${ppctl_bin} shebang already pinned to system python3."
+  else
+    sudo sed -i '1c\#!/usr/bin/python3' "${ppctl_bin}"
+    echo "Pinned ${ppctl_bin} shebang to /usr/bin/python3 (mise interop)."
+  fi
+fi
