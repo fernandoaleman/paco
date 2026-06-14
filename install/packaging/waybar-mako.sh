@@ -2,9 +2,11 @@
 # shellcheck disable=SC1091,SC2154
 set -euo pipefail
 
-paco_section "Installing Waybar + Mako"
+paco_section "Installing Waybar + Mako + libnotify"
 
-TOOLS=(waybar mako)
+# libnotify provides notify-send (and the libnotify.so apps link against)
+# so the shell and other tools can emit notifications to mako.
+TOOLS=(waybar mako libnotify)
 
 missing=()
 for t in "${TOOLS[@]}"; do
