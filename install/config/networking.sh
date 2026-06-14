@@ -23,8 +23,13 @@ fi
 
 # Mask systemd-networkd-wait-online — without this it can hang boot for
 # ~2 min waiting for an interface NetworkManager owns. (omarchy pattern.)
-if systemctl is-enabled systemd-networkd-wait-online.service 2> /dev/null |
-  grep -q '^masked$'; then
+#
+# `systemctl is-enabled` prints "masked" but exits 1 for masked units;
+# with `set -o pipefail` upstream, piping into grep would inherit the
+# nonzero exit even on a successful match. Capture into a variable
+# instead so the comparison stands on its own.
+mask_status="$(systemctl is-enabled systemd-networkd-wait-online.service 2> /dev/null || true)"
+if [[ ${mask_status} == "masked" ]]; then
   echo "systemd-networkd-wait-online.service already masked."
 else
   sudo systemctl disable systemd-networkd-wait-online.service 2> /dev/null || true
