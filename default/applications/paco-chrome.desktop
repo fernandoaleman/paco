@@ -1,0 +1,31 @@
+[Desktop Entry]
+# paco's user-visible Chrome entry for Vicinae. The filename
+# (paco-chrome.desktop) is intentional — Vicinae's matchesWindowClass()
+# (src/server/src/services/app-service/xdg/xdg-app.hpp) compares the
+# .desktop file's id (filename minus `.desktop`, lowercased) to a
+# running window's WM class. Chrome reports `google-chrome` for its
+# WM class; our id is `paco-chrome` → no match → Vicinae never
+# focus-existing-window's this entry → Enter always launches a fresh
+# Chrome window.
+#
+# Consistency win: behaves like our webapp .desktop entries (GitHub,
+# YouTube, etc.), which open a new --app= window per Enter because
+# their PWA window classes differ from anything Vicinae indexes.
+#
+# google-chrome.desktop is hidden via NoDisplay=true so the user sees
+# only this single "Google Chrome" entry in Vicinae.
+Version=1.0
+Name=Google Chrome
+GenericName=Web Browser
+Comment=Access the Internet
+Exec=/usr/bin/google-chrome-stable --new-window %U
+StartupNotify=true
+Terminal=false
+Icon=google-chrome
+Type=Application
+Categories=Network;WebBrowser;
+Actions=new-private-window;
+
+[Desktop Action new-private-window]
+Name=New Incognito Window
+Exec=/usr/bin/google-chrome-stable --incognito

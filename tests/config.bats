@@ -35,6 +35,7 @@ setup() {
   [ -r "${ROOT}/default/environment.d/paco.conf" ]
   [ -r "${ROOT}/install/config/chrome-new-window.sh" ]
   [ -r "${ROOT}/default/applications/google-chrome.desktop" ]
+  [ -r "${ROOT}/default/applications/paco-chrome.desktop" ]
   [ -r "${ROOT}/install/config/theme-default.sh" ]
 }
 

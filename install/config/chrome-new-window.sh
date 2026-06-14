@@ -2,37 +2,49 @@
 # shellcheck disable=SC1091,SC2154
 set -euo pipefail
 
-paco_section "Overriding Chrome .desktop so Vicinae opens new windows"
+paco_section "Installing Chrome launcher overrides (Vicinae always opens new window)"
 
-# Per user feedback: launching Chrome from Vicinae with the stock
-# .desktop file just raises the existing instance (Chrome's singleton
-# behavior). Paco ships an override that puts --new-window in the main
-# Exec line — symlinked at the user level, which fully shadows
-# /usr/share/applications/google-chrome.desktop so Vicinae shows a
-# single Chrome entry that always opens a fresh window. Incognito
-# stays available via the Action sub-entry.
+# Two .desktop files ship for Chrome (see headers of each for the why):
+#   - google-chrome.desktop  → hidden (NoDisplay=true); preserves
+#                              xdg-open / xdg-settings URL routing
+#                              with --new-window in Exec.
+#   - paco-chrome.desktop    → user-visible; filename intentionally
+#                              differs from Chrome's WM class so
+#                              Vicinae's matchesWindowClass() fails
+#                              and Enter always launches a fresh
+#                              Chrome window (consistency with the
+#                              webapp .desktop entries).
 target_dir="${HOME}/.local/share/applications"
-target="${target_dir}/google-chrome.desktop"
-source_file="${PACO_PATH}/default/applications/google-chrome.desktop"
-
 mkdir -p "${target_dir}"
 
-if [[ -L "${target}" ]] && [[ "$(readlink "${target}")" == "${source_file}" ]]; then
-  echo "Chrome --new-window override already symlinked."
-  exit 0
-fi
+# Helper: symlink ${source} → ${target}, backing up existing non-link
+# files. Idempotent.
+link_desktop() {
+  local name="$1"
+  local source_file="${PACO_PATH}/default/applications/${name}"
+  local target="${target_dir}/${name}"
 
-if [[ -e "${target}" ]] && [[ ! -L "${target}" ]]; then
-  backup="${target}.backup.$(date +%Y%m%d-%H%M%S)"
-  echo "Backing up existing ${target} → ${backup}"
-  mv "${target}" "${backup}"
-fi
+  if [[ -L "${target}" ]] && [[ "$(readlink "${target}")" == "${source_file}" ]]; then
+    echo "${name} already symlinked."
+    return 0
+  fi
 
-ln -sfn "${source_file}" "${target}"
-echo "Symlinked ${target} → ${source_file}"
+  if [[ -e "${target}" ]] && [[ ! -L "${target}" ]]; then
+    local backup
+    backup="${target}.backup.$(date +%Y%m%d-%H%M%S)"
+    echo "Backing up existing ${target} → ${backup}"
+    mv "${target}" "${backup}"
+  fi
 
-# Update the desktop database so launchers re-scan immediately. Best
-# effort — if update-desktop-database is missing, it's not critical.
+  ln -sfn "${source_file}" "${target}"
+  echo "Symlinked ${target} → ${source_file}"
+}
+
+link_desktop "google-chrome.desktop"
+link_desktop "paco-chrome.desktop"
+
+# Refresh the desktop database so Vicinae re-scans immediately. Best
+# effort — if update-desktop-database is missing, not critical.
 if command -v update-desktop-database > /dev/null 2>&1; then
   update-desktop-database "${target_dir}" > /dev/null 2>&1 || true
 fi
