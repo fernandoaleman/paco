@@ -69,12 +69,14 @@ fi
 # 5. Strip pam_gnome_keyring from /etc/pam.d/sddm so SDDM autologin
 #    doesn't try to set up an encrypted login keyring (Q22 pattern;
 #    relies on a passwordless Default_keyring for the desktop session).
-if grep -q "pam_gnome_keyring" /etc/pam.d/sddm 2> /dev/null; then
+#    Only strips -auth and -password phases — the -session phase
+#    legitimately keeps pam_gnome_keyring (to start the daemon).
+if grep -qE '^-(auth|password).*pam_gnome_keyring\.so' /etc/pam.d/sddm 2> /dev/null; then
   sudo sed -i '/-auth.*pam_gnome_keyring\.so/d' /etc/pam.d/sddm
   sudo sed -i '/-password.*pam_gnome_keyring\.so/d' /etc/pam.d/sddm
-  echo "Stripped pam_gnome_keyring from /etc/pam.d/sddm"
+  echo "Stripped pam_gnome_keyring -auth/-password from /etc/pam.d/sddm"
 else
-  echo "pam_gnome_keyring already absent from /etc/pam.d/sddm."
+  echo "pam_gnome_keyring -auth/-password already stripped."
 fi
 
 # 6. Enable SDDM. Intentionally NOT --now — activates on next reboot.
