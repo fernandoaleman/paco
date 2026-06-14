@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# paco:summary=Print the currently active paco theme name
+
+set -euo pipefail
+
+name_file="${HOME}/.config/paco/current/theme-name"
+
+if [[ -f "${name_file}" ]]; then
+  cat "${name_file}"
+else
+  echo "(no theme set — try: paco theme-set catppuccin-macchiato)" >&2
+  exit 1
+fi

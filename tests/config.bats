@@ -26,6 +26,24 @@ setup() {
   [ -r "${ROOT}/install/config/waybar.sh" ]
   [ -r "${ROOT}/install/config/mako.sh" ]
   [ -r "${ROOT}/install/config/vicinae.sh" ]
+  [ -r "${ROOT}/install/config/theme-default.sh" ]
+}
+
+@test "theme scripts exist and are executable" {
+  [ -x "${ROOT}/bin/paco-theme-set" ]
+  [ -x "${ROOT}/bin/paco-theme-set-templates" ]
+  [ -x "${ROOT}/bin/paco-theme-list" ]
+  [ -x "${ROOT}/bin/paco-theme-current" ]
+}
+
+@test "catppuccin-macchiato theme exists" {
+  [ -r "${ROOT}/themes/catppuccin-macchiato/colors.toml" ]
+}
+
+@test "theme templates exist" {
+  for f in waybar.css mako.ini ghostty.conf hyprland.lua; do
+    [ -r "${ROOT}/default/themed/${f}.tpl" ]
+  done
 }
 
 @test "default nvim files exist" {

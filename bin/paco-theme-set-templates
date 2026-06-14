@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# paco:summary=Render themed config templates against the next theme's colors
+# paco:hidden=true
+
+set -euo pipefail
+
+PACO_PATH="${PACO_PATH:-${HOME}/.local/share/paco}"
+TEMPLATES_DIR="${PACO_PATH}/default/themed"
+NEXT_THEME_DIR="${HOME}/.config/paco/current/next-theme"
+COLORS_FILE="${NEXT_THEME_DIR}/colors.toml"
+
+if [[ ! -f "${COLORS_FILE}" ]]; then
+  echo "Theme is missing colors.toml at ${COLORS_FILE}" >&2
+  exit 1
+fi
+
+hex_to_rgb() {
+  local hex="${1#\#}"
+  printf "%d,%d,%d" "0x${hex:0:2}" "0x${hex:2:2}" "0x${hex:4:2}"
+}
+
+sed_script="$(mktemp)"
+trap 'rm -f "${sed_script}"' EXIT
+
+while IFS='=' read -r key value; do
+  key="${key//[\"\' ]/}"
+  [[ -n ${key} && ${key} != \#* ]] || continue
+  value="${value#*[\"\']}"
+  value="${value%%[\"\']*}"
+
+  printf 's|{{ %s }}|%s|g\n' "${key}" "${value}" >> "${sed_script}"
+  printf 's|{{ %s_strip }}|%s|g\n' "${key}" "${value#\#}" >> "${sed_script}"
+  if [[ ${value} =~ ^# ]]; then
+    rgb="$(hex_to_rgb "${value}")"
+    printf 's|{{ %s_rgb }}|%s|g\n' "${key}" "${rgb}" >> "${sed_script}"
+  fi
+done < "${COLORS_FILE}"
+
+shopt -s nullglob
+for tpl in "${TEMPLATES_DIR}"/*.tpl; do
+  filename="$(basename "${tpl}" .tpl)"
+  sed -f "${sed_script}" "${tpl}" > "${NEXT_THEME_DIR}/${filename}"
+done

@@ -1,5 +1,8 @@
 # paco mako config — notification daemon for Wayland.
-# Iter 16 ships a minimal base; per-app handlers can land in later iters.
+# Theme colors come from ~/.config/paco/current/theme/mako.ini
+# (rendered from default/themed/mako.ini.tpl by `paco theme-set`).
+
+include=~/.config/paco/current/theme/mako.ini
 
 anchor=top-right
 group-by=app-name,summary,body

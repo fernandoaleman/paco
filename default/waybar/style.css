@@ -1,9 +1,10 @@
 /* paco Waybar style.
  *
- * Iter 16 ships hardcoded catppuccin-macchiato colors. iter 17 (theme
- * system) will refactor this to @import a theme-managed waybar.css so
- * `paco theme set <name>` can repaint the bar.
+ * Theme colors live in ~/.config/paco/current/theme/waybar.css and are
+ * rendered from default/themed/waybar.css.tpl by `paco theme-set`.
  */
+
+@import url("../paco/current/theme/waybar.css");
 
 * {
   border: none;
@@ -14,9 +15,9 @@
 }
 
 window#waybar {
-  background-color: #24273a;
-  color: #cad3f5;
-  border-bottom: 2px solid #363a4f;
+  background-color: @background;
+  color: @foreground;
+  border-bottom: 2px solid @surface0;
 }
 
 .modules-left,
@@ -28,15 +29,15 @@ window#waybar {
 #workspaces button {
   padding: 0 8px;
   background: transparent;
-  color: #a5adcb;
+  color: @subtext0;
 }
 
 #workspaces button.active {
-  color: #8aadf4;
+  color: @accent;
 }
 
 #workspaces button.urgent {
-  color: #ed8796;
+  color: @red;
 }
 
 #clock,
@@ -49,18 +50,18 @@ window#waybar {
 }
 
 #battery.warning {
-  color: #f5a97f;
+  color: @peach;
 }
 
 #battery.critical {
-  color: #ed8796;
+  color: @red;
 }
 
 tooltip {
-  background-color: #1e2030;
-  border: 1px solid #494d64;
+  background-color: @background;
+  border: 1px solid @surface1;
 }
 
 tooltip label {
-  color: #cad3f5;
+  color: @foreground;
 }

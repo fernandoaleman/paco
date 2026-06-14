@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# paco:summary=List available paco themes
+
+set -euo pipefail
+
+PACO_PATH="${PACO_PATH:-${HOME}/.local/share/paco}"
+THEMES_DIR="${PACO_PATH}/themes"
+
+if [[ ! -d "${THEMES_DIR}" ]]; then
+  echo "No themes directory at ${THEMES_DIR}" >&2
+  exit 1
+fi
+
+for theme in "${THEMES_DIR}"/*/; do
+  basename "${theme}"
+done | sort

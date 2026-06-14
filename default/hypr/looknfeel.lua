@@ -6,10 +6,7 @@ hl.config({
     gaps_in = 5,
     gaps_out = 10,
     border_size = 2,
-    col = {
-      active_border = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
-      inactive_border = "rgba(595959aa)",
-    },
+    -- Border colors are loaded from the active theme below.
     resize_on_border = false,
     allow_tearing = false,
     layout = "dwindle",
@@ -45,3 +42,15 @@ hl.config({
     new_status = "master",
   },
 })
+
+-- Theme-managed colors. `paco theme-set` renders
+-- ~/.config/paco/current/theme/hyprland.lua from the template; this
+-- dofile() applies the per-theme color overrides on top of the above.
+do
+  local theme_lua = os.getenv("HOME") .. "/.config/paco/current/theme/hyprland.lua"
+  local f = io.open(theme_lua, "r")
+  if f then
+    f:close()
+    dofile(theme_lua)
+  end
+end

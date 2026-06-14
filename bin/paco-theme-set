@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# paco:summary=Apply a paco theme (renders templates + restarts affected apps)
+
+set -euo pipefail
+
+if [[ -z ${1:-} ]]; then
+  echo "Usage: paco theme-set <theme-name>"
+  echo "       paco theme-list  # to see available themes"
+  exit 1
+fi
+
+PACO_PATH="${PACO_PATH:-${HOME}/.local/share/paco}"
+THEMES_DIR="${PACO_PATH}/themes"
+CURRENT_DIR="${HOME}/.config/paco/current/theme"
+NEXT_DIR="${HOME}/.config/paco/current/next-theme"
+
+THEME_NAME="$(echo "$1" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')"
+
+if [[ ! -d "${THEMES_DIR}/${THEME_NAME}" ]]; then
+  echo "Theme '${THEME_NAME}' not found in ${THEMES_DIR}" >&2
+  exit 1
+fi
+
+# Atomic swap: build next-theme, then rename to theme.
+rm -rf "${NEXT_DIR}"
+mkdir -p "${NEXT_DIR}"
+cp -r "${THEMES_DIR}/${THEME_NAME}/"* "${NEXT_DIR}/"
+
+# Render dynamic configs from templates
+paco-theme-set-templates
+
+# Atomic swap (rm + mv is two steps, but acceptable for paco)
+rm -rf "${CURRENT_DIR}"
+mv "${NEXT_DIR}" "${CURRENT_DIR}"
+
+# Record the active theme name
+echo "${THEME_NAME}" > "${HOME}/.config/paco/current/theme-name"
+
+# Restart affected apps (best-effort — silent if not running)
+command -v paco-restart-waybar > /dev/null && paco-restart-waybar > /dev/null 2>&1 || true
+command -v paco-restart-mako > /dev/null && paco-restart-mako > /dev/null 2>&1 || true
+command -v hyprctl > /dev/null && hyprctl reload > /dev/null 2>&1 || true
+
+echo "Theme set: ${THEME_NAME}"
