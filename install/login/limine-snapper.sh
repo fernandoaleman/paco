@@ -20,7 +20,7 @@ hooks_tmp="$(mktemp)"
 trap 'rm -f "${hooks_tmp}"' EXIT
 
 cat > "${hooks_tmp}" << 'EOF'
-HOOKS=(base udev plymouth keyboard autodetect microcode modconf kms keymap consolefont block encrypt filesystems fsck btrfs-overlayfs)
+HOOKS=(base udev plymouth keyboard autodetect microcode modconf kms keymap consolefont block encrypt lvm2 filesystems fsck btrfs-overlayfs)
 EOF
 
 if [[ -f "${hooks_target}" ]] && cmp -s "${hooks_tmp}" "${hooks_target}"; then
