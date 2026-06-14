@@ -29,6 +29,7 @@ setup() {
   [ -r "${ROOT}/install/packaging/chrome.sh" ]
   [ -r "${ROOT}/install/packaging/icons.sh" ]
   [ -r "${ROOT}/install/packaging/webapps.sh" ]
+  [ -r "${ROOT}/install/packaging/hardware-vulkan.sh" ]
 }
 
 @test "all packaging scripts are syntactically valid" {

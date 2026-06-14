@@ -1,0 +1,22 @@
+[Desktop Entry]
+# paco override: --new-window in the main Exec so launching from
+# Vicinae (or any .desktop launcher) always opens a fresh top-level
+# window instead of focusing the existing Chrome instance. Mirrors
+# the file shipped by the google-chrome package but with the flag
+# added. Incognito stays available via the Desktop Action below.
+Version=1.0
+Name=Google Chrome
+GenericName=Web Browser
+Comment=Access the Internet
+Exec=/usr/bin/google-chrome-stable --new-window %U
+StartupNotify=true
+Terminal=false
+Icon=google-chrome
+Type=Application
+Categories=Network;WebBrowser;
+MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/about;x-scheme-handler/ftp;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/mailto;x-scheme-handler/unknown;x-scheme-handler/webcal;
+Actions=new-private-window;
+
+[Desktop Action new-private-window]
+Name=New Incognito Window
+Exec=/usr/bin/google-chrome-stable --incognito
