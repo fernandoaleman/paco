@@ -110,12 +110,27 @@ else
 fi
 
 # 7. snapper for /. Skip if /home is btrfs (paco doesn't snapshot /home per Q43).
-if ! sudo snapper list-configs 2> /dev/null | grep -q "root"; then
-  echo "Creating snapper root config..."
-  sudo snapper -c root create-config /
+#    `snapper list-configs` requires root because /etc/snapper/configs/ is
+#    typically root:snapper 0750 — without a paco state marker, we'd
+#    prompt for sudo on every paco update just to check whether the
+#    config exists.
+snapper_marker="${PACO_STATE_DIR}/snapper-root-created"
+if [[ -f ${snapper_marker} ]]; then
+  echo "snapper root config already created (paco marker present)."
+else
+  if sudo snapper list-configs 2> /dev/null | grep -q "root"; then
+    echo "snapper root config already exists (no marker; backfilling)."
+  else
+    echo "Creating snapper root config..."
+    sudo snapper -c root create-config /
+  fi
+  mkdir -p "${PACO_STATE_DIR}"
+  touch "${snapper_marker}"
 fi
 
-# Overwrite with paco's snapper config (cmp-s gated for idempotency).
+# Overwrite with paco's snapper config (cmp-s gated for idempotency —
+# this check is sudo-free because /etc/snapper/configs/root becomes
+# 0644 readable after `snapper create-config` runs).
 paco_snapper_root="${PACO_PATH}/default/snapper/root"
 sys_snapper_root="/etc/snapper/configs/root"
 if [[ -f "${sys_snapper_root}" ]] && cmp -s "${paco_snapper_root}" "${sys_snapper_root}"; then
@@ -126,8 +141,18 @@ else
 fi
 
 # 8. Disable btrfs quotas — full qgroup accounting is a major perf drag,
-#    and snapper works fine without it. Idempotent.
-sudo btrfs quota disable / 2> /dev/null || true
+#    and snapper works fine without it. Use a paco state marker so the
+#    sudo call only fires on first install; `btrfs quota` has no
+#    sudo-free way to query current state.
+quota_marker="${PACO_STATE_DIR}/btrfs-quota-disabled"
+if [[ -f ${quota_marker} ]]; then
+  echo "btrfs quotas already disabled (paco marker present)."
+else
+  sudo btrfs quota disable / 2> /dev/null || true
+  mkdir -p "${PACO_STATE_DIR}"
+  touch "${quota_marker}"
+  echo "Disabled btrfs quotas."
+fi
 
 # 9. Enable limine-snapper-sync.service (NOT --now; activates after reboot).
 if systemctl is-enabled limine-snapper-sync.service > /dev/null 2>&1; then
