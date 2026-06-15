@@ -24,18 +24,30 @@ distribution carries forward that license for the copied assets.
 | `YouTube.png`         | omarchy/applications/icons/YouTube.png         |
 | `Zoom.png`            | omarchy/applications/icons/Zoom.png            |
 
-## Flaticon (4 icons)
+## UXWing (2 icons)
+
+The following icons were sourced from [UXWing](https://uxwing.com/).
+UXWing's [license](https://uxwing.com/license/) permits use for
+personal, commercial, and client projects without required
+attribution; the entries below are listed for source transparency.
+
+| Icon         | Source                                   |
+| ------------ | ---------------------------------------- |
+| `Claude.png` | <https://uxwing.com/claude-ai-icon/>     |
+| `Gemini.png` | <https://uxwing.com/google-gemini-icon/> |
+
+## Flaticon (2 icons)
 
 The following icons were sourced from [Flaticon](https://www.flaticon.com/).
-Flaticon's free tier requires attribution to the icon author. Replace
-this section with the specific author + URL of each icon you
-downloaded so paco's attribution stays accurate.
+Flaticon's free tier requires crediting the icon's author with the
+exact snippet they generate on the download page; we ship that
+snippet verbatim below per
+[Flaticon's attribution guidance](https://support.flaticon.com/s/article/Attribution-How-when-and-where).
 
-| Icon                  | Author / URL (TODO: fill in) |
-| --------------------- | ---------------------------- |
-| `Claude.png`          | _Flaticon — author + URL_    |
-| `Gemini.png`          | _Flaticon — author + URL_    |
-| `Gmail.png`           | _Flaticon — author + URL_    |
-| `Google Calendar.png` | _Flaticon — author + URL_    |
+### `Google Calendar.png`
 
-See [Flaticon's attribution guidance](https://support.flaticon.com/s/article/Attribution-How-when-and-where).
+<a href="https://www.flaticon.com/free-icons/google-calendar" title="google calendar icons">Google calendar icons created by Freepik - Flaticon</a>
+
+### `Gmail.png`
+
+<a href="https://www.flaticon.com/free-icons/gmail" title="gmail icons">Gmail icons created by Freepik - Flaticon</a>
