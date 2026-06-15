@@ -6,19 +6,22 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
 
 ## Working state
 
-- **Phase:** 2 implementation sprint. Iterations 1-19 complete
-  (2026-06-14, latest commit `b107930`). **Milestone E fully closed;
-  Milestone F started (iter 19/4).**
+- **Phase:** 2 implementation sprint. Iterations 1-19 + 20a complete
+  (2026-06-14, latest commit `bd8d650`). **Milestone E fully closed;
+  Milestone F in progress (iter 19 + 20a done; 20b/20c + 21 remain).**
   All 13 Q30 themes + theme-driven install-output colors. Boot stack
   live: Plymouth (bgrt), Limine (paco-branded), snapper root snapshots.
   System services live: NetworkManager + nm-applet, bluez + blueman,
   full pipewire, power-profiles-daemon, UFW default-deny+SSH.
+  Webapp system live: paco-webapp-* family, 9 default webapps,
+  Chrome with --new-window UX. AMD/Intel Vulkan driver auto-installed.
   - Latest live system: full paco. Cold boot → Plymouth splash →
     SDDM autologin → Hyprland with catppuccin-macchiato theme applied
     across waybar/mako/ghostty/hyprland borders. Vicinae on Super+Space.
     Full dev environment. limine-snapper-sync watching for snapshots.
     Network/BT/audio/power/firewall all active; waybar tray hosts
-    nm-applet + blueman-applet.
+    nm-applet + blueman-applet. Chrome + 9 webapps launchable via
+    Vicinae; every Enter opens a fresh window (consistency win).
   - Symlinks: `~/.zshenv`, `~/.config/{zsh,starship.toml,
     git/config,fontconfig/fonts.conf,ghostty/config,tmux/tmux.conf,
     nvim,mise/config.toml,lazydocker/config.yml,hypr,waybar,mako}`.
@@ -35,12 +38,46 @@ deliverable: a downloadable ISO with a `paco update` mechanism.
   - Hyprland config: Q32 strict (Lua), Omarchy-derived bindings,
     paco-rebranded. vim-style hjkl focus / Super+Shift+hjkl swap.
     Super+Backslash for split-toggle. Border colors theme-managed.
-- **Next iteration:** Iteration 20 — bundled apps. Big iter, per-item
-  approval per `feedback-approve-bundled-apps`. Scope: 5 native apps
-  (Chrome, 1Password, Slack, Spotify, Obsidian per Q20), 12 web-apps
-  via `paco-webapp-*` (Q19), Thunar + yazi (Q16). Source 3 missing
-  web-app icons (Google Calendar, Gmail, Claude — flaticon first).
-  After this: iter 21 (first-run + tag v0.1.0).
+- **Next iteration:** Iteration 20b — 3 remaining web-app icons
+  (Google Calendar, Gmail, Claude per Q19) sourced from flaticon,
+  `applications/icons/ATTRIBUTION.md` (covering omarchy-derived
+  bundle + new sources), and the 3 webapp entries appended to
+  `install/packaging/webapps.sh`. Then iter 20c (5 native apps —
+  1Password, Slack, Spotify, Obsidian, + `paco-install-zennotes`
+  opt-in; Thunar + yazi). Then iter 21 (first-run + tag v0.1.0).
+
+  **iter 20a gotchas (all resolved):**
+    1. paco-launch-webapp exited 2 before reaching Chrome: sed exits
+       2 when any of its file args is missing, even on successful
+       match on another file; `set -o pipefail` made the pipeline
+       inherit that. Fix (aae2039): filter file list to existing
+       files before handing to sed.
+    2. .desktop Exec= lines used bare `paco-launch-webapp <url>`,
+       failing in launcher contexts where /usr/share/paco/bin wasn't
+       on PATH. environment.d propagates it for systemd --user
+       processes but only after re-exec — too fragile. Fix (aae2039):
+       hard-code /usr/share/paco/bin/ in .desktop Exec= lines.
+    3. Chrome from Vicinae focused the existing instance instead of
+       opening a new window (Chrome singleton + Vicinae's
+       matchesWindowClass logic). Fix (3f31a2d): ship a second
+       paco-chrome.desktop with id that won't match Chrome's WM
+       class, hide google-chrome.desktop via NoDisplay=true (keeps
+       it as xdg-open URL handler). Vicinae shows one entry, Enter
+       always launches fresh. Vicinae match logic in
+       src/server/src/services/app-service/xdg/xdg-app.hpp.
+    4. limine-snapper.sh re-prompted for sudo every paco update via
+       `sudo snapper list-configs` (idempotency probe needs root)
+       and unconditional `sudo btrfs quota disable /`. Fix
+       (bd8d650): PACO_STATE_DIR markers — snapper-root-created,
+       btrfs-quota-disabled. Same pattern as iter 19 firewall.
+    5. Chrome stderr noise from missing Vulkan driver (SwiftShader
+       fallback). Fix (3eee9ca): hardware-vulkan.sh detects GPU via
+       lspci, installs vulkan-radeon (AMD) / vulkan-intel (Intel).
+       NVIDIA deferred to a dedicated Q40 iter.
+    6. (Fixed earlier this iter, b811c00:) Chrome's "Choose password
+       for new keyring" dialog on first launch — Q22 said we'd ship
+       a passwordless Default_keyring but we never wrote the script.
+       Ported omarchy's install/login/default-keyring.sh.
 
   **iter 19 gotchas (all resolved, commits 4d4713b, b7de496, b107930):**
     1. UFW default-deny locked out the SSH rescue path the
