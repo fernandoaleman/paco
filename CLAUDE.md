@@ -367,10 +367,11 @@ on macOS is the canonical pattern.
   `--app=` mode drives it. Keep generalized Zoom URL-scheme handler.
   **Drop HEY-specific mailto handler** (Basecamp-internal). Default
   bundled web-apps via per-item approval rule (Q19+).
-- Q19 (revised): Default bundled web-apps (12, per-item approved):
-  Google Photos, Google Contacts, Google Messages, Google Maps, Google
-  Calendar, Gmail, YouTube, ChatGPT, GitHub, Discord, Zoom (with
-  URL-scheme handler), Claude. 1Password and Slack moved to native in
+- Q19 (revised; amended iter 20b — Gemini added): Default bundled
+  web-apps (13, per-item approved): Google Photos, Google Contacts,
+  Google Messages, Google Maps, Google Calendar, Gmail, ChatGPT,
+  Gemini, Claude, YouTube, GitHub, Discord, Zoom (with URL-scheme
+  handler). 1Password and Slack moved to native in
   Q20 (Omarchy pattern: one mode per app). Skipped Omarchy defaults:
   HEY, Basecamp, Fizzy, WhatsApp, X, Figma. Icons bundled from
   Omarchy's set (9): Google Photos, Google Contacts, Google Messages,

@@ -31,11 +31,17 @@ setup() {
   run -2 "${ROOT}/bin/paco-launch-webapp"
 }
 
-@test "9 bundled webapp icons are present" {
+@test "13 bundled webapp icons are present" {
   for name in "Google Photos" "Google Contacts" "Google Messages" \
-    "Google Maps" "YouTube" "ChatGPT" "GitHub" "Discord" "Zoom"; do
+    "Google Maps" "Google Calendar" "Gmail" \
+    "ChatGPT" "Gemini" "Claude" \
+    "YouTube" "GitHub" "Discord" "Zoom"; do
     [ -r "${ROOT}/applications/icons/${name}.png" ]
   done
+}
+
+@test "icon attribution file exists" {
+  [ -r "${ROOT}/applications/icons/ATTRIBUTION.md" ]
 }
 
 @test "webapp install scripts exist" {
