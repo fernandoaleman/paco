@@ -25,7 +25,7 @@ paco-webapp-install "Gmail" https://mail.google.com/ Gmail.png
 
 # AI assistants
 paco-webapp-install "ChatGPT" https://chatgpt.com/ ChatGPT.png
-paco-webapp-install "Gemini" https://gemini.google.com/ Gemini.png
+paco-webapp-install "Gemini" https://gemini.google.com/app Gemini.png
 paco-webapp-install "Claude" https://claude.ai/ Claude.png
 
 # Social / media
