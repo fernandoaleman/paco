@@ -9,11 +9,12 @@ setup() {
 @test "paco-update scripts exist and are executable" {
   [ -x "${ROOT}/bin/paco-update" ]
   [ -x "${ROOT}/bin/paco-update-git" ]
+  [ -x "${ROOT}/bin/paco-update-system-pkgs" ]
   [ -x "${ROOT}/bin/paco-migrate" ]
 }
 
 @test "paco-update scripts are syntactically valid" {
-  for f in paco-update paco-update-git paco-migrate; do
+  for f in paco-update paco-update-git paco-update-system-pkgs paco-migrate; do
     run bash -n "${ROOT}/bin/${f}"
     [ "${status}" -eq 0 ]
   done

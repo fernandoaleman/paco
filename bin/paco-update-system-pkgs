@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# paco:summary=Refresh pacman database and upgrade installed system packages
+# paco:hidden=true
+
+set -euo pipefail
+
+# Without this, a Beelink (or any paco box) that sits idle for a week
+# accumulates a stale local sync DB (/var/lib/pacman/sync/extra.db).
+# When `paco update` then tries to install a new package via
+# paco-pkg-add → `pacman -S --needed <pkg>`, pacman looks for the
+# version recorded in the stale DB — which Arch mirrors have long
+# since dropped — and every mirror returns 404. This step keeps the
+# DB fresh and the system current as a single, atomic transaction.
+#
+# `-yy` forces a fresh DB download (single `-y` is a no-op when the
+# local DB claims it's fresh, which it does even when stale).
+# `-u` then upgrades anything with a newer version, avoiding the
+# partial-upgrade danger Arch warns against when running `-Sy <pkg>`
+# in isolation.
+#
+# Per Q42 / omarchy update flow: system-pkgs sync goes BEFORE paco's
+# own packaging phase so paco-pkg-add operates against a fresh DB.
+echo "==> Refreshing pacman database + upgrading system packages..."
+sudo pacman -Syyu --noconfirm
+echo "==> System packages up to date."

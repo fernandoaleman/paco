@@ -9,6 +9,12 @@ export PACO_PATH
 # Pull latest source.
 paco update-git
 
+# Refresh pacman DB + upgrade installed packages BEFORE paco's
+# packaging phase runs. Without this, an idle box accumulates a
+# stale local DB and `paco-pkg-add` 404s on packages whose versions
+# have been bumped on the mirrors. (See bin/paco-update-system-pkgs.)
+paco update-system-pkgs
+
 # Run any pending migrations BEFORE re-running install (migrations may
 # adjust state that install.sh expects).
 paco migrate
