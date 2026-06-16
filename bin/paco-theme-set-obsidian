@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# paco:summary=Sync paco theme to all Obsidian vaults
+# paco:hidden=true
+
+set -euo pipefail
+
+CURRENT_THEME_DIR="${XDG_CONFIG_HOME:-${HOME}/.config}/paco/current/theme"
+
+# Bail if the active paco theme didn't render an obsidian.css. Skipping
+# silently is correct — paco-theme-set runs us unconditionally, and
+# not every theme is required to ship an Obsidian palette.
+[[ -f ${CURRENT_THEME_DIR}/obsidian.css ]] || exit 0
+
+# Obsidian writes the list of registered vaults to ~/.config/obsidian/
+# obsidian.json. We iterate every vault and drop the paco theme CSS
+# into <vault>/.obsidian/themes/paco/theme.css. Without `jq` available
+# we'd have to parse JSON in shell — jq is a Tier-2 tool installed in
+# iter 8, so it's always present here.
+obsidian_config="${XDG_CONFIG_HOME:-${HOME}/.config}/obsidian/obsidian.json"
+[[ -r ${obsidian_config} ]] || exit 0
+
+jq -r '.vaults | values[].path' "${obsidian_config}" 2> /dev/null |
+  while read -r vault_path; do
+    [[ -d ${vault_path}/.obsidian ]] || continue
+
+    theme_dir="${vault_path}/.obsidian/themes/paco"
+    mkdir -p "${theme_dir}"
+
+    if [[ ! -f ${theme_dir}/manifest.json ]]; then
+      cat > "${theme_dir}/manifest.json" << 'EOF'
+{
+  "name": "paco",
+  "version": "1.0.0",
+  "minAppVersion": "0.16.0",
+  "description": "Automatically syncs with your current paco system theme colors.",
+  "author": "paco",
+  "authorUrl": "https://github.com/fernandoaleman/paco"
+}
+EOF
+    fi
+
+    cp "${CURRENT_THEME_DIR}/obsidian.css" "${theme_dir}/theme.css"
+  done

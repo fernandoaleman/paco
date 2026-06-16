@@ -40,6 +40,7 @@ echo "${THEME_NAME}" > "${HOME}/.config/paco/current/theme-name"
 command -v paco-restart-waybar > /dev/null && paco-restart-waybar > /dev/null 2>&1 || true
 command -v paco-restart-mako > /dev/null && paco-restart-mako > /dev/null 2>&1 || true
 command -v paco-restart-terminal > /dev/null && paco-restart-terminal > /dev/null 2>&1 || true
+command -v paco-theme-set-obsidian > /dev/null && paco-theme-set-obsidian > /dev/null 2>&1 || true
 command -v hyprctl > /dev/null && hyprctl reload > /dev/null 2>&1 || true
 
 echo "Theme set: ${THEME_NAME}"

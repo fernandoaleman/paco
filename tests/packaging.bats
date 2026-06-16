@@ -30,6 +30,14 @@ setup() {
   [ -r "${ROOT}/install/packaging/icons.sh" ]
   [ -r "${ROOT}/install/packaging/webapps.sh" ]
   [ -r "${ROOT}/install/packaging/hardware-vulkan.sh" ]
+  [ -r "${ROOT}/install/packaging/native-apps.sh" ]
+  [ -r "${ROOT}/install/packaging/file-managers.sh" ]
+}
+
+@test "paco-install-zennotes opt-in helper exists and is executable" {
+  [ -x "${ROOT}/bin/paco-install-zennotes" ]
+  run bash -n "${ROOT}/bin/paco-install-zennotes"
+  [ "${status}" -eq 0 ]
 }
 
 @test "all packaging scripts are syntactically valid" {

@@ -36,6 +36,10 @@ setup() {
   [ -r "${ROOT}/install/config/chrome-new-window.sh" ]
   [ -r "${ROOT}/default/applications/google-chrome.desktop" ]
   [ -r "${ROOT}/default/applications/paco-chrome.desktop" ]
+  [ -r "${ROOT}/install/config/mimetypes.sh" ]
+  [ -r "${ROOT}/default/themed/obsidian.css.tpl" ]
+  [ -r "${ROOT}/default/hypr/bindings/file-manager.lua" ]
+  [ -r "${ROOT}/default/zsh/conf.d/55-yazi.zsh" ]
   [ -r "${ROOT}/install/config/theme-default.sh" ]
 }
 
@@ -44,6 +48,7 @@ setup() {
   [ -x "${ROOT}/bin/paco-theme-set-templates" ]
   [ -x "${ROOT}/bin/paco-theme-list" ]
   [ -x "${ROOT}/bin/paco-theme-current" ]
+  [ -x "${ROOT}/bin/paco-theme-set-obsidian" ]
 }
 
 @test "catppuccin-macchiato theme exists" {

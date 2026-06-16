@@ -23,3 +23,8 @@ invisible=false
 [urgency=critical]
 default-timeout=0
 layer=overlay
+
+# Spotify spams a notification for every track change — universally
+# unwanted. Carried over from omarchy as a distro-level fix.
+[app-name=Spotify]
+invisible=1
