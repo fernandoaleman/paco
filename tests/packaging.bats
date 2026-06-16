@@ -34,12 +34,6 @@ setup() {
   [ -r "${ROOT}/install/packaging/file-managers.sh" ]
 }
 
-@test "paco-install-zennotes opt-in helper exists and is executable" {
-  [ -x "${ROOT}/bin/paco-install-zennotes" ]
-  run bash -n "${ROOT}/bin/paco-install-zennotes"
-  [ "${status}" -eq 0 ]
-}
-
 @test "all packaging scripts are syntactically valid" {
   for f in "${ROOT}/install/packaging/"*.sh; do
     run bash -n "${f}"

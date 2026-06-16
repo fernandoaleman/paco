@@ -8,16 +8,19 @@ paco_section "Installing bundled native apps (Q20)"
 # iter 20a). Per-item user approval has happened — see iter 20c
 # preview discussion.
 #
-# AUR (4):
+# AUR (5):
 #   1password         — desktop GUI (stable; not the omarchy-beta)
 #   1password-cli     — `op` command for shells / browser autofill
 #   slack-desktop     — official Slack Linux binary
 #   spotify           — official Spotify client
+#   zennotes-bin      — keyboard-first Markdown notes; ships
+#                       alongside Obsidian so users can compare
+#                       (both read the same plain-.md vaults, so
+#                       coexistence is trivial)
 # extra (1):
-#   obsidian          — knowledge / notes (default; opt-out via
-#                       paco-install-zennotes if user prefers ZN)
+#   obsidian          — mature notes app; the safe default
 PACMAN_TOOLS=(obsidian)
-AUR_TOOLS=(1password 1password-cli slack-desktop spotify)
+AUR_TOOLS=(1password 1password-cli slack-desktop spotify zennotes-bin)
 
 pacman_missing=()
 for t in "${PACMAN_TOOLS[@]}"; do

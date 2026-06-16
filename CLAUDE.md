@@ -380,12 +380,17 @@ on macOS is the canonical pattern.
   X/Figma/Disk Usage/Docker/imv/Retro Gaming/windows). Icons to source
   (3): Google Calendar, Gmail, Claude — try flaticon.com first (see
   auto-memory `feedback-flaticon-for-icons`).
-- Q20: Default bundled native apps (5, per-item approved): 1Password
-  (`1password` + `1password-cli`), Claude Code (`claude-code`), Slack
-  (`slack-desktop`), Spotify (`spotify`), Obsidian (`obsidian`). Stable
-  branch (not Omarchy's `1password-beta`) — to confirm at install
-  script time (Q39). Skipped: Typora (paid), Cursor, VS Code (user
-  uses LazyVim; both would be optional `paco-install-<name>` later).
+- Q20 (revised; amended iter 20c): Default bundled native apps (6,
+  per-item approved): 1Password (`1password` + `1password-cli`),
+  Claude Code (`claude-code`), Slack (`slack-desktop`), Spotify
+  (`spotify`), Obsidian (`obsidian`), ZenNotes (`zennotes-bin`).
+  Stable branch (not Omarchy's `1password-beta`). Skipped: Typora
+  (paid), Cursor, VS Code (user uses LazyVim).
+  ZenNotes originally planned as a `paco-install-zennotes` opt-in
+  helper but pivoted to bundled-default during iter 20c verification:
+  ships alongside Obsidian so users discover and compare both
+  notes apps without first reading docs (both use plain-.md vaults
+  so coexistence is trivial; ~80MB Electron cost is acceptable).
 - Q21: Default bundled CLI/TUI tools (21, per-item approved):
   - Tier 1 (5): bat, **bottom/btm** (Rust, replacing btop — Rust pedigree
     with theme integration via `default/themed/bottom.toml.tpl` and

@@ -11,6 +11,7 @@ require("default.hypr.bindings.tiling")
 require("default.hypr.bindings.terminal")
 require("default.hypr.bindings.exit")
 require("default.hypr.bindings.launcher")
+require("default.hypr.bindings.file-manager")
 
 require("default.hypr.autostart")
 
