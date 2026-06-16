@@ -82,6 +82,7 @@ setup() {
   [ -r "${ROOT}/default/zsh/conf.d/10-options.zsh" ]
   [ -r "${ROOT}/default/zsh/conf.d/20-keybindings.zsh" ]
   [ -r "${ROOT}/default/zsh/conf.d/30-aliases.zsh" ]
+  [ -r "${ROOT}/default/zsh/conf.d/15-editor.zsh" ]
   [ -r "${ROOT}/default/zsh/conf.d/40-zoxide.zsh" ]
   [ -r "${ROOT}/default/zsh/conf.d/99-plugins.zsh" ]
 }
